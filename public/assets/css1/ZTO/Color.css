@@ -1,0 +1,26 @@
+
+#header .topnav { 
+  background: #01b7f2;  
+}
+
+.search-box-wrapper.style2 .search-box > ul.search-tabs li > a {
+  /*margin-bottom: 5px;*/ 
+  background: #01b7f2; 
+}
+.activeMenu
+{
+    color: #01b7f2;
+    border-bottom:3px solid #01b7f2;
+}
+
+#main-menu ul.menu > li:hover > a, .chaser ul.menu > li:hover > a {
+  color: #01b7f2;
+}
+
+button, input[type="button"].button {
+    background: #01b7f2;
+}
+
+.search-box-wrapper.style2 .search-box > ul.search-tabs li.active > a {   
+    color: #01b7f2;
+}

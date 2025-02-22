@@ -1,0 +1,217 @@
+﻿
+@*<script src="~/Scripts/TSA/Home/active.js"></script>*@
+
+<footer class="m-t-30">
+    <div class="top-footer p-t-25">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div class="footer-box">
+
+                        <div class="contact-box">
+                            <ul>
+                                <li>
+                                    <span class="con-icon">
+                                        <i class="fas fa-phone-alt"></i>
+                                    </span>
+                                    <span>&nbsp;@CommonComponents.CompanySettings.CompanySetting().ChannelSetting.TollFreeNo</span>
+
+                                </li>
+                                <li>
+                                    <span class="con-icon"><i class="fa fa-envelope"></i></span>
+                                    <a href="mailto:@CommonComponents.CompanySettings.CompanySetting().ChannelSetting.ContactEmail" class="contact-email">@CommonComponents.CompanySettings.CompanySetting().ChannelSetting.ContactEmail</a>
+                                </li>
+                            </ul>
+                        </div>
+                     
+
+                        <div class="social_info m-t-20">
+                            <ul class="social-icons clearfix">
+                                <li class="facebook"><a title="facebook" href="https://www.facebook.com/ztourtravel/"><i class="fab fa-facebook-f"></i></a></li>
+
+                                @*New Code Updated By Shivendra Singh, Dated : 09 Nov 2023*@
+                                <li class="instagram"><a title="instagram" href="https://www.instagram.com/ztour.travel"><i class="fab fa-instagram"></i></a></li>
+                                @*<li class="instagram"><a title="instagram" href="https://www.instagram.com/ztourtravel/"><i class="fab fa-instagram"></i></a></li>*@
+
+                                @*New Code Updated By Shivendra Singh, Dated : 09 Nov 2023*@
+
+                                <li class="youtube"><a title="youtube" href="https://www.youtube.com/channel/UCz3SHShurGawyZa5ofCicXw " data-toggle="tooltip" target="_blank"><i class="fab fa-youtube"></i></a></li>
+
+                                @*New Code Updated By Shivendra Singh, Dated : 05 Sep 2023*@
+
+                                <li class="twitter"><a title="TikTok" href="@("https://www.tiktok.com/@ztourtravel?lang=en")" data-toggle="tooltip" target="_blank"><i class="tiktok" style="display: flex; padding: 7px;"><img width="100%" src="~/Images/ZTO/icon/tik-tok.png" /></i></a></li>
+                                @*<li class="twitter"><a title="twitter" href="https://twitter.com/ztour?lang=en" data-toggle="tooltip" target="_blank"><i class="fab fa-twitter"></i></a></li>*@
+                                <li class="blog"><a title="blog" href="https://blog.ztour-travel.ro/" data-toggle="tooltip" target="_blank"><i class="fa fa-rss"></i></a></li>
+
+                                @*<li class="twitter"><a title="twitter" href="https://twitter.com/ztour?lang=en" data-toggle="tooltip" target="_blank"><i class="fab fa-twitter"></i></a></li>
+        <li class="blog"><a title="blog" href="http://vacante.ztour-travel.ro/ " data-toggle="tooltip" target="_blank"><i class="fa fa-rss"></i></a></li>*@
+
+                                @*End, New Code Updated By Shivendra Singh, Dated : 05 Sep 2023*@
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                    @*<div class="footer-box">
+                        <div class="contact-box">
+                            <div class="row">
+                                <div class="col-lg-3 visible-lg col-xs-12" href="JavaScript:Void(0)"> <img src="@Url.Content("~/Images/ZTO/home/mobile-app.png")"></div>
+                                <div class="col-lg-9 col-xs-12 m-t-25">
+                                    <h4>@LanguageResources.Resources.Downloadour </h4>
+                                    <ul>
+                                        <li><img src="@Url.Content("~/Images/ZTO/home//g-play.png")"></li>
+                                        <li><img src="@Url.Content("~/Images/ZTO/home//app-iocn.png")"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+                </div>
+
+                <div class="col-sm-4 col-md-5">
+                    <div class="footer-box">
+                        <div class="contact-box">
+                            <form class="explosive-form" method="" action="">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h4>@LanguageResources.Resources.Subscribetothe <strong class="ProximaNova-Extrabld">@LanguageResources.Resources.Newsletter</strong></h4>
+                                        <p class="font-12 italic">@LanguageResources.Resources.Forfreeholiday</p>
+                                    </div>
+                                   
+                                    <div class="col-sm-8 col-xs-8 col-md-7 col-lg-9">
+                                        <div class="form-group">
+                                            <input class="form-control bg-higlight-white" id="NewsemailId" placeholder="Enter your email" aria-label="Enter your email">
+                                            <span id="lblNewsemailId" class="alertMsg"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4 col-xs-4 col-md-5 col-lg-3">
+                                        <div class="form-group">
+                                            <button class="exlore_now btn-default text-uppercase ProximaNova-Extrabld font-12" type="button" id="btnNewsLetter">@LanguageResources.Resources.SUBMIT </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom-footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="footer-bottom-box font-14">
+                        <ul>
+                            <li><a href="@Url.Content("~/AboutUs?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">@LanguageResources.Resources.AboutUs</a></li>
+                            <li><a href="@Url.Content("~/General/ContactUs?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">@LanguageResources.Resources.ContactUs</a></li>
+                            @*<li><a href="@Url.Content("~/FAQ?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">@LanguageResources.Resources.FAQ</a></li>*@
+                            <li><a href="@Url.Content("~/PrivacyAndPolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">@LanguageResources.Resources.PrivacyPolicy</a></li>
+                            <li><a href="@Url.Content("~/TermAndConditions?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">@LanguageResources.Resources.TermsofServices</a></li>
+                            @if (CommonComponents.CompanySettings.LangCode().ToUpper() == "EN")
+                            {
+                                <li><a href="https://www.mae.ro/" target="_blank">Travel Guidelines</a></li>
+                            }
+                            @if (CommonComponents.CompanySettings.LangCode().ToUpper() == "RO")
+                            {
+                                <li><a href="https://www.mae.ro/" target="_blank">Ghiduri de călătorie</a></li>
+                            }
+
+
+                            @*New Code Added For Cookie Policy, By Shivendra Singh, Dated : 09 June 2022; On Request of Andreea, Email Dated : 08 June 2022*@
+
+                            @if (CommonComponents.CompanySettings.LangCode().ToUpper() == "EN")
+                            {
+                                <li><a href="@Url.Content("~/CookiePolicy?lang=en")" target="_blank">Cookie Policy</a></li>
+                                <li><a href="@Url.Content("~/News?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">News</a></li>
+                                <li><a href="@Url.Content("~/SpecialEvents?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Special Events</a></li>
+                                @*New Code Added, By Shivendra Singh, Dated : 29 May 2024*@
+                                <li><a href="@Url.Content("~/CompanyInfo?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">COMPANY INFO</a></li>
+                                @*End, New Code Added, By Shivendra Singh, Dated : 29 May 2024*@
+                            }
+                            @if (CommonComponents.CompanySettings.LangCode().ToUpper() == "RO")
+                            {
+                                <li><a href="@Url.Content("~/CookiePolicy?lang=ro")" target="_blank">Politica de cookie-uri</a></li>
+                                <li><a href="@Url.Content("~/News?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Concurs</a></li>
+                                <li><a href="@Url.Content("~/SpecialEvents?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Evenimente Speciale</a></li>
+                                @*New Code Added, By Shivendra Singh, Dated : 29 May 2024*@
+                                <li><a href="@Url.Content("~/CompanyInfo?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">INFO SOCIETATE</a></li>
+                                @*End, New Code Added, By Shivendra Singh, Dated : 29 May 2024*@
+                            }
+
+                            @*End, New Code Added For Cookie Policy, By Shivendra Singh, Dated : 09 June 2022; On Request of Andreea, Email Dated : 08 June 2022*@
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <div class="footer-bottom-box ">
+                        <p class="text-right font-14" id="copyright">
+                            &copy;
+                            <script>document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))</script> @CommonComponents.CompanySettings.CompanySetting().ChannelSetting.BrandName All Rights Reserved.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="back-to-top" id="gototopfrombottom">
+            <a id="back-to-top" href="javascript:void(0)" class="animated" data-animation-type="bounce"><i class="fa fa-angle-up"></i></a>
+        </div>
+    </div>
+</footer> 
+
+<script>
+
+    tjq('ul.nav li.dropdown').hover(function () {
+        tjq(this).find('.dropdown-menu').stop(true, true).delay(100).fadeIn(500);
+}, function() {
+    tjq(this).find('.dropdown-menu').stop(true, true).delay(100).fadeOut(500);
+});
+
+
+</script>
+<script type="text/javascript">
+    tjq(document).on('ready', function () {
+
+	/*!---responsive slider----	*/
+    tjq('.center').slick({
+     dots: false,
+     infinite: true,
+	 autoplay: true,
+     autoplaySpeed: 1000,
+	 autoplayTimeout: 1000,
+
+     slidesToShow: 7,
+     slidesToScroll: 1,
+     responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        infinite: true,
+		autoplay: true,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1
+      }
+    }
+  ]
+});
+
+    });
+</script>

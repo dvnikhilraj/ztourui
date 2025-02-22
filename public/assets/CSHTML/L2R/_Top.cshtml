@@ -1,0 +1,329 @@
+﻿@Html.AntiForgeryToken()
+<script>
+    var forgeryId = document.getElementsByName("@AntiForgeryConfig.CookieName")[0].value;
+    if (window.performance && window.performance.navigation.type == window.performance.navigation.TYPE_BACK_FORWARD) {
+        window.location.reload();
+    }
+</script>
+
+@try
+{
+    System.Globalization.DateTimeFormatInfo ukDtfi = new System.Globalization.CultureInfo("en-IN", false).DateTimeFormat;
+
+    if (Request.Cookies["lastupdate"] == null || System.Configuration.ConfigurationManager.AppSettings["LastUpdateDate"] == null)
+    {
+        <script>
+            localStorage.clear();
+        </script>
+        HttpCookie lastupdateCookie = new HttpCookie("lastupdate") { Value = DateTime.Now.ToString("dd-MM-yyyy") };
+        HttpContext.Current.Response.Cookies.Add(lastupdateCookie);
+    }
+    if (Request.Cookies["lastupdate"] != null && System.Configuration.ConfigurationManager.AppSettings["LastUpdateDate"] != null && Convert.ToDateTime(Request.Cookies["lastupdate"].Value, ukDtfi) < Convert.ToDateTime(System.Configuration.ConfigurationManager.AppSettings["LastUpdateDate"].ToString(), ukDtfi))
+    {
+        <script>
+            localStorage.clear();
+        </script>
+        HttpCookie lastupdateCookie = new HttpCookie("lastupdate") { Value = DateTime.Now.ToString("dd-MM-yyyy") };
+        HttpContext.Current.Response.Cookies.Add(lastupdateCookie);
+    };
+}
+catch (Exception ex)
+{
+
+}
+
+<div class="container">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="@Url.Content("~/?lang="+@CommonComponents.CompanySettings.LangCode())">
+            <img src="@Url.Content("~/Images/" + CommonComponents.CompanySettings.CompanySetting().CompanyId + "/logo.png")" alt=@CommonComponents.CompanySettings.CompanySetting().CompanyName />
+        </a>
+        <ul class="nav navbar-nav navbar-right top-menu">
+            <li><a href="tel:@CommonComponents.CompanySettings.CompanySetting().ChannelSetting.TollFreeNo"><span><i class="fas fa-phone-alt"></i> </span><span class="hidden-xs">@CommonComponents.CompanySettings.CompanySetting().ChannelSetting.TollFreeNo</span></a></li>
+            <li><a href="@Url.Content("~/Enquiry?lang="+@CommonComponents.CompanySettings.LangCode())"><span><i class="fas fa-file-alt"></i> </span><span class="hidden-xs">@LanguageResources.Resources.GetaQuote</span></a></li>
+            @if (Request.Url.AbsoluteUri.Contains("PassengerInfo") || Request.Url.AbsoluteUri.Contains("BookingConfirmation"))
+            {
+            }
+            else
+            {
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="Currency" aria-expanded="false">
+                        <span><i class="far fa-credit-card" style="font-size: 16px;"></i> </span><span class="hidden-xs">{{selectedCurrency.ChangeCurrency}}</span>
+                        <i class="fa fa-chevron-down font-12"></i>
+                    </a>
+                    <ul class="dropdown-menu main-navigation" role="menu">
+                        <li class="dropdown" id="currencycompile">
+                            @{
+                                System.Data.DataTable DtCurrncies = new System.Data.DataTable();
+                                if (Session["CompanyChannelCurencies"] != null)
+                                {
+                                    DtCurrncies = (System.Data.DataTable)Session["CompanyChannelCurencies"];
+                                }
+                                else
+                                {
+                                    CommonComponents.B2CDBOperation dbops = new CommonComponents.B2CDBOperation(CommonComponents.CompanySettings.CompanySetting().CompanyId);
+                                    DtCurrncies = dbops.GetCompanyChannelCurrencies(CommonComponents.CompanySettings.CompanySetting().CompanyId, "B2C");
+                                    Session["CompanyChannelCurencies"] = DtCurrncies;
+                                }
+                            }
+                            <ul class="dropdown" aria-labelledby="language-dropdown" id="CurrencyList">
+                                @foreach (System.Data.DataRow dr in DtCurrncies.Rows)
+                                {
+                                    <li ng-class="{active:selectedCurrency.ChangeCurrency === '@dr["CurrencyCode"]'}"><a href="javascript:void(0)" title="@dr["CurrencyCode"]" ng-click="ChangeSelectedCurrency('@CommonComponents.CompanySettings.CompanySetting().CompanyCurrency','@dr["CurrencyCode"]',true)">@dr["CurrencyCode"]</a></li>
+                                }
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" title="" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="hidden-sm hidden-md hidden-lg"><i class="fas fa-globe" style="font-size: 16px;"></i></span>
+                        <span id="cultureSelectedLink" class="hidden-xs"></span> <i class="fa fa-chevron-down font-12"></i>
+                    </a>
+                    <ul class="dropdown-menu main-navigation" role="menu">
+
+                        @if (CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(',').Length > 0)
+                        {
+
+                            <li class="dropdown">
+
+                                <ul class="dropdown" id="cultureDropDown">
+                                    @{
+                                        if (CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages != null)
+                                        {
+                                            foreach (string codename in CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(','))
+                                            {
+                                                <li><a href="javascript:SetCulture('@codename.Split(':')[0]','@codename.Split(':')[1]')" title="@codename.Split(':')[0]">@codename.Split(':')[1]</a></li>
+                                            }
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+                    </ul>
+                </li>
+            }
+            @if (TIUser.GeneralVariable.UserDetails() != null)
+            {
+                <li class="dropdown" id="loginUser">
+                    @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_TopWithLogin")
+                </li>
+                <li class="dropdown" id="linkmyaccount" style="display:none">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class=""><i class="far fa-user" style="font-size: 16px;"></i>&nbsp;<span class="hidden-xs">@LanguageResources.Resources.MyAccount &nbsp;</span><i class="fa fa-chevron-down font-12"></i></span>
+                    </a>
+                    <ul class="dropdown-menu main-navigation" role="menu">
+                        <li class="dropdown">
+                            <ul class="dropdown">
+                                <li class="ribbon currency" id="loginUser" style="display:none"></li>
+
+                                <li id="signinAfter"><a href="#ti-login" id="loginpass" class="soap-popupbox">@LanguageResources.Resources.SIGNIN</a></li>
+                                <li id="regisAfter"><a href="#ti-signup" class="soap-popupbox">@LanguageResources.Resources.CreateanAccount</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            }
+            else
+            {
+                <li class="dropdown ribbon currency" id="loginUser" style="display:none"></li>
+                <li class="dropdown" id="linkmyaccount">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class=""><i class="far fa-user" style="font-size: 16px;"></i>&nbsp;<span class="hidden-xs">@LanguageResources.Resources.MyAccount &nbsp;</span><i class="fa fa-chevron-down font-12"></i></span>
+                    </a>
+                    <ul class="dropdown-menu main-navigation" role="menu">
+                        <li class="dropdown">
+                            <ul class="dropdown">
+                                <li class="ribbon currency" id="loginUser" style="display:none"></li>
+
+                                <li id="signinAfter"><a href="#ti-login" class="soap-popupbox">@LanguageResources.Resources.SIGNIN</a></li>
+                                <li id="regisAfter"><a href="#ti-signup" class="soap-popupbox">@LanguageResources.Resources.CreateanAccount</a></li>
+
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            }
+        </ul>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        @if (@CommonComponents.CompanySettings.LangCode().ToLower() == "en")
+        {
+            <span class="visible-xs Discover-text" style="display: inline-block; margin-top: 6px; color: #15327a; font-size: 18px;"><a style="color: #15327a;" href="@Url.Content("~/DiscoverDestination?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Discover Our Destinations</a></span>
+        }
+        else
+        {
+            <span class="visible-xs Discover-text" style="display: inline-block; margin-top: 6px; color: #15327a; font-size: 18px;"><a style="color: #15327a;" href="@Url.Content("~/DiscoverDestination?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Descopera Destinatiile Noastre</a></span>
+        }
+        <ul class="nav navbar-nav navbar-right visible-xs">
+            <li class="menu-item-has-children visible-xs">
+                <a href="@Url.Content("~/Package?lang="+@CommonComponents.CompanySettings.LangCode())">
+                    @if (@CommonComponents.CompanySettings.LangCode().ToLower() == "en")
+                    {<span>Dynamic Packages</span>}
+                    @*@if (@CommonComponents.CompanySettings.LangCode().ToLower() == "ro")
+                    {<span>PACHETE DINAMICE</span> }*@
+                    else
+                    { <span>PACHETE DINAMICE</span>}
+                </a>
+            </li>
+
+            @*<li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/Package?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Packages </a></li>*@
+
+            <li class="menu-item-has-children visible-xs"><a href="https://charter.ztour-travel.ro" target="_blank">CHARTER</a></li>
+
+
+            <li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/Flight?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Flights</a></li>
+            <li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/Hotel?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Hotels </a></li>
+            @*<li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/Activity?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Activities </a></li>*@
+            <li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/Transfer?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Transfers</a></li>
+            <li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/FlightHotel?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.FlightsHotel</a></li>
+            @*<li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/Car?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Cars </a></li>*@
+            <li class="menu-item-has-children visible-xs"><a href="@Url.Content("~/Insurance?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Insurance </a></li>
+
+            @*Code Commented by Shivendra Singh, Date : 06 Feb 2024*@
+            @*<li class="menu-item-has-children visible-xs"><a target="_blank" href="@Url.Content("~/General/ToGermani?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.GermanTO</a></li>*@
+            @*End Code, Commented by Shivendra Singh, Date : 06 Feb 2024*@
+
+        </ul>
+    </div><!-- /.navbar-collapse -->
+</div>
+<!--<---------header---->
+<header class="header">
+    <div class="menu-container">
+        <nav id="main-menu" role="navigation" class="container">
+            @if (@CommonComponents.CompanySettings.LangCode().ToLower() == "en")
+            {
+                <span class="Discover-text" style="display:inline-block;margin-top:6px; color:white;font-size:18px;"><a style="color:white;" href="@Url.Content("~/DiscoverDestination?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Discover Our Destinations</a></span>
+            }
+            else
+            {
+                <span class="Discover-text" style="display:inline-block;margin-top:6px; color:white;font-size:18px;"><a style="color:white;" href="@Url.Content("~/DiscoverDestination?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Descopera Destinatiile Noastre</a></span>
+            }
+
+            <ul class="menu">
+
+                <li class="menu-item-has-children visible">
+                    <a href="@Url.Content("~/Package?lang="+@CommonComponents.CompanySettings.LangCode())">
+                        @if (@CommonComponents.CompanySettings.LangCode().ToLower() == "en")
+                        {<span>Dynamic Packages</span>}
+                        @*@if (@CommonComponents.CompanySettings.LangCode().ToLower() == "ro")
+                        {<span>PACHETE DINAMICE</span> }*@
+                        else
+                        { <span>PACHETE DINAMICE</span>}
+                    </a>
+                </li>
+
+                @*<li class="menu-item-has-children visible"><a href="@Url.Content("~/Package?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Packages </a></li>*@
+
+
+                <li class="menu-item-has-children visible"><a href="https://charter.ztour-travel.ro" target="_blank">CHARTER</a></li>
+
+                <li class="menu-item-has-children visible"><a href="@Url.Content("~/Flight?lang="+@CommonComponents.CompanySettings.LangCode())"> @LanguageResources.Resources.Flights</a></li>
+                <li class="menu-item-has-children visible"><a href="@Url.Content("~/Hotel?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Hotels </a></li>
+                @*<li class="menu-item-has-children visible"><a href="@Url.Content("~/Activity?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Activities </a></li>*@
+                <li class="menu-item-has-children visible"><a href="@Url.Content("~/Transfer?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Transfers </a></li>
+                <li class="menu-item-has-children visible"><a href="@Url.Content("~/FlightHotel?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.FlightsHotel</a></li>
+                @*<li class="menu-item-has-children visible"><a href="@Url.Content("~/Car?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Cars</a></li>*@
+                <li class="menu-item-has-children visible"><a href="@Url.Content("~/Insurance?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Insurance</a></li>
+
+                @*Code Commented by Shivendra Singh, Date : 06 Feb 2024*@
+                @*<li class="menu-item-has-children visible"><a target="_blank" href="@Url.Content("~/General/ToGermani?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.GermanTO</a></li>*@
+                @*End Code, Commented by Shivendra Singh, Date : 06 Feb 2024*@
+
+            </ul>
+        </nav>
+    </div>
+    <div id="ti-signup" class="ti-signup-box ti-box">
+        @Html.Partial("~/Areas/Common/Views/Shared/" + CommonComponents.CompanySettings.ViewBasePath() + "_Registration.cshtml")
+    </div>
+    <div id="ti-login" class="ti-login-box ti-box">
+        @Html.Partial("~/Areas/Common/Views/Shared/" + CommonComponents.CompanySettings.ViewBasePath() + "_Login.cshtml")
+    </div>
+    <!--<---------header---->
+</header>
+@if (Session["cartStartTime"] != null)
+{
+    DateTime currentTime = DateTime.Now;
+    DateTime startTime = (DateTime)Session["cartStartTime"];
+    var timeDiff = Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["CartExpireTime"]) - Math.Round((currentTime - startTime).TotalSeconds);
+    // var test = currentTime - startTime;
+    <script>
+        var sec = @timeDiff;
+        function pad(val) { return val > 9 ? val : "0" + val; }
+        tjq('.seconds').html(pad(sec % 60));
+        tjq('.minutes').html(pad(parseInt(sec / 60, 10)));
+        var timeOut = 0;
+        setInterval(function() {
+            if (sec <= 0)
+            {
+                timeOut++;
+                if (timeOut == 1)
+                {
+                    tjq('#carttimer').hide();
+                    tjq('#link-cart-expired').trigger('click');
+                    tjq('.cartItem_main').hide();
+                    var path = document.getElementById("hdnPath").value;
+                    tjq.ajax({
+                        type: "POST",
+                        url: path + "Cart/RemoveCart",
+                        data: '{cartItem: "ALL" }',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: function(response) {
+                        },
+                        failure: function(response) {
+                        },
+                        error: function(response) {
+                        }
+                    });
+                }
+            }
+            else
+            {
+                tjq('.seconds').html(pad(--sec % 60));
+                tjq('.minutes').html(pad(parseInt(sec / 60, 10)));
+            }
+        }, 1000);
+        //Validate Max Item in Cart
+        function stopEvent(control, maxCartItem) {
+            var cartCount = 0;
+            var MaxItemInCart = maxCartItem
+            tjq.ajax({
+                async:false,
+                type: "POST",
+                url: path + "Cart/GetCartBookingXMLList",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    cartCount = response.CartBookingObject.length;
+                    if (cartCount >= parseInt(MaxItemInCart)) {
+                        control.setAttribute("ng-disabled", true);
+                        alert('Shopping cart has reached its max limit of ' + MaxItemInCart + ' items. To book more items, complete current booking process.');
+                        control.addEventListener("click", function (event) {
+                            event.stopImmediatePropagation();
+                        });
+                    }
+                },
+                failure: function (response) {
+                },
+                error: function (response) {
+                }
+            });
+        }z
+    </script>
+}
+<script>
+    tjq('#change').change(function () {
+        alert("hello");
+        //this is just getting the value that is selected
+        var title = $(this).val();
+        tjq('.modal-title').html(title);
+        tjq('.modal').modal('show');
+    });
+</script>

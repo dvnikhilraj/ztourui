@@ -1,0 +1,250 @@
+﻿@{
+    bool isrest = false;
+    if (Request.QueryString["reset"] != null && Convert.ToString(Request.QueryString["reset"]).ToLower() == "true")
+    {
+        isrest = true;
+    }
+    SEOTagsContent.SEOContent seoContent = null;
+    SEOTagsContent.SEOContent seoContentPromo = null;
+    HttpCookie cultureCookie1 = HttpContext.Current.Request.Cookies["culture"];
+    string culturecode = string.Empty;
+    if (!string.IsNullOrEmpty(Request.QueryString["lang"]))
+    {
+        culturecode = Convert.ToString(Request.QueryString["lang"]).ToLower();
+        culturecode = CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(',').Select(x => x.Split(':')).Where(y => y.FirstOrDefault() == culturecode).Count() > 0 ? culturecode : !string.IsNullOrEmpty(CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureCode) ? CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureCode : "en";
+        cultureCookie1 = new HttpCookie("culture") { Value = CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(',').Select(x => x.Split(':')).Where(y => y.FirstOrDefault() == culturecode).Count() > 0 ? culturecode : !string.IsNullOrEmpty(CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureCode) ? CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureCode : "en" };
+
+        if (cultureCookie1 != null)
+        {
+            culturecode = cultureCookie1.Value;
+            seoContent = SEOTagsContent.SEOTags.GetSEOContet(cultureCookie1.Value, isrest);
+
+            if (RouteTable.Routes.GetRouteData(new HttpContextWrapper(HttpContext.Current)).Values["action"].ToString().ToLower() == "countrypromotiondetails" && RouteTable.Routes.GetRouteData(new HttpContextWrapper(HttpContext.Current)).Values["id"].ToString() != "")
+            {
+                seoContentPromo = SEOTagsContent.SEOTags.GetPromoSEOContent(cultureCookie1.Value, isrest);
+                //if (seoContentPromo != null)
+                //{
+                //    if (!string.IsNullOrEmpty(seoContentPromo.Title))
+                //    {
+                //        seoContent.Title = seoContentPromo.Title;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.MetaKeywords))
+                //    {
+                //        seoContent.MetaKeywords = seoContentPromo.MetaKeywords;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.MetaDescription))
+                //    {
+                //        seoContent.MetaDescription = seoContentPromo.MetaDescription;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.ogTitle))
+                //    {
+                //        seoContent.ogTitle = seoContentPromo.ogTitle;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.ogDescription))
+                //    {
+                //        seoContent.ogDescription = seoContentPromo.ogDescription;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.ogImage))
+                //    {
+                //        seoContent.ogImage = seoContentPromo.ogImage;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.twitterTitle))
+                //    {
+                //        seoContent.twitterTitle = seoContentPromo.twitterTitle;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.twitterDescription))
+                //    {
+                //        seoContent.twitterDescription = seoContentPromo.twitterDescription;
+                //    }
+                //    if (!string.IsNullOrEmpty(seoContentPromo.twitterImage))
+                //    {
+                //        seoContent.twitterImage = seoContentPromo.twitterImage;
+                //    }
+                //}
+            }
+        }
+    }
+
+
+
+
+}
+@if (@seoContent != null)
+{
+    <!-- Page Title -->
+    if (seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.ogImage))
+    {
+        <title> @seoContentPromo.Title</title>
+    }
+    else
+    {
+        <title>@seoContent.Title</title>
+    }
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="@Html.Raw(seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.MetaKeywords) ? @seoContentPromo.MetaKeywords : @seoContent.MetaKeywords)" />
+    <meta name="description" content="@Html.Raw(seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.MetaDescription) ? @seoContentPromo.MetaDescription : @seoContent.MetaDescription)">
+    <meta name="author" content=@CommonComponents.CompanySettings.CompanySetting().CompanyName>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----------------- Social Media Open Graph ---------------------------->
+    <meta property="og:title" content="@Html.Raw(seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.ogTitle) ? @seoContentPromo.ogTitle : @seoContent.ogTitle)">
+    <meta property="og:description" content="@Html.Raw(seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.ogDescription) ? @seoContentPromo.ogDescription : @seoContent.ogDescription)">
+    <meta property="og:locale" content="@seoContent.ogLocale">
+    <meta property="og:url" content="@Request.Url.Scheme://@Request.Url.Host@Request.Url.AbsolutePath?lang=@culturecode">
+    if (seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.ogImage))
+    {
+        <meta property="og:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContentPromo.ogImage">
+    }
+    else
+    {
+        <meta property="og:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContent.ogImage">
+    }
+    <meta property="og:image:alt" content="@seoContent.ogImageAlt" />
+    <meta property="og:image:width" content="@seoContent.ogImageWidth" />
+    <meta property="og:image:height" content="@seoContent.ogImageHeight" />
+    <meta property="og:image:type" content="@seoContent.ogImageType" />
+    <meta property="og:site_name" content="@seoContent.ogSiteName">
+    <meta property="og:type" content="@seoContent.ogType">
+    <meta property="fb:app_id" content="@seoContent.fbAppId">
+
+    <!----------------- Social Media Twitter List  ---------------------------->
+    <meta name="twitter:title" content="@Html.Raw(seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.twitterTitle) ? @seoContentPromo.twitterTitle : @seoContent.twitterTitle)">
+    <meta name="twitter:description" content="@Html.Raw(seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.twitterDescription) ? @seoContentPromo.twitterDescription : @seoContent.twitterDescription)">
+    <meta name="twitter:card" content="@seoContent.twitterCard">
+    if (seoContentPromo != null && !string.IsNullOrEmpty(seoContentPromo.twitterImage))
+    {
+        <meta property="twitter:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContentPromo.twitterImage">
+    }
+    else
+    {
+        <meta name="twitter:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContent.twitterImage">
+    }
+    <meta name="twitter:image:alt" content="@seoContent.twitterImageAlt">
+    <meta name="twitter:domain" content="@Request.Url.Scheme://@Request.Url.Host@Request.Url.AbsolutePath">
+    <meta name="twitter:site" content="@seoContent.twitterSite">
+    <meta name="twitter:creator" content="@seoContent.twitterCreator">
+    <!----------------- End of Social Media Twitter List  ---------------------------->
+}
+@if (string.IsNullOrEmpty(Convert.ToString(Request.QueryString["lang"])))
+{
+    bool Isrest = false;
+    if (Request.QueryString["reset"] != null && Convert.ToString(Request.QueryString["reset"]).ToLower() == "true")
+    {
+        Isrest = true;
+    }
+    SEOTagsContent.SEOContent seoContents = null;
+    SEOTagsContent.SEOContent seoContentsPromo = null;
+    HttpCookie cultureCookie2 = HttpContext.Current.Request.Cookies["culture"];
+    string culturecodes = string.Empty;
+    if (cultureCookie2 != null)
+    {
+        culturecodes = cultureCookie2.Value;
+    }
+    else
+    {
+        culturecodes = CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureCode;
+    }
+
+    seoContents = SEOTagsContent.SEOTags.GetSEOContet(culturecodes, Isrest);
+
+    if (RouteTable.Routes.GetRouteData(new HttpContextWrapper(HttpContext.Current)).Values["action"].ToString().ToLower() == "countrypromotiondetails" && RouteTable.Routes.GetRouteData(new HttpContextWrapper(HttpContext.Current)).Values["id"].ToString() != "")
+    {
+        seoContentsPromo = SEOTagsContent.SEOTags.GetPromoSEOContent(cultureCookie1.Value, isrest);
+        //if (seoContentsPromo != null)
+        //{
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.Title))
+        //    {
+        //        seoContents.Title = seoContentsPromo.Title;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.MetaKeywords))
+        //    {
+        //        seoContents.MetaKeywords = seoContentsPromo.MetaKeywords;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.MetaDescription))
+        //    {
+        //        seoContents.MetaDescription = seoContentsPromo.MetaDescription;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.ogTitle))
+        //    {
+        //        seoContents.ogTitle = seoContentsPromo.ogTitle;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.ogDescription))
+        //    {
+        //        seoContents.ogDescription = seoContentsPromo.ogDescription;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.ogImage))
+        //    {
+        //        seoContents.ogImage = seoContentsPromo.ogImage;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.twitterTitle))
+        //    {
+        //        seoContents.twitterTitle = seoContentsPromo.twitterTitle;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.twitterDescription))
+        //    {
+        //        seoContents.twitterDescription = seoContentsPromo.twitterDescription;
+        //    }
+        //    if (!string.IsNullOrEmpty(seoContentsPromo.twitterImage))
+        //    {
+        //        seoContents.twitterImage = seoContentsPromo.twitterImage;
+        //    }
+        //}
+    }
+    <!-- Page Title -->
+    if (seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.ogImage))
+    {
+        <title> @seoContentsPromo.Title</title>
+    }
+    else
+    {
+        <title>@seoContents.Title</title>
+    }
+
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="keywords" content="@Html.Raw(seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.MetaKeywords) ? @seoContentsPromo.MetaKeywords : @seoContents.MetaKeywords)" />
+    <meta name="description" content="@Html.Raw(seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.MetaDescription) ? @seoContentsPromo.MetaDescription : @seoContents.MetaDescription)">
+    <meta name="author" content=@CommonComponents.CompanySettings.CompanySetting().CompanyName>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!----------------- Social Media Open Graph ---------------------------->
+    <meta property="og:title" content="@Html.Raw(seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.ogTitle) ? @seoContentsPromo.ogTitle : @seoContents.ogTitle)">
+    <meta property="og:description" content="@Html.Raw(seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.ogDescription) ? @seoContentsPromo.ogDescription : @seoContents.ogDescription)">
+    <meta property="og:locale" content="@seoContents.ogLocale">
+    <meta property="og:url" content="@Request.Url.Scheme://@Request.Url.Host@Request.Url.AbsolutePath?lang=@culturecode">
+    if (seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.ogImage))
+    {
+        <meta property="og:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContentsPromo.ogImage">
+    }
+    else
+    {
+        <meta property="og:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContents.ogImage">
+    }
+    <meta property="og:image:alt" content="@seoContents.ogImageAlt" />
+    <meta property="og:image:width" content="@seoContents.ogImageWidth" />
+    <meta property="og:image:height" content="@seoContents.ogImageHeight" />
+    <meta property="og:image:type" content="@seoContents.ogImageType" />
+    <meta property="og:site_name" content="@seoContents.ogSiteName">
+    <meta property="og:type" content="@seoContents.ogType">
+    <meta property="fb:app_id" content="@seoContents.fbAppId">
+
+    <!----------------- Social Media Twitter List  ---------------------------->
+    <meta name="twitter:title" content="@Html.Raw(seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.twitterTitle) ? @seoContentsPromo.twitterTitle : @seoContents.twitterTitle)">
+    <meta name="twitter:description" content="@Html.Raw(seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.twitterDescription) ? @seoContentsPromo.twitterDescription : @seoContents.twitterDescription)">
+    <meta name="twitter:card" content="@seoContents.twitterCard">
+    if (seoContentsPromo != null && !string.IsNullOrEmpty(seoContentsPromo.twitterImage))
+    {
+        <meta name="twitter:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContentsPromo.twitterImage">
+    }
+    else
+    {
+        <meta name="twitter:image" content="@System.Configuration.ConfigurationManager.AppSettings["CRMBaseURL"]Images/@CommonComponents.CompanySettings.CompanySetting().CompanyId/SM/@seoContents.twitterImage">
+    }
+    <meta name="twitter:image:alt" content="@seoContents.twitterImageAlt">
+    <meta name="twitter:domain" content="@Request.Url.Scheme://@Request.Url.Host@Request.Url.AbsolutePath">
+    <meta name="twitter:site" content="@seoContents.twitterSite">
+    <meta name="twitter:creator" content="@seoContents.twitterCreator">
+    <!----------------- End of Social Media Twitter List  ---------------------------->
+
+}

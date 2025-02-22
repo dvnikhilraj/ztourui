@@ -1,0 +1,639 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8]>          <html class="ie ie8"> <![endif]-->
+<!--[if IE 9]>          <html class="ie ie9"> <![endif]-->
+<!--[if gt IE 9]><!-->
+<html>
+<!--<![endif]-->
+<head>
+    <base href="/">
+
+    @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_SEOContent")
+
+    @*New Code Added By Shivendra, On Request of Olawale, Dated - 26 July 2023*@
+
+    <link rel="canonical" href="https://www.ztour-travel.ro/">
+
+    @*End, New Code Added By Shivendra, On Request of Olawale, Dated - 26 July 2023*@
+
+    <link rel="shortcut icon" href="@Url.Content("~/Images/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/favicon.ico")" type="image/x-icon">
+    @*<link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/bootstrap.css")">*@
+    @*<link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/font-awesome.css")">
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">*@
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/all.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/bootstrap.min.css")">
+    @*<link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/slick.css")">*@
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/slick.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/slick-theme.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/header.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/footer.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/stylehome.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/custom.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/select2.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/responsive.css")">
+
+
+    @{
+        HttpCookie cultureCookie = Request.Cookies["culture"];
+        if (cultureCookie != null && cultureCookie.Value == "ro")
+        {
+            <link rel="stylesheet" href="@Url.Content("~/Css/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Romanian.css")">
+        }
+    }
+    @*<link rel="stylesheet" href="@Url.Content("~/Css/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/Home/font-awesome.css")">*@
+    @*<link rel="stylesheet" href="@Url.Content("~/Css/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/soap-icon.css")">*@
+    <link href="@Url.Content("~/Css/components/Flags/flag-icon.min.css")" rel="stylesheet" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/MultiLingualVars.js")"></script>
+    <script>
+        var CompanyId = "@CommonComponents.CompanySettings.CompanySetting().CompanyId"
+        var paggingFirst = "@LanguageResources.Resources.FIRST"
+        var paggingpPrevious = "@LanguageResources.Resources.PREVIOUS"
+        var paggingNext = "@LanguageResources.Resources.NEXT"
+        var paggingLast = "@LanguageResources.Resources.LAST"
+        var EnterCityLocationorHotel = "@LanguageResources.Resources.EnterCityLocationorHotel"
+        var Pleaseenterorigincity = "@LanguageResources.Resources.Pleaseenterorigincity"
+        var Pleaseenterdestinationcity = "@LanguageResources.Resources.Pleaseenterdestinationcity"
+        var Orginanddestinationcannotbesame = "@LanguageResources.Resources.Orginanddestinationcannotbesame"
+
+        var Emailidisrequired = "@LanguageResources.Resources.Emailidisrequired"
+        var Mobilenumberisrequired = "@LanguageResources.Resources.Mobilenumberisrequired"
+        var Validemailidisrequired = "@LanguageResources.Resources.Validemailidisrequired"
+        var Daillingcodeisrequired = "@LanguageResources.Resources.Daillingcodeisrequired"
+        var Passwordisrequired = "@LanguageResources.Resources.Passwordisrequired"
+        var Emailidisalreadyregistered = "@LanguageResources.Resources.Emailidisalreadyregistered"
+        var Emailidisnotregisteredwithus = "@LanguageResources.Resources.Emailidisnotregisteredwithus"
+        var Youhaveenteredwrongcredential = "@LanguageResources.Resources.Youhaveenteredwrongcredential"
+        var Pleasetryagainsomeerroroccur = "@LanguageResources.Resources.Pleasetryagainsomeerroroccur"
+        var Apasswordresetmailsenttoyouremailid = "@LanguageResources.Resources.Apasswordresetmailsenttoyouremailid"
+
+        var TentativePrice = "@LanguageResources.Resources.TentativePrice"
+        var SelectPurpose = "@LanguageResources.Resources.SelectPurpose"
+        var TripZone = "@LanguageResources.Resources.TripZone"
+        var TripCountry = "@LanguageResources.Resources.TripCountry"
+        var TripPeople = "@LanguageResources.Resources.TripPeople"
+        var InsuranceCoverage = "@LanguageResources.Resources.InsuranceCoverage"
+        var TravelByRequired = "@LanguageResources.Resources.TravelByRequired"
+        var CUIRequire = "@LanguageResources.Resources.CUIRequire"
+        var CompanyNameRequire = "@LanguageResources.Resources.CompanyNameRequire"
+        var RegistrationNoRequire = "@LanguageResources.Resources.RegistrationNoRequire"
+        var CompanyAddressRequire = "@LanguageResources.Resources.CompanyAddressRequire"
+        var CNPNumberUnique = "@LanguageResources.Resources.CNPNumberUnique"
+        var SpecialCharLastNameMsg = "@LanguageResources.Resources.SpecialCharLastNameMsg"
+        var SpecialCharFirstNameMsg = "@LanguageResources.Resources.SpecialCharFirstNameMsg"
+        var SpecialCharMiddleNameMsg = "@LanguageResources.Resources.SpecialCharMiddleNameMsg"
+        var PhoneNoRequired = "@LanguageResources.Resources.PhoneNoRequired"
+        var PassportNoRequired = "@LanguageResources.Resources.PassportNoRequired"
+        var PleaseSelectCountry = "@LanguageResources.Resources.PleaseSelectCountry"
+        var TownRequired = "@LanguageResources.Resources.TownRequired"
+        var StreetRequired = "@LanguageResources.Resources.StreetRequired"
+        var CNPRequire = "@LanguageResources.Resources.CNPRequire"
+        var ValidCNPNumber = "@LanguageResources.Resources.ValidCNPNumber"
+
+        var Titleisrequired = "@LanguageResources.Resources.Titleisrequired"
+        var Firstnameisrequired = "@LanguageResources.Resources.Firstnameisrequired"
+        var Lastnameisrequired = "@LanguageResources.Resources.Lastnameisrequired"
+        var EmailAddressisrequired = "@LanguageResources.Resources.EmailAddressisrequired"
+        var Invalidemailid = "@LanguageResources.Resources.Invalidemailid"
+        var Mobilenumbermustbedigits = "@LanguageResources.Resources.Mobilenumbermustbedigits"
+        var Nationalityisrequired = "@LanguageResources.Resources.Nationalityisrequired"
+        var Dateofbirthisrequired = "@LanguageResources.Resources.Dateofbirthisrequired"
+        var Oldpasswordisrequired = "@LanguageResources.Resources.Oldpasswordisrequired"
+        var Newpasswordisrequired = "@LanguageResources.Resources.Newpasswordisrequired"
+        var Confirmnewpassword = "@LanguageResources.Resources.Confirmnewpassword"
+        var Passworddidntmatch = "@LanguageResources.Resources.Passworddidntmatch"
+        var OldPasswordiswrong = "@LanguageResources.Resources.OldPasswordiswrong"
+        var Youwerenotabletologin = "@LanguageResources.Resources.Youwerenotabletologin"
+        var SelectHolidayTypeOrCountry = "@LanguageResources.Resources.SelectHolidayTypeOrCountry"
+        var Packages = "@LanguageResources.Resources.Packages"
+        var Packages_multiple = "@LanguageResources.Resources.Packages_multiple"
+        @*var PleaseSelectHolidayType = "@LanguageResources.Resources.PleaseSelectHolidayType"
+        var PleaseSelectCountry = "@LanguageResources.Resources.PleaseSelectCountry"
+        var PleaseSelectCity = "@LanguageResources.Resources.PleaseSelectCity"*@
+        var Mobilenumberiswrong = "@LanguageResources.Resources.Mobilenumberiswrong"
+
+        var Firstnamemustbeinenglish = "@LanguageResources.Resources.Firstnamemustbeinenglish"
+        var Middlenamemustbeinenglish = "@LanguageResources.Resources.Middlenamemustbeinenglish"
+        var Lastnamemustbeinenglish = "@LanguageResources.Resources.Lastnamemustbeinenglish"
+        var AddressmustbeinEnglish = "@LanguageResources.Resources.AddressmustbeinEnglish"
+        var PassportmustbeinEnglish = "@LanguageResources.Resources.PassportmustbeinEnglish"
+        var EmailIdmustbeinenglish = "@LanguageResources.Resources.EmailIdmustbeinenglish"
+        var Passwordmustbeinenglish = "@LanguageResources.Resources.Passwordmustbeinenglish"
+        var Messagemustbeinenglish = "@LanguageResources.Resources.Messagemustbeinenglish"
+        var stops = "@LanguageResources.Resources.Stop"
+        var nonstop = "@LanguageResources.Resources.NONSTOP"
+        var mixedairline = "@LanguageResources.Resources.Mixedairline"
+        var EnterOrigin = "@LanguageResources.Resources.EnterOrigin"
+        var EnterDestination = "@LanguageResources.Resources.EnterDestination"
+        var CannotassociatesamePassengertosameInfant = "@LanguageResources.Resources.CannotassociatesamePassengertosameInfant"
+        var EnterPickUpCityMsg = "@LanguageResources.Resources.EnterPickUpCityMsg"
+
+        var EnterPickUpCity = "@LanguageResources.Resources.EnterPickUpCity"
+        var DIFFERENTDROP = "@LanguageResources.Resources.DIFFERENTDROP"
+
+
+
+        var EnterDropOffCityMsg = "@LanguageResources.Resources.EnterDropOffCityMsg"
+        var DropoffCity = "@LanguageResources.Resources.DropoffCity"
+        var OriginDestinationSame = "@LanguageResources.Resources.OriginDestinationSame"
+
+        //----Sorting on R2L--------
+        var Price = "@LanguageResources.Resources.Price"
+        var OutboundAirline = "@LanguageResources.Resources.OutboundAirline"
+        var OutboundDepartureTime = "@LanguageResources.Resources.OutboundDepartureTime"
+        var OutboundArrivalTime = "@LanguageResources.Resources.OutboundArrivalTime"
+        var OutboundDuration = "@LanguageResources.Resources.OutboundDuration"
+        var ReturnAirline = "@LanguageResources.Resources.ReturnAirline"
+        var ReturnDepartureTime = "@LanguageResources.Resources.ReturnDepartureTime"
+        var ReturnArrivalTime = "@LanguageResources.Resources.ReturnArrivalTime"
+        var ReturnDuration = "@LanguageResources.Resources.ReturnDuration"
+        var NumberOfStops = "@LanguageResources.Resources.Noofstops"
+        var EnterPickupCityLocation = "@LanguageResources.Resources.EnterPickupCityLocation"
+        var EnterDropCityLocation = "@LanguageResources.Resources.EnterDropCityLocation"
+        var PickupTimeMsg = "@LanguageResources.Resources.PickupTimeMsg"
+
+        var lblPickupTime = "@LanguageResources.Resources.PickupTime"
+        var lblPickupTimeMsg = "@LanguageResources.Resources.PickupTimeMsg"
+
+        var lblFlightDepartureTime = "@LanguageResources.Resources.FlightDepartureTime"
+        var lblSelectFlightDepartureTime = "@LanguageResources.Resources.SelectFlightDepartureTime"
+
+        var lblTrainDepartureTime = "@LanguageResources.Resources.TrainDepartureTime"
+        var lblSelectTrainDepartureTime = "@LanguageResources.Resources.SelectTrainDepartureTime"
+
+        var lblFlightArrivalTime = "@LanguageResources.Resources.FlightArrivalTime"
+        var lblSelectFlightArrivalTime = "@LanguageResources.Resources.SelectFlightArrivalTime"
+
+        var lblTrainArrivalTime = "@LanguageResources.Resources.TrainArrivalTime"
+        var lblSelectTrainArrivalTime = "@LanguageResources.Resources.SelectTrainArrivalTime"
+
+        var lblTime = "@LanguageResources.Resources.Time"
+        var SelectPickUpLocation = "@LanguageResources.Resources.SelectPickUpLocation"
+
+        var SelectDropofflocation = "@LanguageResources.Resources.SelectDropofflocation"
+        var PleaseSelectDriverAge = "@LanguageResources.Resources.PleaseSelectDriverAge"
+
+        var Yourqueryhasbeensubmitted = "@LanguageResources.Resources.Yourqueryhasbeensubmitted"
+        var Yourbookinghasbeencancelledsuccessfully = "@LanguageResources.Resources.Yourbookinghasbeencancelledsuccessfully"
+
+        var SeletedCultureCode = "@Html.Raw(!string.IsNullOrEmpty(Convert.ToString(Session["lang"])) ? Convert.ToString(Session["lang"]) : CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureCode)"
+        var CultureCode = "@CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureCode"
+        var CultureName = "@CommonComponents.CompanySettings.CompanySetting().WebsiteSetting.CultureName"
+
+    </script>
+    <!-- CSS for IE -->
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/ie.css" />
+    <![endif]-->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script type='text/javascript' src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+      <script type='text/javascript' src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.js"></script>
+    <![endif]-->
+    @*--Angular js refrerence--*@
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-cookies.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-route.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.js"></script>
+
+    <!-- Service Javascripts -->
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Angular/rzslider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Angular/angular-slider.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/dirPagination.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Module/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Module.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/CommonFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/CommonService.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/HotelFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/FlightFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/ActivityFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/FlightHotelFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/PackageFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/TransferFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/CarFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/FlightHotelFactory.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Angularjs/Factory/InsuranceFactory.js")"></script>
+
+
+    <!-- Javascript -->
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/jquery-1.11.1.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/jquery.noconflict.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/jquery-ui.1.10.4.min.js")"></script>
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/scripts.js")"></script>*@
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+
+    @*New Code Updated By Shivendra Singh, Dated 29 May 2023; Requested by Olawale*@
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5CJRFBG');</script>
+    <!-- End Google Tag Manager -->
+    <!-- Google Tag Manager -->
+    @*<script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-PLLNPWK');</script>*@
+    <!-- End Google Tag Manager -->
+    @*End, New Code Updated By Shivendra Singh, Dated 29 May 2023; Requested by Olawale*@
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-178488812-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-178488812-1');
+    </script>
+
+
+
+
+
+
+    <!-- Facebook Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '579302758944836');
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=579302758944836&ev=PageView&noscript=1" />
+    </noscript>
+
+
+    <!-- End Facebook Pixel Code -->
+
+    @*New Code Added By Shivendra Singh, Dated : 15 March 2024, Shared By Ioana Mam *@
+
+    <!-- New PushEngage Script-->
+    <script>
+        (function (w, d) {
+            w.PushEngage = w.PushEngage || [];
+            w._peq = w._peq || [];
+            PushEngage.push(['init', {
+                appId: '27c90354-20ab-4480-a3be-2cdb881538a4'
+            }]);
+
+            var e = d.createElement('script');
+
+            e.src = 'https://clientcdn.pushengage.com/sdks/pushengage-web-sdk.js';
+            e.async = true;
+            e.type = 'text/javascript';
+            d.head.appendChild(e);
+        })(window, document);
+    </script>
+
+    @*End, New Code Added By Shivendra Singh, Dated : 15 March 2024, Shared By Ioana Mam*@
+
+    <!-- PushEngage Pixel Code -->
+    <script>
+        window._peq = window._peq || []; window._peq.push(["init"]);
+    </script>
+    <script src="https://clientcdn.pushengage.com/core/a7675654-c4a3-4405-ba37-0e6d7010467a.js" async>
+    </script>
+
+    @*New Code Added By Shivendra Singh, Reference to the Hotjar Tracking Code for https://www.ztour-travel.ro, Dated : 26 Aug 2022*@
+
+    <!-- Hotjar Tracking Code for https://www.ztour-travel.ro/ -->
+    @*New Script Added By Shivendra Singh, Dated 18 April 2023
+        As confirmed, From: Olawale Balogun | ZTour Travel <olawale.balogun@ztour-travel.ro>; Sent: Tuesday, April 18, 2023 12:33 PM*@
+
+    <script>
+        (function (h, o, t, j, a, r) {
+            h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+            h._hjSettings = { hjid: 3445069, hjsv: 6 };
+            a = o.getElementsByTagName('head')[0];
+            r = o.createElement('script'); r.async = 1;
+            r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+            a.appendChild(r);
+        })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+    </script>
+
+
+    @*<script>
+            (function (h, o, t, j, a, r) {
+                h.hj = h.hj || function () { (h.hj.q = h.hj.q || []).push(arguments) };
+                h._hjSettings = { hjid: 3124669, hjsv: 6 };
+                a = o.getElementsByTagName('head')[0];
+                r = o.createElement('script'); r.async = 1;
+                r.src = t + h._hjSettings.hjid + j + h._hjSettings.hjsv;
+                a.appendChild(r);
+            })(window, document, 'https://static.hotjar.com/c/hotjar-', '.js?sv=');
+        </script>*@
+
+    @*End, New Script Added By Shivendra Singh, Dated 18 April 2023*@
+
+    @*End, New Code Added By Shivendra Singh, Reference to the Hotjar Tracking Code for https://www.ztour-travel.ro, Dated : 26 Aug 2022*@
+
+</head>
+
+<body class="">
+
+    @*New Code Updated By Shivendra Singh, Dated : 11 Sep 2023; Requested by Olawale, to add the New ChatBot*@
+    <script id="64f6eedcba294e003faa5f77" src="https://dashboard.chatfuel.com/integration/entry-point.js" async defer></script>
+    @*End, New Code Updated By Shivendra Singh, Dated : 11 Sep 2023; Requested by Olawale, to add the New ChatBot*@
+
+    @*New Code Updated By Shivendra Singh, Dated 29 May 2023; Requested by Olawale*@
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5CJRFBG"
+                height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Google Tag Manager (noscript) -->
+    @*<noscript>
+            <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PLLNPWK"
+                    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        </noscript>*@
+    <!-- End Google Tag Manager (noscript) -->
+    @*End, New Code Updated By Shivendra Singh, Dated 29 May 2023; Requested by Olawale*@
+
+
+    <div id="page-wrapper" ng-app="mainApp">
+        <input id="hdnPath" value="@Href("~")" type="hidden" />
+        <div id="toparea" ng-controller="CommonService" ng-cloak>
+            @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_Top")
+        </div>
+        @RenderBody()
+        @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_Footer")
+    </div>
+
+    @*New Code Added By Shivendra For Cookie Policy Implementation, Dated : 24 May 2022*@
+
+    @if (Request.QueryString["lang"] == null)
+    {
+        <div id="cookiePopup">
+            <div class="constant clear">
+                <b>Consimțământul pentru cookie-uri Z-Tour</b>
+                @*<a id="close-cookies" class="close-cookies">x</a>*@
+            </div>
+            <p>Pentru a vă oferi o mai bună experiență de navigare, acest website foloseste cookie-uri. Aceste cookie-uri sunt mici fișiere care sunt utilizate de către website ca să-și amintească informații despre preferințele dvs cu privire la procesarea datelor cu caracter personal. Prin folosirea cookie-urilor website-ul devine mai util prin personalizarea conținutului său în funcție de preferințele dvs. Pentru mai multe informatii, va rugam accesati <b><a href="@Url.Content("~/CookiePolicy?lang=ro")" target="_blank">Politica de cookie-uri</a> & <a href="@Url.Content("~/PrivacyAndPolicy?lang=ro")" target="_blank">Polita de confidentialitate</a></b>. Continuarea implică acceptarea lor.</p>
+
+            @*<p>Acest site foloseste cookie-uri pentru o mai buna experienta in navigare. Continuarea implica acceptarea lor. Pentru mai multe informatii, va rugam accesati <b><a href="@Url.Content("~/CookiePolicy?lang=ro")" target="_blank">Politica de cookie-uri</a> & <a href="@Url.Content("~/PrivacyAndPolicy?lang=ro")" target="_blank">Politica de confidentialitate</a></b>.</p>*@
+            @*<p>Acest site foloseste cookie-uri pentru o mai buna experienta in navigare. Continuarea implica acceptarea lor. Pentru mai multe informatii, va rugam accesati <b><a href="@Url.Content("~/CookiePolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Politica de cookie-uri</a> & <a href="@Url.Content("~/PrivacyAndPolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Polita de confidentialitate</a></b>.</p>*@
+            @*<img src="/close.png" class="close-cookies" />*@
+            <div class="accept">
+                <button id="acceptCookie">Accept</button>
+            </div>
+        </div>
+    }
+    else
+    {
+        if (Request.QueryString["lang"] == "ro")
+        {
+            <div id="cookiePopup">
+                <div class="constant clear">
+                    <b>Consimțământul pentru cookie-uri Z-Tour</b>
+                    @*<a id="close-cookies" class="close-cookies">x</a>*@
+                </div>
+                <p>Pentru a vă oferi o mai bună experiență de navigare, acest website foloseste cookie-uri. Aceste cookie-uri sunt mici fișiere care sunt utilizate de către website ca să-și amintească informații despre preferințele dvs cu privire la procesarea datelor cu caracter personal. Prin folosirea cookie-urilor website-ul devine mai util prin personalizarea conținutului său în funcție de preferințele dvs. Pentru mai multe informatii, va rugam accesati <b><a href="@Url.Content("~/CookiePolicy?lang=ro")" target="_blank">Politica de cookie-uri</a> & <a href="@Url.Content("~/PrivacyAndPolicy?lang=ro")" target="_blank">Polita de confidentialitate</a></b>. Continuarea implică acceptarea lor.</p>
+
+                @*<p>Acest site foloseste cookie-uri pentru o mai buna experienta in navigare. Continuarea implica acceptarea lor. Pentru mai multe informatii, va rugam accesati <b><a href="@Url.Content("~/CookiePolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Politica de cookie-uri</a> & <a href="@Url.Content("~/PrivacyAndPolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Politica de confidentialitate</a></b>.</p>*@
+                @*<img src="/close.png" class="close-cookies" />*@
+                <div class="accept">
+                    <button id="acceptCookie">Accept</button>
+                </div>
+            </div>
+        }
+        else
+        {
+
+            <div id="cookiePopup">
+                <div class="constant clear">
+                    <b>Z-Tour Cookie Consent</b>
+                    @*<a id="close-cookies" class="close-cookies">x</a>*@
+                </div>
+                <p>To provide you with a better browsing experience, this website uses cookies. These cookies are small files that are used by the website to remember information about your preferences regarding the processing of personal data. By using cookies the website becomes more useful by personalizing its content according to your preferences. For more information, please access the <b><a href="@Url.Content("~/CookiePolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Cookie Policy</a> & <a href="@Url.Content("~/PrivacyAndPolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Privacy Policy</a></b>. Continuation implies their acceptance.</p>
+
+                @*<p>For the better and smooth browsing experience, Z Tour recommends you to save the website cookies on system. Kindly Accept, to our <b><a href="@Url.Content("~/CookiePolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Cookie Policy</a> & <a href="@Url.Content("~/PrivacyAndPolicy?lang="+@CommonComponents.CompanySettings.LangCode())" target="_blank">Privacy Policy</a></b>.</p>*@
+                @*<img src="/close.png" class="close-cookies" />*@
+                <div class="accept">
+                    <button id="acceptCookie">Accept</button>
+                </div>
+            </div>
+        }
+
+    }
+
+
+    <!-- Twitter Bootstrap -->
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/bootstrap.js")"></script>
+
+        <!-- Flex Slider -->
+        <script type="text/javascript" src="@Url.Content("~/Css/components/flexslider/jquery.flexslider-min.js")"></script>
+        <!-- load BXSlider scripts -->
+        <script type="text/javascript" src="@Url.Content("~/Css/components/jquery.bxslider/jquery.bxslider.min.js")"></script>
+        <!-- parallax -->
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/jquery.stellar.min.js")"></script>
+        <!-- waypoint -->
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/waypoints.min.js")"></script>
+        <!-- load page Javascript -->*@
+
+
+    @*@<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/jquery.min.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/jquery-migrate-3.0.0.js")"></script>*@
+
+
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/jquery-1.11.1.min.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/scripts.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/theme-scripts.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/jquery-ui.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/popper.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/bootstrap.min.js")"></script>
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/boots trap-datepicker.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/slick.m in.js")"></script>*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/all.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/slick.js")"></script>
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/steller.js")"></script>*@
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/facnybox.min.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/circle-progress.min.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/slicknav.min.js")"></script>*@
+
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/all.min.js")"></script>*@
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/owl-carousel.js")"></script>*@
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/owl-carousel.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/magnific-popup.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/waypoints.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/wow.min.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/scrollup.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/easing.js")"></script>
+        <script  type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Home/active.js")"></script>
+        <script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/sopa-icon.css")"></script>*@
+
+    @*<script type="text/javascript" src="@Url.Content("~/Css/components/flexslider/jquery.flexslider-min.js")"></script>
+         <!-- load BXSlider scripts -->
+        <script type="text/javascript" src="@Url.Content("~/Css/components/jquery.bxslider/jquery.bxslider.min.js")"></script>*@
+
+
+    @*<script type="text/javascript" src="@Url.Content("~/Scripts/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/scripts.js")"></script>*@
+    @*<script src="@Url.Content("~/Scripts/select2.min.js")"></script>*@
+    <script type="text/javascript">
+        // tjq(".flexslider").flexslider({ animation: "fade", controlNav: false, animationLoop: true, directionNav: false, slideshow: true, slideshowSpeed: 5000 });
+        tjq(function () {
+            var scope = angular.element(document.getElementById("toparea")).scope();
+            scope.$apply(function () {
+                scope.ChangeSelectedCurrency('@CommonComponents.CompanySettings.CompanySetting().CompanyCurrency', '@CommonComponents.CompanySettings.CompanySetting().CompanyCurrency', false);
+            });
+        });
+        tjq(function () {
+            ClearSessionStorage();
+        });
+    </script>
+    <script>
+        //popup close
+        function closepop() {
+            tjq(".modify-panel-back").trigger('click');
+        }
+        //min height maintain
+        function bodyMinheight() {
+            var headerHeight = tjq("header").innerHeight(),
+                footerHeight = tjq("footer").innerHeight(),
+                windowHeight = tjq(window).height(),
+                documentHeight = windowHeight - (footerHeight);
+            tjq("#content").css("min-height", documentHeight);
+        }
+        tjq(document).ready(bodyMinheight);
+        tjq(window).resize(bodyMinheight);
+    </script>
+
+    @*Code Commented By Shivendra Singh; Dated : 11 Sep 2023, Requested By : Olawale to remove TawkTo and add New Script*@
+    <!--Start of Tawk.to Script-->
+    @*<script type="text/javascript">
+            var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+            (function () {
+                var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+                s1.async = true;
+                s1.src = 'https://embed.tawk.to/5e58cc5da89cda5a188866bf/default';
+                s1.charset = 'UTF-8';
+                s1.setAttribute('crossorigin', '*');
+                s0.parentNode.insertBefore(s1, s0);
+            })();
+        </script>*@
+    <!--End of Tawk.to Script-->
+    @*End, Code Commented By Shivendra Singh; Dated : 11 Sep 2023, Requested By : Olawale to remove TawkTo and add New Script*@
+
+    <script>
+        function PopUp(hideOrshow) {
+            if (hideOrshow == 'hide') document.getElementById('ac-wrapper').style.display = "none";
+            else document.getElementById('ac-wrapper').removeAttribute('style');
+        }
+        //Code Commented by Shivendra Singh, to remove Covid 19 Popup, Dated : 16 June 2022
+        //window.onload = function () {
+        //    setTimeout(function () {
+        //        PopUp('show');
+        //    });
+        //}
+        //End, Code Commented by Shivendra Singh, to remove Covid 19 Popup, Dated : 16 June 2022
+
+    </script>
+
+    @*New Code Added By Shivendra For Cookie Policy Implementation, Dated : 24 May 2022*@
+
+    <script type="text/javascript">
+        // Set ZTour Cookies
+        var todaysDate = new Date();
+        var dd = String(todaysDate.getDate()).padStart(2, '0');
+        var mm = String(todaysDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = todaysDate.getFullYear();
+
+        todaysDate = dd + '/' + mm + '/' + yyyy;
+
+        var cookieName = "Z Tour - Cookie Policy";
+        var cookieValue = "Cookie Policy Saved for, 'ztour-travel.ro', Dated : " + todaysDate;
+
+        var cookieExpireDays = 30;
+
+        // Cookie Acceptance Button, When ZTour User Clicks on.
+        let acceptCookie = document.getElementById("acceptCookie");
+        acceptCookie.onclick = function () {
+            CreateZTourCookie(cookieName, cookieValue, cookieExpireDays);
+        }
+
+        // ZTour's Function To Set Cookie In The Web Browser
+        let CreateZTourCookie = function (cookieName, cookieValue, cookieExpireDays) {
+            let currentDate = new Date();
+            currentDate.setTime(currentDate.getTime() + (cookieExpireDays * 24 * 60 * 60 * 1000));
+            let expires = "expires=" + currentDate.toGMTString();
+            document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
+            if (document.cookie) {
+                document.getElementById("cookiePopup").style.display = "none";
+            } else {
+                alert("Unable to set cookie. Please allow all cookies site from cookie setting of your browser");
+            }
+
+        }
+
+        // Retrive ZTour Cookie From The Web Browser
+        let getCookie = function (cookieName) {
+            let name = cookieName + "=";
+            let decodedCookie = decodeURIComponent(document.cookie);
+            let ca = decodedCookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) == ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) == 0) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        // Verify Whether the ZTour Cookie Is Set or Not
+        let checkCookie = function () {
+            let check = getCookie(cookieName);
+            if (check == "") {
+                document.getElementById("cookiePopup").style.display = "block";
+            } else {
+
+                document.getElementById("cookiePopup").style.display = "none";
+            }
+        }
+        checkCookie();
+    </script>
+
+
+    <script type="text/javascript">
+        // To Hide Cookie Policy Popup Box
+        let closeCookie = document.getElementById("close-cookies");
+        closeCookie.onclick = function () {
+            //alert('Check ZTour Alert');
+            $('#cookiePopup').hide();
+        }
+
+    </script>
+
+    @*End, New Code Added By Shivendra For Cookie Policy Implementation, Dated : 24 May 2022*@
+
+</body>
+</html>

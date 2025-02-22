@@ -1,0 +1,29 @@
+﻿@{
+    // Code disables caching by browser.
+    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+    Response.Cache.SetExpires(DateTime.UtcNow.AddHours(-1));
+    Response.Cache.SetNoStore();
+}
+     
+
+@if (@TIUser.GeneralVariable.UserDetails().FirstName != "")
+
+{
+    <a href="javascript:void(0);"  id="logedinTop"><div class="drop-down-menu-login"><span>@TIUser.GeneralVariable.UserDetails().FirstName.ToString().Substring(0, 1)@TIUser.GeneralVariable.UserDetails().LastName.ToString().Substring(0, 1)</span></div>&nbsp;<i class="fa fa-chevron-down font-12"></i></a>
+    @*<a href="javascript:void(0);" title="" id="logedinTop"><span>@TIUser.GeneralVariable.UserDetails().FirstName.ToString().Substring(0, 1) @TIUser.GeneralVariable.UserDetails().LastName.ToString().Substring(0, 1)</span> <i class="drop-down-menu-login"></i></a>*@
+}
+else
+{
+    <a href="javascript:void(0);" id="logedinTop"><div class="drop-down-menu-login"><span>G</span></div><i class="fa fa-angle-down"></i></a>
+    @*<a href="javascript:void(0);" title="" id="logedinTop"><span>@LanguageResources.Resources.WelcomeGuest</span> <i class="fa fa-angle-down"></i></a>*@
+}
+<ul class="dropdown-menu main-navigation" role="menu">
+    <li><a href="@Url.Content("~/General/MyBookings?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.MyBookings</a></li>
+    <li><a href="@Url.Content("~/General/UserProfile?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.MyAccount</a></li>
+    <li><a href="@Url.Content("~/General/ChangePassword?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.ChangePassword</a></li>
+    <li onclick="SignOut();" id="btnlogouts"><a href="javascript:void(0);" class="active">@LanguageResources.Resources.SignOut</a></li>
+    @*<li id="btnlogout"><a href="@Url.Content("~/General/SignOut")" class="active">@LanguageResources.Resources.SignOut</a></li>*@
+</ul> 
+<input  type="hidden" id="loggedinUser" value="@CommonComponents.SerializeDeserialize.SerializeInJsonString(TIUser.GeneralVariable.UserDetails(), true)"/>
+
+

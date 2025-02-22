@@ -1,0 +1,223 @@
+/*
+ * Title:   TI Infotech - Color theme CSS file
+ * Author:  Shekhar Bajpayee
+ */
+
+#header .topnav {
+    background: #01b7f2;
+}
+button.yellow, input[type="button"].button.yellow, a.button.yellow {
+    background: #fdb714;
+}
+#header .topnav ul.quick-menu > li > a {
+    color: #fff;
+}
+ul.menu.mini {
+    border: 2px solid #01b7f2;
+    background: #fff;
+}
+ul.menu.mini li:hover, ul.menu.mini li.active {
+    background: #f5f5f5;
+}
+    ul.menu.mini li:hover a, ul.menu.mini li.active a {
+        color: #01b7f2;
+    }
+    .activeMenu {
+    color: #01b7f2;
+    border-bottom: 3px solid #01b7f2;
+}
+    #main-menu ul.menu > li ul, .chaser ul.menu > li ul {
+    background: #01b7f2;
+}
+        #main-menu ul.menu > li ul li > a, .chaser ul.menu > li ul li > a {
+            border-top: 1px solid #01b7f2;
+        }
+    #main-menu ul.menu > li:hover > a, .chaser ul.menu > li:hover > a {
+    color: #01b7f2;
+}
+#main-menu ul.menu > li ul li:hover > a, #main-menu ul.menu > li ul li.active > a, .chaser ul.menu > li ul li:hover > a, .chaser ul.menu > li ul li.active > a {
+    background: #01b7f2;
+}
+
+.search-box-wrapper.style2 .search-box > ul.search-tabs li.active > a {
+    color: #01b7f2;
+}
+.search-box-wrapper.style2 .search-box > ul.search-tabs li > a {
+    background: #01b7f2;
+}
+/* calendar */
+.ui-datepicker .ui-datepicker-header {
+    background: #fdb714;
+}
+.ui-datepicker th span {
+    color: #fdb714;
+}
+.ui-datepicker .ui-datepicker-title {
+    color: #fff;
+}
+.ui-datepicker .ui-datepicker-calendar td.ui-datepicker-current-day a, .ui-datepicker .ui-datepicker-calendar td a:hover {
+    background: #fdb714;
+    color: #fff;
+}
+.ui-datepicker {
+    background: #fff;
+    border: 1px solid #fdb714;
+}
+.datepickerTI:after {
+    color: #fdb714;
+    background: #fdb714;
+}
+button, input[type="button"].button {
+    background: #B2AA14;
+}
+.yellow-color {
+    color: #fdb714 !important;
+}
+a:hover, a:focus {
+    color: #01b7f2;
+}
+a.button:hover {
+    background: #B2AA14;
+    color:#fff;
+}
+button:hover, input[type="button"].button:hover {
+    background: #706B0C;
+}
+.details .button {
+    background: #B2AA14;
+}
+#btnNewsLetter.go {
+    background: #B2AA14 !important;
+}
+#btnNewsLetter.go:hover {
+    background: #706B0C !important;
+}
+.contact-details .contact-phone i {
+    color: #01b7f2;
+}
+.contact-details .contact-email {
+    color: #01b7f2;
+}
+#footer .bottom #back-to-top i {
+    border-color: #01b7f2;
+}
+.panel-title-modify {
+    background: #01b7f2;
+    color: #fff !important;
+}
+.toggle-container .panel.style1 .panel-title > a.collapsed:before {
+    content: "\f067";
+    color: #fff;
+    background: #01b7f2;
+}
+.yellow-color {
+    color: #fdb714 !important;
+}
+rzslider .rz-bar.rz-selection {
+    background: #01b7f2 !important;
+}
+.sort-by-section .sort-bar li.active .sort-by-container > span:after {
+    background: #fdb714;
+}
+.sort-by-section .swap-tiles li:hover > a > i, .sort-by-section .swap-tiles li.active > a > i {
+    background: #01b7f2;
+    color: #fff;
+}
+.listing-style3 [class^="fa"].circle:hover {
+    background: #01b7f2;
+    color: #fff;
+}
+.glyphicon-star {
+    color: #fdb714 !important;
+}
+.price {
+    color: #B2AA14;
+}
+.cmn-t-underline {
+    color: #01b7f2;
+}
+.cmn-t-underline:hover {
+    color: #01b7f2;
+}
+.page-title-container.style2 .breadcrumbs li.active {
+    color: #01b7f2;
+}
+.hotel-color {
+    color: #01b7f2;
+}
+.tab-container ul.tabs li.active > a, .tab-container ul.tabs li:hover > a {
+    color: #01b7f2;
+    background: #fff;
+}
+.pop .button {
+    background: #B2AA14;
+}
+#hotel-description .features label, #cruise-description .features label, #travel-guide .features label {
+    border-right: 1px solid #f5f5f5;
+    color: #01b7f2;
+}
+.ti-signup-box .goto-login, .ti-signup-box .goto-signup, .ti-signup-box .signup-email, .ti-login-box .goto-login, .ti-login-box .goto-signup, .ti-login-box .signup-email {
+    color: #01b7f2;
+}
+.ti-login-box .forgot-password {
+    color: #01b7f2;
+}
+.selector span.custom-select:before {
+    background: #fdb714;
+}
+.checkbox.checked:before, .radio.checked:before {
+    border-color: #01b7f2;
+    color: #fff;
+    background: #01b7f2;
+}
+.booking-details .other-details dt {
+    color: #01b7f2;
+}
+.booking-details .other-details .total-price-value {
+    color: #98ce44;
+}
+.skin-color {
+    color: #01b7f2;
+}
+.tab-container.style1 ul.tabs li.active > a, .tab-container.style1 ul.tabs li:hover > a {
+    color: #fff;
+    background: #01b7f2;
+}
+.tab-container.style1 ul.tabs li.active > a:after, .tab-container.style1 ul.tabs li:hover > a:after {
+    border-top: 5px solid #01b7f2;
+}
+button.sky-blue1, input[type="button"].button.sky-blue1, a.button.sky-blue1 {
+    background: #B2AA14;
+}
+.ti-signup-box, .ti-policy-box {
+    border: 2px solid #01b7f2;
+}
+button.sky-blue1:hover, input[type="button"].button.sky-blue1:hover, a.button.sky-blue1:hover {
+    background: #706B0C;
+}
+.pagination > li.active > a, .pagination > li.active > span {
+    background: #fdb714 !important;
+}
+.pagination > li > a:hover, .pagination > li > a:focus, .pagination > li > span:hover, .pagination > li > span:focus {
+    color: #fff;
+    background: #fdb714;
+}
+.btn-info {
+    color: #fff;
+    background-color: #01b7f2;
+    border-color: #01b7f2;
+}
+.btn-info.disabled:hover, .btn-info[disabled]:hover, fieldset[disabled] .btn-info:hover, .btn-info.disabled:focus, .btn-info[disabled]:focus, fieldset[disabled] .btn-info:focus, .btn-info.disabled.focus, .btn-info[disabled].focus, fieldset[disabled] .btn-info.focus {
+    background-color: #9d0823;
+    border-color: #9d0823;
+}
+.btn-info:active:hover, .btn-info.active:hover, .open > .dropdown-toggle.btn-info:hover, .btn-info:active:focus, .btn-info.active:focus, .open > .dropdown-toggle.btn-info:focus, .btn-info:active.focus, .btn-info.active.focus, .open > .dropdown-toggle.btn-info.focus {
+    color: #fff;
+    background-color: #fc9cad;
+    border-color: #fc9cad;
+}
+.btn-info:hover {
+    color: #fff;
+    background-color:  #9d0823;
+    border-color: #9d0823;
+}

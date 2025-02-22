@@ -1,0 +1,213 @@
+﻿<div>
+    <style>
+        #header .ribbon1 {
+            position: relative;
+        }
+
+            #header .ribbon1 > a {
+                position: relative;
+                padding: 0 10px 0 0;
+                text-transform: uppercase;
+            }
+
+                #header .ribbon1 > a:after {
+                    display: inline-block;
+                    position: absolute;
+                    right: 7px;
+                    top: 7px;
+                    content: "\f0d7";
+                    font-family: FontAwesome;
+                    color: #fff;
+                }
+
+            #header .ribbon1:hover > ul.menu {
+                top: 28px;
+                visibility: visible;
+                filter: alpha(opacity=100);
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+                -moz-opacity: 1;
+                -khtml-opacity: 1;
+                opacity: 1;
+            }
+
+            #header .ribbon1 > ul.menu {
+                position: absolute;
+                left: -15px;
+                top: -9999px;
+                z-index: 99;
+                visibility: hidden;
+            }
+
+                #header .ribbon1 > ul.menu.left {
+                    left: auto;
+                    right: -10px;
+                }
+
+            #header .ribbon1.currency > ul.menu li a {
+                text-transform: uppercase;
+                font-size: 0.8333em;
+            }
+    </style>
+    <header id="header" class="navbar-static-top">
+        <div class="topnav hidden-xs">
+            <div class="container">
+                <ul class="quick-menu pull-left"></ul>
+                <ul class="quick-menu pull-right">
+                    @if (CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(',').Length > 1)
+                    {
+                    <li class="ribbon1">
+                        <a class="button yellow btn-small" style="height: 30px; font-size: .8em; background:none;font-weight:normal">
+                            <div class="call-no" style="font-size: .8em;">LANGUAGE</div>
+                            <div class="call-us" id="cultureSelectedLink" style="font-size: .9em;"></div>
+                        </a>
+                        <ul class="menu mini" id="cultureDropDown">
+                            @{
+                                if (CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages != null)
+                                {
+                                    foreach (string codename in CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(','))
+                                    {
+                                        <li><a href="javascript:SetCulture('@codename.Split(':')[0]')" title="@codename.Split(':')[0]">@codename.Split(':')[1]</a></li>
+                                    }
+                                }
+                            }
+                            @*<li><a href="javascript:SetCulture('ar')" title="ar">Arabic</a></li>
+                <li><a href="javascript:SetCulture('en-US')" title="en-US">English</a></li>
+                <li><a href="javascript:SetCulture('es-ES')" title="es-ES">Spanish</a></li>*@
+                        </ul>
+                    </li>
+                    }
+                    @if (TIUser.GeneralVariable.UserDetails() != null)
+                    {
+                        <li class="ribbon currency" id="loginUser">
+                            @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_TopWithLogin")
+                        </li>
+                    }
+                    <li><a href="@Url.Content("~/General/ContactUs")">@LanguageResources.Resources.CONTACT_US</a></li>
+                    <li>
+                        <div class="button yellow call-container">
+                            <div class="call-no">@CommonComponents.CompanySettings.CompanySetting().ChannelSetting.TollFreeNo</div>
+                            <div class="call-us">@LanguageResources.Resources.BOOKONLINEORCALLUS247</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-header">
+            <a href="#mobile-menu-01" data-toggle="collapse" class="mobile-menu-toggle">
+                Mobile Menu Toggle
+            </a>
+            <div class="container">
+                <h1 class="navbar-brand dynamiclogo">
+                    <a href="@Url.Content("~/?lang="+@CommonComponents.CompanySettings.LangCode())" title="@CommonComponents.CompanySettings.CompanySetting().CompanyName - home">
+                        <img src="@Url.Content("~/Images/"+ CommonComponents.CompanySettings.CompanySetting().CompanyId + "/logo.png")" alt=@CommonComponents.CompanySettings.CompanySetting().CompanyName />
+                    </a>
+                </h1>
+                <nav id="main-menu" role="navigation">
+                    <ul class="menu">
+                        <li class="menu-item-has-children">
+                            <a href="@Url.Content("~/?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Home</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="@Url.Content("~/Flight?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Flights</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="@Url.Content("~/Hotel?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Hotels</a>
+                        </li>
+                        @*<li class="menu-item-has-children" >
+                                <a href="car-index.html">Cars</a>
+                            </li>*@
+                        <li class="menu-item-has-children">
+                            <a href="@Url.Content("~/Activity?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Activities</a>
+                        </li>
+                        <li class="menu-item-has-children">
+                            <a href="javascript:void(0)">@LanguageResources.Resources.More</a>
+                            <ul>
+                                <li><a href="@Url.Content("~/?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Transfer</a></li>
+                                @*<li>
+                                    <a href="@Url.Content("~/FlightHotel?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.FLIGHTS_Upper + @LanguageResources.Resources.HOTELS_Upper</a>
+                                </li>*@
+                                <li>
+                                    <a href="@Url.Content("~/Package?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.PACKAGE_Upper</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <nav id="mobile-menu-01" class="mobile-menu collapse">
+                <ul id="mobile-primary-menu" class="menu">
+                    <li class="menu-item-has-children">
+                        <a href="@Url.Content("~/?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Home</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="@Url.Content("~/Flight?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Flights</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="@Url.Content("~/Hotel?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.HOTELS_Upper</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="@Url.Content("~/Activity?lang="+@CommonComponents.CompanySettings.LangCode())">@LanguageResources.Resources.Activities</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="@Url.Content("~/")">@LanguageResources.Resources.Transfer</a>
+                    </li>
+                    <li class="menu-item-has-children">
+                        <a href="@Url.Content("~/FlightHotel?lang="+@CommonComponents.CompanySettings.LangCode())">Flight + Hotel</a>
+                    </li>
+                </ul>
+                <ul class="mobile-topnav container">
+
+                    @if (TIUser.GeneralVariable.UserDetails() != null)
+                    {
+                        <li id="loginUserMobile"><a href="@Url.Content("~/General/MyBookings?lang="+@CommonComponents.CompanySettings.LangCode())">MY ACCOUNT</a></li>
+                        <li id="logoutUserMobile" onclick="SignOut();"><a href="javascript:void(0);">SIGN OUT</a></li>
+                    }
+                    else
+                    {
+                        <li id="loginUserMobile" style="display:none"><a href="@Url.Content("~/General/MyBookings?lang="+@CommonComponents.CompanySettings.LangCode())">MY ACCOUNT</a></li>
+                        <li id="logoutUserMobile" style="display:none" onclick="SignOut();"><a href="javascript:void(0);">SIGN OUT</a></li>
+                     
+                        <li><a href="#ti-login" id="linkSigninMobile" class="soap-popupbox">Sign In</a></li>
+                        <li><a href="#ti-signup" id="linkRegisterMobile" class="soap-popupbox">Create an Account</a></li>
+                    }
+                    <li id="signinAfterMobile" style="display:none"><a href="#ti-login" class="soap-popupbox">Sign In</a></li>
+                    <li id="regisAfterMobile" style="display:none"><a href="#ti-signup" class="soap-popupbox">Create an Account</a></li>
+               
+                    @if (Request.Url.AbsoluteUri.Contains("PassengerInfo") || Request.Url.AbsoluteUri.Contains("BookingConfirmation"))
+                    {
+
+                    }
+                    else
+                    {
+                        if (CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(',').Length > 1)
+                        {
+                            <li class="ribbon language menu-color-skin">
+                                <a href="javascript:void(0)" id="cultureSelectedLinkMobile"></a>
+                                <ul class="menu mini" id="cultureDropDown">
+                                    @{
+                                        if (CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages != null)
+                                        {
+                                            foreach (string langcodename in CommonComponents.CompanySettings.CompanySetting().MultiLingualLanguages.Split(','))
+                                            {
+                                                <li><a href="javascript:SetCulture('@langcodename.Split(':')[0]')" title="@langcodename.Split(':')[0]">@langcodename.Split(':')[1]</a></li>
+                                            }
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                                        }
+                                        @*<li><a href="#ti-login" class="soap-popupbox">LOGIN</a></li>
+                                    <li><a href="#ti-signup" class="soap-popupbox">SIGNUP</a></li>*@
+                                        
+                                        }
+                </ul>
+            </nav>
+        </div>
+        <div id="ti-signup" class="ti-signup-box ti-box">
+            @Html.Partial("~/Areas/Common/Views/Shared/" + CommonComponents.CompanySettings.ViewBasePath() + "_Registration.cshtml")
+        </div>
+        <div id="ti-login" class="ti-login-box ti-box">
+            @Html.Partial("~/Areas/Common/Views/Shared/" + CommonComponents.CompanySettings.ViewBasePath() + "_Login.cshtml")
+        </div>
+    </header>
+</div>

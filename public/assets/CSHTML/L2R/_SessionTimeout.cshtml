@@ -1,0 +1,21 @@
+﻿<a href="#ti-SessionTimeout" id="linkSessionTimeout" class="soap-popupbox" style="display:none"></a>
+<div id="ti-SessionTimeout" class="ti-login-box ti-box session-box">
+    <h3>@LanguageResources.Resources.YourSessionhasexpired</h3>
+    <p>@LanguageResources.Resources.Ifthereisnoactivity @Html.Raw(Convert.ToInt32(System.Configuration.ConfigurationManager.AppSettings["SessionTimeoutHotel"]) / 60000) @LanguageResources.Resources.minutesortheinternetconnectionwaslostorreset</p>
+    <br />
+    <div class="row details">
+        <div class="@(Request.Url.AbsoluteUri.Contains("PassengerInfo") || Request.Url.AbsoluteUri.Contains("BookingConfirmation")  ? "col-xs-6" : "col-xs-6")">
+            <a id="btngoHome" href="@Url.Content("~/?lang="+@CommonComponents.CompanySettings.LangCode())" class="full-width button btn-small icon-check">@LanguageResources.Resources.BacktoHome</a>
+        </div>
+        @if (Request.Url.AbsoluteUri.Contains("PassengerInfo") || Request.Url.AbsoluteUri.Contains("BookingConfirmation"))
+        {
+
+        }
+        else
+        {
+            <div class="col-xs-6">
+                <a onClick="window.location.reload()" class="full-width button btn-small icon-check">@LanguageResources.Resources.RefreshResult</a>
+            </div>
+        }
+    </div>
+</div>

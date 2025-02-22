@@ -1,0 +1,507 @@
+﻿@charset "utf-8";
+/* CSS Document */
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'ProximaNova-Regular';
+	color: #000000;
+	font-size: 16px;
+	background: #fff;
+}
+a {color: #000;}
+a:focus, a:hover {color: #000;}
+/*font-include*/
+@font-face {
+    font-family: 'ProximaNova-Regular';
+    src:url('/assets/css/ZTO/fonts/ProximaNova-Regular.eot?#iefix') format('embedded-opentype'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Regular.otf') format('opentype'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Regular.woff') format('woff'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Regular.ttf') format('truetype'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Regular.svg#ProximaNova-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ProximaNova-Extrabld';
+    src:url('/assets/css/ZTO/fonts/ProximaNova-Extrabld.eot?#iefix') format('embedded-opentype'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Extrabld.otf') format('opentype'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Extrabld.woff') format('woff'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Extrabld.ttf') format('truetype'),
+        url('/assets/css/ZTO/fonts/ProximaNova-Extrabld.svg#ProximaNova-Extrabld') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src:url('/assets/css/ZTO/fonts/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+        url('/assets/css/ZTO/fonts/Montserrat-Bold.otf') format('opentype'),
+        url('/assets/css/ZTO/fonts/Montserrat-Bold.woff') format('woff'),
+        url('/assets/css/ZTO/fonts/Montserrat-Bold.ttf') format('truetype'),
+        url('/assets/css/ZTO/fonts/Montserrat-Bold.svg#Montserrat-Bold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'Montserrat-Light';
+    src:url('/assets/css/ZTO/fonts/Montserrat-Light.eot?#iefix') format('embedded-opentype'),
+        url('/assets/css/ZTO/fonts/Montserrat-Light.otf') format('opentype'),
+        url('/assets/css/ZTO/fonts/Montserrat-Light.woff') format('woff'),
+        url('/assets/css/ZTO/fonts/Montserrat-Light.ttf') format('truetype'),
+        url('/assets/css/ZTO/fonts/Montserrat-Light.svg#Montserrat-Light') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+/*common-css*/
+.ProximaNova-Extrabld{font-family: 'ProximaNova-Extrabld';}
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+a, a:hover, a:focus{
+	text-decoration: none;
+	background: none;
+}
+h1 {
+    font-size: 32px;
+}
+.letter-spacing-2{ letter-spacing: 2px;}
+.m-0{ margin:0}
+.m-b-0{ margin-bottom: 0;}
+.m-t-0{ margin-top: 0;}
+.padding-4{ padding:4px;}
+.padding-5{ padding:5px;}
+.padding-10{ padding:10px;}
+.m-t-3{ margin-top:3px;}
+.m-t-5{ margin-top:5px;}
+.m-t-10{ margin-top:10px;}
+.m-t-15{ margin-top:15px;}
+.m-t-20{ margin-top:20px;}
+.m-t-25{ margin-top:25px;}
+.m-t-30{ margin-top:30px;}
+.m-t-35{ margin-top:35px;}
+.m-t-40{ margin-top:40px;}
+.m-b-10{ margin-bottom:10px;}
+.m-b-15{ margin-bottom:15px;}
+.m-b-20{ margin-bottom:20px;}
+.m-b-25{ margin-bottom:25px;}
+.m-b-30{ margin-bottom:30px;}
+.m-b-35{ margin-bottom:35px;}
+.m-b-40{ margin-bottom:40px;}
+.p-b-10{ padding-bottom: 10px;}
+.p-b-15{ padding-bottom: 15px;}
+.p-b-20{ padding-bottom: 20px;}
+.p-b-25{ padding-bottom: 25px;}
+.p-b-30{ padding-bottom: 30px;}
+.p-b-35{ padding-bottom: 35px;}
+.p-b-40{ padding-bottom: 40px;}
+.p-b-45{ padding-bottom: 45px;}
+.p-t-10{ padding-top : 10px;}
+.p-t-15{ padding-top : 15px;}
+.p-t-20{ padding-top: 20px;}
+.p-t-25{ padding-top :25px;}
+.p-t-30{ padding-top :30px;}
+.p-t-35{ padding-top :35px;}
+.p-t-40{ padding-top :40px;}
+.p-t-45{ padding-top :45px;}
+
+.font-12{ font-size: 12px!important;}
+.red{ color:#ef4420;}
+.home_slider{margin-bottom: 20px;}
+.home_slider img{ width:100%; height:423px !important;}
+.carousel-control.right,.carousel-control.left { background-image: initial;}
+.carousel-control{width:6%; }
+.w-100-percent{ width:100%;}
+.holiday_place {
+    background-color: #f0d839;
+    padding: 6px;
+    border-radius: 30px;
+    left: 0px;
+    right: 0px;
+    min-width: 180px;
+    max-width: 240px;
+    /* margin-top: -20px; */
+    position: relative;
+    margin: 0 auto;
+    /*top: -20px;*/
+    top: 5px;
+}
+.bg-higlight{ background:#d4effc;}
+.font-16{ font-size:16px;}
+.price_desc{padding: 0px 10px; }
+.font-18{ font-size: 18px;}
+.font-20{ font-size: 24px;}
+.button_color{ background:#243c7c;line-height: 15px;color:#fff;border-radius: 0px;border:0px solid #000;}
+.thumbnail-image img{ height:180px;object-fit:cover;}
+.exlore_now_button{ position:absolute;top:76%;right:6%;}
+.exlore_now{background-color: #f0d839; padding: 5px;border-radius: 30px;left: 0px;right: 0px;min-width: 150px; max-width:100%;border: 0px; color:#243c7c;letter-spacing: 2px; font-weight:bold; font-size: 14px; }
+.white-color{ color:#fff;}
+.banner_text{ color:#053687;}
+.banner_background{ background-image: url(../../../images/ZTO/home/home_banner.jpeg); background-size:cover; background-repeat: no-repeat;height:450px;background-position:center;}
+.text-center.banner_text h2{line-height:40px; padding-top: 30px;}
+.exotic_destination{ background:#d4effc;}
+.bg-higlight-white{ background:#fff;}
+.padding-l-r-5{ padding-left:3px; padding-right:3px;}
+.padding-right-5{ padding-right: 5px;}
+.button_price_show{position: relative;top: 50%;transform: translate(0px, -50%);}
+.font-14{ font-size: 14px;}
+.bg-higlight-yellow{ background:#f0d839;}
+.flex_row{display: flex;margin-bottom: 5px;}
+.flex_1{ flex: 1;}
+.margin-left-5{ margin-left:5px;}
+.button_price_show.text-center > a{ color:#000;}
+.border-all{border: 1px solid #d7d7d7;padding: 1px 8px;display: inline-block;font-size: 11px;}
+.radius-10{ border-radius:5px;}
+.exlore_now_button.relative {position: relative;text-align: center;right: 0px;left:0px;}
+.height_150{ height:120px; overflow: hidden;}
+.purple{ color:purple;}
+/*!----choose booking z-tour--->*/
+.why-us-item.antistres {
+    border-left: 4px solid #83c84d;
+	background:#fff;
+}
+    .why-us-item.antistres h4 {
+        background: url(../../../Images/ZTO/home/icon-antistres.png)#f2f9ed no-repeat;
+        color: #7cc952;
+    }
+.why-us-item p {
+    color: #6f7b7f;
+    padding: 10px 10px 20px 20px;
+    margin: 0;
+	font-size: 15px;
+}
+.why-us-item.protectia h4 {
+    background:url(../../../Images/ZTO/home/icon-protectia.png)#e8f5fd no-repeat;
+    color: #229bea;
+}
+.why-us-item.planificare {
+    border-left: 4px solid #e97a2e;
+	background:#fff;
+}
+.why-us-item.tarife {
+    border-left: 4px solid #f1cf00;
+	background:#fff;
+}
+.why-us-item.planificare h4 {
+    background: url(../../../Images/ZTO/home/icon-planificarea.png) #fdf1ea no-repeat;
+    color: #e97a2e;
+}
+.why-us-item h4 {
+    padding-left: 95px;
+    height: 76px;
+    position: relative;
+    color: #7cc952;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+}
+.why-us-item h4 span {
+    display: block;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+.why-us-item.protectia {
+    border-left: 4px solid #229bea;
+	background:#fff;
+}
+.why-us-item.tarife h4 {
+    background: url(../../../Images/ZTO/home/icon-tarife.png) #fefae5 no-repeat;
+    color: #d4b600;
+}
+.why-us-item {
+    -webkit-box-shadow: 5px 5px 20px 0 rgba(0,0,0,.08);
+    -moz-box-shadow: 5px 5px 20px 0 rgba(0,0,0,.08);
+    box-shadow: 5px 5px 20px 0 rgba(0,0,0,.08);
+    min-height:205px;
+    
+}
+.slick-slide {
+      margin: 0px 40px;
+    }
+.slick-slide img {  width:auto;  }
+ .slick-prev:before,
+    .slick-next:before {
+      color: #005aab !important;
+    }
+
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+     
+    }
+     .alertMsg {
+    color: red;
+    width: 100%;
+    text-transform: none;
+    margin:1px 0px 1px 5px;
+    font-size:11px;
+    float: left;
+
+}
+    
+div#ti-login {
+    background: #fff;
+    width: 300px;
+    margin: 0 auto;
+    border: 2px solid #0065b8;
+}
+
+
+div#ti-login {
+    background: #fff;
+    width: 300px;
+    margin: 0 auto;
+    border: 0px solid #0065b8;
+}
+
+div#ti-signup {
+    /* width: 300px; */
+    margin: 0 auto;
+    background: #fff;
+    border: 0px solid #0065b8;
+    font-size:14px;
+}
+ul.menu.mini.language li a {
+    color: #333;
+    font-size: 14px;
+    display: block;
+} 
+    
+/*ul#CurrencyList li {
+    padding: 5px 10px;
+}*/
+ul#CurrencyList lli a {
+    color:#000;
+}
+/*!---homepage search for fligh section -->*/
+
+.takeoff-icon, .landing-icon {
+    position: absolute;
+    top:10px;
+    left: 10px;
+}
+.new-calendar-icon{
+    position: absolute;
+    top: 5px;
+    left: 13px;
+    z-index: 999;
+}
+
+
+.button-checkbox > div {
+    display: inline-block;
+    vertical-align: middle;
+}
+.nonstop-service {
+    margin-left: 30px;
+}
+.flight-pax-count {
+    position: absolute;
+    margin: 10px 0 0 0;
+    width: 379px;
+    z-index: 999;
+    display: none;
+    padding: 15px;
+}
+
+.new-down-right {
+    position: absolute;
+    margin: 0px;
+    top: 8px;
+    right: 0px;
+    color: #a6a6a6;
+    background: #ffffff;
+    width: 20px;
+    bottom: 7px;
+    /* line-height: 42px; */
+    text-align: center;
+    border-radius: 20px;
+}
+
+.new-user-icon {
+    position: absolute;
+    top: 0px;
+    left: 8px;
+}
+.datetextbox{ background:#ffffff;}
+.button-checkbox > div {
+    display: inline-block;
+   
+}
+.button-checkbox a.btn:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #023366;
+    border-radius: 100%;
+    background: #fff;
+}
+.button-checkbox a.btn.active:after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: #023366;
+    position: absolute;
+    top: 11px;
+    left: 3px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.button-checkbox .btn-group a {
+    padding-left: 20px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #023366;
+    vertical-align: middle;
+    margin-bottom: 0px;
+}
+[type="checkbox"]:not(:checked) + label:before, [type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 3px;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #023366;
+    background: #fff;
+    border-radius: 4px;
+}[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+ [type="checkbox"]:not(:checked) + label:after, [type="checkbox"]:checked + label:after {
+    content: '\2713\0020';
+    position: absolute;
+    top: 3px;
+    left: 4px;
+    font-size: 12px;
+    color: #023366;
+    transition: all .2s;
+    font-weight: 900;
+}
+ [type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+ [type="checkbox"]:not(:checked) + label, [type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+}
+.search-back-img-htls {
+    background: url(../../../Images/ZTO/home/background-parallax.jpg);
+   
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 450px !important;
+}.search-back-img-activity {
+    background-image: url('../../../Images/ZTO/home/activity-back.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+.search-back-img-flight {
+    background-size: cover;
+     background-image: url('../../../Images/ZTO/home/flight-back.jpg');
+}
+.flightHotel-banner {
+    background-size: cover;
+     background-image: url('../../../Images/ZTO/home/flight-hotel-back.jpg');
+    background-repeat: no-repeat;
+    min-height: 450px !important;
+}
+.transfer-banner {
+    background-image: url('../../../Images/ZTO/home/transfer-back.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 450px !important;
+}
+.car-banner {
+    background: url('../../../Images/ZTO/home/car-back.jpg') no-repeat center;
+    background-size: cover;
+}
+.carousel-inner {margin-top: 3px;}
+.carousel-control .fa-angle-left, .carousel-control .fa-angle-right{
+    position: absolute; 
+    top: 50%; 
+    z-index: 5; 
+    display: inline-block; 
+    margin-top: -21px; 
+    font-size:42px;
+    left: 50%;
+    margin-left: -10px;
+}
+.carousel-control .fa-angle-right{
+    right: 50%;
+    left: auto;
+    margin-right: -10px;
+    margin-left: 0px;
+}
+/*.carousel-control.right {right: 18px;}*/
+.h4.text-center.m-0 small {
+    color: #000;
+}
+#btnlogin, #btnforgot, #btnregister {
+    width: 100%;
+      background:#243c7b;
+      color:#fff;height:34px;
+      font-size:14px;
+      outline:none;
+}
+button, input[type="button"].button, .btn-default {
+    background: #243c7b;
+    color: #fff;
+}
+.ti-signup-box  .logintextbox{ border-radius:0px !important;}
+.ti-signup-box input.input-text {
+    border-radius: 0px;
+        padding-left: 15px !important;
+        height:34px;
+}
+.ti-login-box .input-text {
+    border-radius: 0px;
+    padding-left:15px;
+    height:34px;
+}
+.drop-down-menu-login {
+    background: #023366;
+    border-radius: 50px;
+    border-radius: 100%;
+    display: inline-block;
+    padding: 10px;
+    font-size: 16px;
+    letter-spacing: 2px;
+    height: 45px;
+    width: 45px;
+    margin-top: -25px;
+    color: #fff;
+    line-height: 25px;
+    text-align: center;
+}
+body {
+     -ms-overflow-style: scrollbar;
+}
+
+/*Code Added by Shivendra Singh, 30 Sep 2022*/
+.Insurance-Banner {
+    background-image: url('../../../Images/ZTO/home/Insurance_Back.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 450px !important;
+}
+
+.Package-Banner {
+    background-image: url('../../../Images/ZTO/home/Package_Banner.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    min-height: 450px !important;
+}
+
+/*End, code Added by Shivendra Singh, 30 Sep 2022*/

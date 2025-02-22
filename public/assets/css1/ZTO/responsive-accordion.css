@@ -1,0 +1,66 @@
+/*	Responsive Accordion v1.1, Copyright 2014, Joe Mottershaw, https://github.com/joemottershaw/
+//	============================================================================================ */
+
+/*	Table of Contents
+//	==================================================
+//		#Reset
+//		#Themes
+
+
+/*	#Reset
+//	================================================== */
+
+
+
+	.accordion {
+		margin: 0 0 20px 0;
+		padding: 0;
+		list-style-type: none;
+	}
+
+	.accordion.bm-remove	{ margin-bottom: 0;    }
+	.accordion.bm-smaller	{ margin-bottom: 5px;  }
+	.accordion.bm-small		{ margin-bottom: 10px; }
+	.accordion.bm-medium	{ margin-bottom: 20px; }
+	.accordion.bm-large		{ margin-bottom: 30px; }
+	.accordion.bm-large		{ margin-bottom: 40px; }
+
+	.accordion li {
+		margin: 0 0 10px 0;
+		padding: 0;
+	}
+
+	.accordion li:last-child { margin-bottom: 0; }
+
+	.accordion li .accordion-head { cursor: pointer; }
+
+	.accordion li .accordion-head.active { font-weight: normal; background:#810a20!important; color:#fff!important;  font-size:14px;}
+
+
+/*	#Themes
+//	================================================== */
+
+	.accordion-default.accordion li .accordion-head {
+		border: 1px solid #DDD;
+		padding: 10px 30px 10px 10px;
+		background: #ededed;
+		color: #333; font-size:14px;
+		line-height: normal;
+		position: relative;
+	}
+
+	.accordion-default.accordion li .accordion-head i {
+		position: absolute;
+		top: 12px;
+		right: 10px;
+	}
+
+	.accordion-default.accordion li .accordion-panel {
+		border: 1px solid #DDD;
+		border-top: 0;
+		padding: 10px;
+		background: #FFF; text-align:justify; font-size:12px; overflow:hidden;
+	}
+	
+	
+	
