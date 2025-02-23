@@ -1,0 +1,279 @@
+﻿
+@{
+    ViewBag.Title = "ActivityResult";
+    Layout = "~/Views/Shared/" + CommonComponents.CompanySettings.CompanySetting().CompanyId + "/L2R/_LayoutInner.cshtml";
+}
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivitySearch.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/Generic.js")"></script>
+
+@*<script type="text/javascript" src="@Url.Content("~/Angularjs/Angular/rzslider.js")"></script>*@
+<link id="main-style" rel="stylesheet" href="@Url.Content("~/Css/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/rzslider.css")" media="all" />
+<style type="text/css">
+    .offer_red {
+        position: absolute;
+        top: 0px;
+        z-index: 1;
+    }
+</style>
+<div ng-app="mainApp" ng-controller="ActivitySearch" ng-cloak>
+
+    <div ng-show="!showWaiting && !noResultsFound">
+        @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityMobileSortFilter")
+    </div>
+    <div class="activity-main-wrapper">
+        <section id="content">
+            <div class="container">
+                <div id="main-1">
+                    <div class="search-box-wrapper" ng-show="noResultsFound" id="modifyNR">
+                        @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityNR")
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 col-md-3 hidden-sm" ng-show="noResults">
+                            <div class="toggle-container filters-container hidden-xs">
+                                @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "/_ActivityM")
+                                @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "/_ActivityFilter")
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-9 " ng-show="noResults">
+                            <div class="sort-by-section clearfix search-details fixresulttop">
+                                <ul class="search-criteria sort-bar clearfix block-sm">
+                                    <li>
+                                        <label class="search-city">
+                                            @*<i class="soap-icon-departure" style="font-size: 20px;vertical-align:sub !important"></i>*@
+                                            {{:: ActivityCityName}}
+                                        </label>
+                                        <div>
+                                            <span class="customDir"><i class="soap-icon-calendar" style="font-size: 18px;vertical-align:baseline !important"></i>&nbsp;{{ActivitySearchRQ.SearchRequest.Master.FromDate | dayName | date:'EEE'}}, {{ActivityFromDate}} &nbsp;<i class="soap-icon-right" style="vertical-align:baseline !important"></i>&nbsp; <i class="soap-icon-calendar" style="font-size: 18px;vertical-align:baseline !important"></i>&nbsp;{{ActivitySearchRQ.SearchRequest.Master.ToDate | dayName | date:'EEE'}}, {{ActivityToDate}}</span>,<b style="margin-left:5px;">
+                                                {{Adultcount > 1 ? Adultcount+ ' @LanguageResources.Resources.Adults' : Adultcount+ ' Adult'}}{{Childcount >1 ? ', ' +Childcount+ ' Children' : ', ' +Childcount+ ' @LanguageResources.Resources.Child'}}
+                                            </b>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="sort-by-section clearfix activity-sort" ng-show="noResults" ng-if="!showWaiting">
+                                <div class="row">
+                                    <div class="col-sm-10 hidden-sm hidden-xs border-rdashed min-height-50">
+                                        <div ng-show="showWaiting" class="sort-by-title block-sm" style="margin:16px 18px 16px 0px">
+                                            <div class="animated-hotelSorting"></div>
+                                        </div>
+                                        <div ng-show="ActivityresultShow" ng-if="(Activities | filter:{Name:ByActivityname} | orderBy:sortType:sortReverse | filter:priceRangeA  | filter:CategoryFilter | itemsPerPage:ResultSize).length > 0" class="hidden-xs">
+                                            <h4 class="sort-by-title block-sm">@LanguageResources.Resources.Sortresultsby</h4>
+                                            <ul class="sort-bar clearfix block-sm">
+                                                <li id="minPp" class="sort-by-price">
+                                                    <a href="javascript:void(0)" class="sort-by-container" ng-click="sortBy('Min_Price','Gross_Curr');">
+                                                        <span>@LanguageResources.Resources.Price <i ng-class="(sortType=='Min_Price' && sortReverse==true ?'fas fa-long-arrow-alt-down':'fas fa-long-arrow-alt-up')" ng-style="{'visibility':(sortType=='Min_Price')?'visible':'hidden'}"></i></span>
+                                                    </a>
+                                                </li>
+                                                <li class="clearer visible-sms"></li>
+                                                <li id="durationn" class="sort-by-rating">
+                                                    <a href="javascript:void(0)" class="sort-by-container" ng-click="sortBy('DurationHours');">
+                                                        <span>
+                                                            @LanguageResources.Resources.Duration
+                                                            <i ng-class="(sortType=='DurationHours' && sortReverse==true ?'fas fa-long-arrow-alt-down':'fas fa-long-arrow-alt-up')" ng-style="{'visibility':(sortType=='DurationHours')?'visible':'hidden'}"></i>
+                                                        </span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div ng-show="showWaiting">
+                                            <div class="animated-totalHotel"></div>
+                                        </div>
+                                        <h5 ng-show="ActivityresultShow" class="sort-by-title-total block-sm-total margin-top-0">{{(Activities | filter:{Name:ByActivityname} | orderBy:sortType:sortReverse |filter:priceRangeA | filter:CategoryFilter).length}} {{(Activities | filter:{Name:ByActivityname} | orderBy:sortType:sortReverse |filter:priceRangeA | filter:CategoryFilter).length > 1 ? '@LanguageResources.Resources.Activities' : '@LanguageResources.Resources.activity'}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="margin-bottom:0px !important" ng-show="hideClearFilter" class="listing-style3 hotel nofilterresult" ng-if="(Activities | filter:{Name:ByActivityname} | orderBy:sortType:sortReverse | filter:priceRangeA  | filter:CategoryFilter | itemsPerPage:ResultSize).length == 0">
+                                <article class="box margin-bottom-0">
+                                    <div class="row">
+                                        <div class="col-sm-2 text-center" style="border-right:1px solid #eaeaea">
+                                            <i class="fas fa-link fa-7x"></i>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <h3 style="color:#9e9e9e">@LanguageResources.Resources.Wecouldnotfindanyoptionsasperyourselectedcombinationoffilters</h3>
+                                            <div class="txt"><a href="javascript:void(0)" ng-click="ClearAllFilters()" style="color:#337ab7 !important"><img src="@Url.Content("~/Images/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/clearfilter.png")" style="height: 18px;padding-right: 5px;" />@LanguageResources.Resources.Clearallfilters</a></div>
+                                        </div>
+                                    </div>
+                                </article>
+
+
+                            </div>
+
+                            @*<div ng-repeat="Activity in Activities">
+                                {{Activity.priceRangeA}}
+                                </div>*@
+
+                            <div class="listing-style3 activity" style="margin-top:10px;" ng-show="ActivityresultShow" id="dvResult" dir-paginate="Activity in Activities | filter:{Name:ByActivityname} | orderBy:sortType:sortReverse | filter:priceRangeA  | filter:CategoryFilter | itemsPerPage:ResultSize">
+
+                                <!---new brand -->
+                                <!---new box-->
+                                <article class="resultBox box">
+                                    <a class="hidden-lg hidden-md hidden-sm btn-on-responsive" ng-click="GetDetails(Activity, '')"></a>
+                                    <div class="row new-design-flex clearfix">
+
+                                        <figure class="col-xs-4 col-sm-3 col-md-3" ng-if="Activity.Image!=''">
+                                            <a title="" data-toggle="modal" data-target="#squarespaceModal" class="hover-effect">
+                                                <img class="img-responsive" ng-src="{{Activity.Image}}" alt="" on-error-src="@Url.Content("~/Images/TI/not_avil.jpg")" />
+                                            </a>
+                                        </figure>
+                                        <figure class="col-xs-4 col-sm-3 col-md-3" ng-if="Activity.Image ==''">
+                                            <a title="" data-toggle="modal" data-target="#squarespaceModal" class="hover-effect">
+                                                <img class="img-responsive" src="@Url.Content("~/Images/ZTO/not_avil.jpg")" />
+                                            </a>
+                                        </figure>
+                                        <div class="col-xs-8 col-sm-7 col-md-7 select_hotel ">
+                                            <div class="activity-name-details">
+                                                <h3>
+                                                    {{Activity.Name}} <br/>
+                                                    <small ng-if="Activity.Duration !=''" class="ng-scope">
+                                                        <span class="capitalize ng-binding">@LanguageResources.Resources.Duration: {{Activity.Duration}}</span>
+                                                    </small>
+                                                </h3>
+                                                @*<div class="total-activity-price price-wrapper-new visible-xs">
+                                                        <span class="price"> <small>{{GrossCurrency}}</small> {{(Activity.MinP)*(GrossROE) | number:2}}</span>
+                                                    </div>*@
+                                                <p class="hidden-xs">{{Activity.Desc}}....</p>
+                                            </div>
+                                            <div class="amenities hidden-xs infor-circle">
+                                                <a data-toggle="modal" data-target="#squarespaceModal" title="@LanguageResources.Resources.Rates" ng-click="GetDetails(Activity,'TOURLIST')" class="border-round"><i class="far fa-money-bill-alt"></i></a>
+                                                <a data-toggle="modal" data-target="#squarespaceModal" title="@LanguageResources.Resources.Details" ng-click="GetDetails(Activity,'DETAILS')" class="border-round"><i class="fas fa-info"></i></a>
+                                                <a data-toggle="modal" data-target="#squarespaceModal" title="@LanguageResources.Resources.Gallery" ng-click="GetDetails(Activity,'GALLERY')" class="border-round"><i class="far fa-image"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 col-sm-2 hidden-xs ">
+                                            <div class="total-activity-price_result">
+                                                <div class="total-activity-price price-wrapper-new">
+                                                    <span class="price"> <small>{{GrossCurrency}}</small> {{(Activity.MinP)*(GrossROE) | number:2}}</span>
+                                                </div>
+                                                <div class="activity-select">
+                                                    <button data-toggle="modal" data-target="#squarespaceModal" class="full-width button btn-small icon-check" ng-click="GetDetails(Activity, '')">@LanguageResources.Resources.Select</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="visible-xs earnpoint-price-res  visible-xs">
+                                        <div class="col-xs-12">
+                                            <div class="row">
+                                                <div class="col-xs-6">  @LanguageResources.Resources.Price</div>
+                                                <div class="price-responsive text-right col-xs-6">
+                                                    <small>{{GrossCurrency}}</small> {{(Activity.MinP)*(GrossROE) | number:2}}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </article>
+
+
+                                @*<--End new box--->*@
+
+
+                                @*<----end new brand--->*@
+
+                            </div>
+
+                            @*<div class="listing-style3 hotel" style="margin-top:10px;">
+                                    <article class="box" style="background:none">
+                                        <figure class="col-sm-5 col-md-12">
+                                            @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityWaiting")
+                                        </figure>
+                                    </article>
+                                </div>*@
+
+
+
+                            <div id="noResult" class="text-center nofilterresult col-lg-12" ng-show="noResultsFound" style="padding: 28px!important">
+                                <div class="col-lg-2" ><i class="fa fa-chain-broken"></i></div>
+                                <div class="col-lg-8">
+                                    <h3>@LanguageResources.Resources.Wecouldnotfindanyoptionsasperyoursearchcriteria.</h3>
+                                    <div class="txt">@LanguageResources.Resources.Pleaseupdateyoursearchcriteriaanddothesearchagain.</div>
+                                </div>
+                            </div>
+                            <div class="block pull-right">
+                                @*Start Angular paging section*@
+                                <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true" on-page-change="pageChanged(newPageNumber)">
+                                </dir-pagination-controls>
+                                @*End Angular paging section*@
+                            </div>
+                        </div>
+                        <div class="col-md-12" ng-show="noResultsFound">
+                            @*<div class="sort-by-section clearfix search-details">
+                                <ul class="search-criteria sort-bar clearfix block-sm">
+                                    <li class="search-city">
+                                        <label>
+                                            {{ :: ActivityCityName}}
+                                        </label>
+                                    </li>
+                                  
+                                      <span class="customDir"><i class="soap-icon-calendar" style="font-size: 18px;vertical-align:baseline !important"></i>&nbsp;{{ActivitySearchRQ.SearchRequest.Master.FromDate | dayName | date:'EEE'}}, {{ActivityFromDate}} &nbsp;<i class="soap-icon-right" style="vertical-align:baseline !important"></i>&nbsp; <i class="soap-icon-calendar" style="font-size: 18px;vertical-align:baseline !important"></i>&nbsp;{{ActivitySearchRQ.SearchRequest.Master.ToDate | dayName | date:'EEE'}}, {{ActivityToDate}}</span>,<b style="margin-left:5px;">
+                                                {{Adultcount > 1 ? Adultcount+ ' @LanguageResources.Resources.Adults' : Adultcount+ ' Adult'}}{{Childcount >1 ? ', ' +Childcount+ ' Children' : ', ' +Childcount+ ' @LanguageResources.Resources.Child'}}
+                                            </b>
+                                </ul>
+                            </div>*@
+                            <div id="noResult" class="text-center nofilterresult margin-top-10 clearfix" style="background: #fff;padding: 30px;text-align:left">
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-3 hidden-xs text-center" style="border-right:1px solid #eaeaea">
+                                        <i class="fas fa-link fa-7x"></i>
+                                    </div>
+                                    <div class="col-lg-8 col-md-8 col-sm-9">
+                                        <h2>@LanguageResources.Resources.Oops!</h2>
+                                        <div style="color:#9e9e9e;font-size:16px"><b class="blink_me">@*@LanguageResources.Resources.*@ Noflightsfound</b></div>
+                                        <div class="txt" style="color:#9e9e9e">@LanguageResources.Resources.Wecouldnotfindanyoptionsasperyoursearchcriteria. </div>
+                                        <div class="txt" style="color:#9e9e9e;font-size:11px">@LanguageResources.Resources.Pleaseupdateyoursearchcriteriaanddothesearchagain.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "/_ActivityWaiting")
+                </div>
+            </div>
+        </section>
+    </div>
+  
+</div>
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Angular/rzslider.js")"></script>
+<script src="@Url.Content("~/Scripts/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/Gallery/jquery.flexslider.js")"></script>
+<script type="text/javascript">
+    tjq(document).ready(function () {
+        tjq('.mod-panel').on('click', function () {
+            tjq('.modify-panel-back').css('display', 'block');
+            tjq(this).css({ 'color': 'rgb(0, 0, 0)' }).parent().css({ 'background-color': 'rgb(255, 255, 255)' });
+            tjq('.modify-panel').css({
+                'box-shadow': '5px 5px 5px #565656'
+            });
+            tjq(this).parent().parent().css({
+                'z-index': '998',
+                'position': 'absolute',
+                'width': '100%',
+                'box-shadow': '5px 5px 5px #565656',
+                '-webkit-boxshadow': '5px 5px 5px #565656'
+            });
+            tjq(".modify-panel").css('');
+            tjq('.modify-panel').show("slide", {
+                direction: "left"
+            }, 200);
+
+
+        });
+        tjq('.modify-panel-back').on('click', function () {
+            tjq('.modify-panel').css({
+                'display': 'none',
+            });
+            tjq('.mod-panel').parent().parent().css({
+                'box-shadow': '5px 5px 5px #565656',
+                'z-index': '',
+                'position': '',
+                'width': '',
+                'box-shadow': 'none',
+                '-webkit-boxshadow': 'none'
+            });
+            tjq('.modify-panel-back').css({
+                'display': 'none'
+            });
+        });
+    });
+</script>
+

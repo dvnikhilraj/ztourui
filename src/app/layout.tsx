@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import '../../public/assets/css/ZTO/Home/all.min.css';
 import '../../public/assets/css/ZTO/Home/bootstrap.min.css';
@@ -15,7 +16,12 @@ import Head from "next/head";
 // import Script from "next/script";
 import { Top } from "./components/layout/top";
 import { Footer } from "./components/layout/footer";
+import dynamic from 'next/dynamic';
+import '../../i18n';
 
+const ReduxProvider = dynamic(() => import('@/store/redux-provider'), {
+  ssr: false,
+});
 
 
 interface LayoutProps {
@@ -54,6 +60,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
     <>
       <html>
         <body>
+        <ReduxProvider>
           <Head>
             <base href="/" />
             <link rel="canonical" href="https://www.ztour-travel.ro/" />
@@ -89,9 +96,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             </div>
 
             {/* Main Content */}
-            <div id="main">
+            
             {children}
-            </div>
+            
             <main></main>
 
             <Footer/>
@@ -119,6 +126,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <Script src="/js/jquery-ui.1.10.4.min.js" />
           <Script src="/js/bootstrap.min.js" />
           <Script src="/js/slick.js" /> */}
+        </ReduxProvider>
         </body>
       </html>
     </>

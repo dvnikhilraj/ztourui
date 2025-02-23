@@ -1,0 +1,156 @@
+{
+  "booking": {
+    "flight": {
+      "searchTitle": "Vă rugăm să introduceți numărul zborului de sosire",
+      "flightDestinationRequired": "Destinația zborului este obligatorie",
+      "flightArrivalRequired": "Sosirea zborului este obligatorie",
+      "flightArrivalFrom": "Sosire zbor de la",
+      "flightArrivalTime": "Ora de sosire a zborului",
+      "flightDepartureTime": "Ora de plecare a zborului",
+      "flightNumber": "Număr zbor",
+      "departureStation": "Stație de plecare",
+      "departureCity": "Oraș de plecare",
+      "departureDate": "Data plecării",
+      "departureDateRequired": "Data plecării este obligatorie",
+      "departureArrival": "Plecare/Sosire",
+      "selectFlightDepartureTime": "Selectați ora de plecare a zborului",
+      "selectFlightArrivalTime": "Selectați ora de sosire a zborului"
+    },
+    "status": {
+      "booked": "Rezervat",
+      "confirmed": "Confirmat",
+      "unconfirmed": "Neconfirmat",
+      "cancelled": "Anulat",
+      "pending": "În așteptare",
+      "failed": "Eșuat"
+    },
+    "reference": {
+      "bookingNo": "Nr. rezervare",
+      "bookingRef": "Referință rezervare",
+      "bookingDate": "Data rezervării",
+      "bookingAmount": "Suma rezervării",
+      "bookingDetails": "Detalii rezervare",
+      "bookingHistory": "Istoricul rezervărilor"
+    }
+  },
+  "navigation": {
+    "myAccount": "Contul Meu",
+    "signIn": "CONECTARE",
+    "createAccount": "Creează un cont",
+    "getQuote": "Obține o ofertă"
+  },
+  "menu": {
+    "dynamicPackages": "PACHETE DINAMICE",
+    "charter": "Charter",
+    "flights": "Zboruri",
+    "hotels": "Hoteluri",
+    "transfers": "Transferuri",
+    "flightsHotel": "Zboruri + Hoteluri",
+    "insurance": "Asigurare",
+    "discoverDestinations": "Descopera Destinatiile Noastre",
+    "mainNav": {
+      "discover": "Descopera Destinatiile Noastre",
+      "packages": "PACHETE DINAMICE",
+      "charter": "CHARTER",
+      "flights": "Zboruri",
+      "hotels": "Hoteluri",
+      "transfers": "Transferuri",
+      "flightHotel": "Zbor + Hotel",
+      "insurance": "Asigurare"
+    }
+  },
+  "search": {
+    "common": {
+      "searchNow": "CAUTĂ ACUM",
+      "where": "Unde",
+      "when": "Când",
+      "who": "Cine",
+      "clearSearch": "Șterge căutarea",
+      "modifySearch": "Modifică căutarea",
+      "filterResults": "Filtrează rezultatele",
+      "sortBy": "Sortează după",
+      "noResults": "Nu s-au găsit rezultate"
+    },
+    "location": {
+      "enterCity": "Introduceți un oraș sau o locație",
+      "enterCityHotel": "Introduceți un oraș, o locație sau un hotel",
+      "pickupLocation": "Locație de preluare",
+      "dropoffLocation": "Locație de predare",
+      "cityRequired": "Numele orașului este obligatoriu",
+      "selectCity": "Selectați orașul"
+    }
+  },
+  "common": {
+    "actions": {
+      "add": "Adaugă",
+      "edit": "Editează",
+      "delete": "Șterge",
+      "save": "Salvează",
+      "cancel": "Anulează",
+      "confirm": "Confirmă",
+      "back": "Înapoi",
+      "next": "Următorul",
+      "apply": "Aplică",
+      "remove": "Elimină",
+      "close": "Închide",
+      "show": "Arată",
+      "hide": "Ascunde"
+    },
+    "status": {
+      "active": "Activ",
+      "inactive": "Inactiv",
+      "pending": "În așteptare",
+      "approved": "Aprobat",
+      "rejected": "Respins"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Autentificare",
+      "emailRequired": "Adresa de email este obligatorie",
+      "passwordRequired": "Parola este obligatorie",
+      "forgotPassword": "Ai uitat parola?",
+      "noAccount": "Nu ai cont?"
+    },
+    "register": {
+      "title": "Înregistrare",
+      "emailId": "Adresă email",
+      "mobileNumber": "Număr de telefon",
+      "mobileRequired": "Numărul de telefon este obligatoriu",
+      "termsAccept": "Prin înregistrare, acceptați",
+      "termsConditions": "Termenii și condițiile"
+    }
+  },
+  "payment": {
+    "methods": {
+      "creditCard": "Card de credit",
+      "debitCard": "Card de debit",
+      "bankTransfer": "Transfer bancar",
+      "cash": "Numerar"
+    },
+    "status": {
+      "paid": "Plătit",
+      "unpaid": "Neplătit",
+      "pending": "În așteptare",
+      "failed": "Eșuat"
+    },
+    "details": {
+      "amount": "Sumă",
+      "paymentDate": "Data plății",
+      "paymentMode": "Mod de plată",
+      "paymentStatus": "Stare plată",
+      "transactionId": "ID tranzacție"
+    }
+  },
+  "header": {
+    "tollFree": "Număr Gratuit",
+    "currency": {
+      "title": "Monedă",
+      "change": "Schimbă Moneda"
+    },
+    "language": {
+      "title": "Limbă",
+      "select": "Selectează Limba"
+    }
+  }
+}

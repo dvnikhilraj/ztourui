@@ -1,0 +1,181 @@
+﻿@model TIRequestResponse.BookingXML
+@{
+    ViewBag.Title = "Thankyou";
+    Layout = "~/Views/Shared/" + CommonComponents.CompanySettings.CompanySetting().CompanyId + "/L2R/_LayoutInner.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivityDetails.js")"></script>
+
+<div ng-controller="ActivityDetails" ng-cloak>
+
+    <section id="content" class="gray-area">
+        <div class="container confirmbooking" id="main">
+            <div class="row">
+                <div class="col-sm-8 col-md-8">
+                    <div class="booking-information travelo-box">
+                        <h2>@LanguageResources.Resources.BookingStatus</h2>
+                        <hr />
+                        <div class="booking-confirmation clearfix details">
+                            <i class="soap-icon-recommend icon circle hidden-xs"></i>
+                            <div class="message">
+                                <h4 class="main-message">
+                                    @LanguageResources.Resources.ThankYouYourBooking @LanguageResources.Resources.Is
+                                    <span class="@(@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "onrequest" ? "redcolor" : "greencolor")">
+                                        @Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus
+                                    </span>.
+                                </h4>
+                                @if (!Model.Client.Registered && Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "confirmed")
+                                {
+                                    <p>@LanguageResources.Resources.Anemailhasbeensentto <span style="color:#01b7f2; text-decoration:underline">@Model.Client.Email</span> @LanguageResources.Resources.withlogindetails</p>
+                                }
+                                else if (Model.Client.Registered && Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "confirmed")
+                                {
+                                    <p>@LanguageResources.Resources.Anemailhasbeensentto <span style="color:#01b7f2; text-decoration:underline">@Model.Client.Email</span>  </p>
+                                }
+                                else
+                                {
+                                    <p>@LanguageResources.Resources.Togetyourbookingconfirmedcontactuson @CommonComponents.CompanySettings.CompanySetting().ChannelSetting.ContactEmail @LanguageResources.Resources.OR @CommonComponents.CompanySettings.CompanySetting().ChannelSetting.TollFreeNo @LanguageResources.Resources.andshareyourbookingreferenceno <span class="main-message" style="text-decoration:underline">@Model.ReservationRef</span>  </p>
+                                }
+                            </div><br />
+                            @if (Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "confirmed")
+                            {
+                                <a href="#ti-sendbookingdocument-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" class="print-button button btn-small soap-popupbox" style="margin-left:10x;">@LanguageResources.Resources.EmailVoucher</a>
+                                <div id="ti-sendbookingdocument-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" class="ti-login-box ti-box" style="width:60%;">
+                                    <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    <div class="modal-popup-inner">
+                                        @{Html.RenderAction("SendBookingDocument", "General", new { Area = "Common", refno = Model.ReservationRef, serviceType = "SSG", productId = Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId, clientId = Model.Client.ClientId });}
+                                    </div>
+                                </div>
+                                <a href="#ti-printbookingdocument-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" class="print-button button btn-small soap-popupbox" onclick="PrintBookingDocument('@Model.ReservationRef','SSG', '@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId', '@Model.Client.ClientId')">@LanguageResources.Resources.PrintVoucher</a>
+                                <div id="ti-printbookingdocument-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" class="print-modal-popup modal-popup ti-box" style="display:none;">
+                                    <div class="modal-header">
+                                        <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                    </div>
+                                    <div id="printbookingloader-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" style="display:none;">
+                                        <div class="loaderlogin"></div>
+                                    </div>
+                                    <div class="table-responsive modal-popup-inner" id="printbookingcontent-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" style="display:none"></div>
+                                </div>
+                            }
+                        </div>
+                        <hr />
+                        <h2>@LanguageResources.Resources.BookingInfomation</h2>
+                        <dl class="term-description clearfix">
+                            <dt>@LanguageResources.Resources.Booking @LanguageResources.Resources.Referencenumber</dt>
+                            <dd>
+                                <a class="print-button button btn-small" href='@Url.Content("~/General/mybooking?refno=" + Model.ReservationRef)'>@Model.ReservationRef</a>
+                            </dd>
+                            <dt>@LanguageResources.Resources.First_name</dt>
+                            <dd>@Model.Client.FirstName</dd>
+                            <dt>@LanguageResources.Resources.Last_name</dt>
+                            <dd>@Model.Client.LastName</dd>
+                            <dt>@LanguageResources.Resources.E_mail_address</dt>
+                            <dd>@Model.Client.Email</dd>
+                            <dt>@LanguageResources.Resources.Mobile</dt>
+                            <dd>@Html.Raw(Model.Client.AreaCode + Model.Client.Mobile)</dd>
+                        </dl>
+                        <hr />
+                        <h2>@LanguageResources.Resources.Payment</h2>
+                        <dl class="term-description clearfix">
+                            <dt>@LanguageResources.Resources.PaymentRefNo</dt>
+                            <dd class="total-price-value">@Model.PaymentDetail.Payment[0].PGTxnCode</dd>
+                            <dt>@LanguageResources.Resources.PaymentMode</dt>
+                            <dd>Online</dd>
+                            <dt>@LanguageResources.Resources.TotalPrice</dt>
+
+                            <dd>@Model.Activityinfo.Activity_Booking_RQ[0].Master.Gross_Curr&nbsp;{{@Html.Raw(Model.PaymentDetail.Payment[0].PayAmount * Convert.ToDecimal(Model.Activityinfo.Activity_Booking_RQ[0].Master.Gross_ROE)) | number: @Model.GeneralInfo.DecimalPreference}}</dd>
+
+                        </dl>
+                        @if (Model.CouponDetails.Coupon.CouponCode != null)
+                        {
+                            <h2>@LanguageResources.Resources.DiscountDetails</h2>
+                            <dl class="term-description clearfix">
+                                <dt>@LanguageResources.Resources.PromoCodeUsed:</dt>
+                                <dd class="total-price-value">@Model.CouponDetails.Coupon.CouponCode</dd>
+                                <dt>@LanguageResources.Resources.DiscountAmount</dt>
+                                <dd>@Model.Activityinfo.Activity_Booking_RQ[0].Master.Gross_Curr&nbsp;{{@Html.Raw(Model.CouponDetails.Coupon.DiscountAmount * Convert.ToDecimal(Model.Activityinfo.Activity_Booking_RQ[0].Master.Gross_ROE)) | number: @Model.GeneralInfo.DecimalPreference}}</dd>
+                            </dl>
+                        }
+                        <p class="red-color">@LanguageResources.Resources.Paymentismadeby Online.</p>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4">
+                    <div class="booking-details" ng-cloak>
+                        <div class="trip-summary">
+                            <h2>@LanguageResources.Resources.BookingSummary</h2>
+                        </div>
+                        <div class="travelo-box">
+                            <div class="cart-container">
+                                <div class="cart-service-heading-container">
+                                    <span class="cart-service-heading">
+                                        @LanguageResources.Resources.activity :&nbsp; @Model.Activityinfo.Activity_Booking_RQ[0].Master.CityName
+                                        @*{{ActivitySearchRQ.SearchRequest.Master.DisplayCountryCityName}}*@
+                                    </span>
+                                </div>
+                                <div class="row-eq-height">
+                                    <div class="cart-date"><span>@Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).DayOfWeek.ToString().Substring(0, 3), @Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).ToString("dd MMM yyyy")</span></div>
+                                    <div class="cart-service-detail-container cart-service-detail-1">
+                                        <div class="">
+                                            <div class="cart-service-name">
+                                                <span class="capitalize">@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Name.ToLower()</span>
+                                                <div class="cart-service-price">
+                                                    <span class="currency">
+                                                        {{GrossCurrency}}
+                                                    </span> <span class="cartServicePrice">{{@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Gross_Price * GrossROE | number:@CommonComponents.CompanySettings.CompanySetting().DecimalPreference}}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row-eq-height">
+                                    <div class="cart-service-detail-all-container">
+                                        <div class="cart-service-detail-2">
+                                            <div class="cart-service-heading">
+                                                <div class="cart-service-info">
+                                                    <div class="">
+                                                        <span class="paddin g-left-15"><i class="fas fa-umbrella cart-service-info-icon"></i> @Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).ToString("dd MMM")</span>
+                                                        <i class="far fa-clock clock" aria-hidden="true"></i>
+                                                        <span>@Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).ToString("dd MMM")</span>
+                                                    </div>
+                                                    <div class="cart-service-pax-container">
+                                                        <span class="cart-service-pax">@LanguageResources.Resources.Traveler (s) : &nbsp; @Html.Raw((Model.PassengerDetails.Adults > 1 ? Model.PassengerDetails.Adults + " Adults" : Model.PassengerDetails.Adults + " Adult") + (Model.PassengerDetails.Childs > 0 ? ", " + Model.PassengerDetails.Childs + (Model.PassengerDetails.Childs > 1 ? " Children" : " Child") : ""))</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="moreinfo" class="cart-service-full-detail cart-more-info moreinfo" style="display:block">
+                                            <article class="image-box hotel listing-style1 mrng-btn">
+                                                <div class="details">
+                                                    <div class="feed back feed back-add">
+                                                        <div class="hotel_address capitalize"><i class="fas fa-map-marker-alt yellow-color"></i>&nbsp;<span>{{ActivitySearchRQ.SearchRequest.Master.DisplayCountryCityName}}</span></div>
+                                                    </div>
+                                                </div>
+                                            </article>
+                                            <div class="clearfix other-details">
+                                                <div class="clearfix border-top-1 padding-TB-3">
+                                                    <div class="feature pull-left">@LanguageResources.Resources.TourDuration:</div>
+                                                    <div class="value pull-right">&nbsp;@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Duration</div>
+                                                </div>
+                                                <div class="clearfix border-top-1 padding-TB-3">
+                                                    <div class="feature pull-left">@LanguageResources.Resources.TourName:</div>
+                                                    <div class="value pull-right">&nbsp;@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Name</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix margin-top-10"></div>
+                            <div class="cart-service-heading-container">
+                                <span class="cart-grand-total">
+                                    <strike ng-If="IsValid" class="strike-main"><div class="strike-price"><span class="cart-gto tal"><span class="currency">{{GrossCurrency}}</span> {{TotalCartPrice | number:@CommonComponents.CompanySettings.CompanySetting().DecimalPreference}}</span></div></strike>
+                                    @LanguageResources.Resources.Total <span class="cart-gtotal"><span class="currency">{{GrossCurrency}}</span> {{@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Gross_Price * GrossROE | number:@CommonComponents.CompanySettings.CompanySetting().DecimalPreference}}</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

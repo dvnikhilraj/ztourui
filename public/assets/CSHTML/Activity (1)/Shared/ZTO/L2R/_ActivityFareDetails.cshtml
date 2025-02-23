@@ -1,0 +1,128 @@
+﻿@model TIRequestResponse.BookingXML
+<style>
+    .booking-details .other-details dt, .booking-details .other-details dd {
+        padding: .5em 0 !important;
+    }
+
+    .guest {
+        border-bottom: 0px solid #f5f5f5 !important;
+    }
+</style>
+<div class="booking-details ">
+    <div class="trip-summary">
+        <h2>@LanguageResources.Resources.TripSummary</h2>
+    </div>
+    <div class="travelo-box">
+        <div class="cart-container padding-left-0 padding-right-0">
+            <div class="cart-service-heading-container">
+                <span class="cart-service-heading">
+                    @LanguageResources.Resources.activity :&nbsp; @Model.Activityinfo.Activity_Booking_RQ[0].Master.CityName
+                </span>
+            </div>
+            <div class="row-eq-height">
+                <div class="cart-date"><span>@Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).DayOfWeek.ToString().Substring(0, 3), @Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).ToString("dd MMM yyyy")</span></div>
+                <div class="cart-service-detail-container cart-service-detail-1">
+                    <div class="">
+                        <div class="cart-service-name">
+                            <span class="capitalize">@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Name.ToLower()</span>
+                            <div class="cart-service-price">
+                                <span class="currency ng-binding">
+                                    {{GrossCurrency}}
+                                </span> 
+                                <span class="cartServicePrice ng-binding">{{@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Gross_Price * GrossROE | number:2}}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-eq-height">
+                <div class="cart-service-detail-all-container">
+                    <div class="cart-service-detail-2">
+                        <div class="cart-service-heading">
+                            <div class="cart-service-info">
+                                <div class="">
+                                    <span class="paddin g-left-15"><i class="fa fa-umbrella cart-service-info-icon"></i> @Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).ToString("dd MMM")</span>
+                                    <i class="far fa-clock clock" aria-hidden="true"></i>
+                                    <span>@Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.TourDate).ToString("dd MMM")</span>
+                                </div>
+                                <div class="cart-service-pax-container">
+                                    <span class="cart-service-pax">@LanguageResources.Resources.Traveler (s) : &nbsp; @Html.Raw((Model.PassengerDetails.Adults > 1 ? Model.PassengerDetails.Adults + " Adults" : Model.PassengerDetails.Adults + " Adult") + (Model.PassengerDetails.Childs > 0 ? ", " + Model.PassengerDetails.Childs + (Model.PassengerDetails.Childs > 1 ? " Children" : " Child") : ""))</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="moreinfo" class="cart-service-full-detail cart-more-info moreinfo" style="display:block">
+                        <article class="image-box hotel listing-style1 mrng-btn">
+                            <div class="details">
+                                <div class="feedback feedback-add">
+                                    <div class="hotel_address capitalize"><i class="fa fa-map-marker-alt yellow-color" aria-hidden="true"></i>&nbsp;&nbsp;<span>{{ActivitySearchRQ.SearchRequest.Master.DisplayCountryCityName}}</span></div>
+                                </div>
+                            </div>
+                        </article>
+                        <div class="clearfix other-details">
+                            <div class="clearfix border-top-1 padding-TB-3">
+                                <div class="feature pull-left">@LanguageResources.Resources.TourDuration :</div>
+                                <div class="value pull-right">&nbsp;@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Duration</div>
+                            </div>
+                            <div class="clearfix border-top-1 padding-TB-3">
+                                <div class="feature pull-left">@LanguageResources.Resources.TourName :</div>
+                                <div class="value pull-right">&nbsp;@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Name</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="cart-service-heading-container margin-top-10">
+            <span class="cart-grand-total">
+                <!-- ngIf: IsValid -->
+                @LanguageResources.Resources.Total <span class="cart-gtotal ng-binding"><span class="currency ng-binding">{{GrossCurrency}}</span>  {{@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Gross_Price * GrossROE | number:2}}</span>
+            </span>
+        </div>
+        <div class="coupon-back clearfix margin-top-10">
+            <div id="dvCouponArea">
+                <dl ng-hide="IsValid" class="invalid margin-bottom-0 clearfix">
+                    <dt class="feature" style="border-top: none;">
+                        <input type="text" style="background:#fff;" class="input-text promocodetxt" placeholder="@LanguageResources.Resources.HaveaPromoCode" id="txtPromocode" maxlength="20" ng-model="couponCode" />
+                        <span class="alertMsg" ng-if="errorMessage !=''" style="margin-bottom: 0px; float: none;">{{errorMessage}}</span>
+                    </dt>
+                    <dd class="value" style="border-top: none;">
+                        <input type="button" class="button btn-small margin-top-5" ng-click="ValidateCoupon()" value="@LanguageResources.Resources.Apply"/>
+                    </dd>
+                </dl>
+                <dl ng-show="IsValid" class="other-details valid margin-bottom-0 clearfix">
+                    <div class="promo-wrapper clearfix">
+                        <dt class="feature pull-left">
+                            <span class="valid-promo">@LanguageResources.Resources.PromoCodeApplied</span>
+                        </dt>
+                        <dd class="value promo-close promoapplied pull-right" style="border-top: none;">
+                            <span style="cursor:pointer" ng-click="removeDiscount()" alt="@LanguageResources.Resources.RemoveCoupon" title="@LanguageResources.Resources.RemoveCoupon" class="glyphicon glyphicon-remove circle"></span>
+                            <span style="display: block;">{{errorMessage}}</span>
+                        </dd>
+                    </div>
+                    <dt class="feature discount-txt">@LanguageResources.Resources.PromoDiscount</dt>
+                    <dd class="value discount-value">{{GrossCurrency}} {{DiscountAmt  | number:2}}</dd>
+                    <div class="cart-service-heading-container">
+                        <span class="cart-grand-total clearfix padding-0">
+                            <dt class="total-price pull-left">@LanguageResources.Resources.GrandTotal</dt>
+                            <dd class="total-price-value pull-right"><span class="currency">{{GrossCurrency}}</span> {{(@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Gross_Price * GrossROE - 0) - (DiscountAmt-0) | number:2}}</dd>
+                        </span>
+                    </div>
+                    <dt class="saved-value" style="text-transform: none;">
+                        <span class="glyphicon glyphicon-ok circle"></span>
+                        @LanguageResources.Resources.CongratsYoujustsaved {{GrossCurrency}} {{DiscountAmt  | number:2}}
+                    </dt>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    tjq(".moreinfobtn").click(function () {
+        tjq(this).parent().parent().parent().parent().next(".moreinfo").slideToggle("slow");
+        tjq("i", this).toggleClass("fa fa-angle-double-down  fa fa-angle-double-up");
+        tjq(this).html(tjq(this).text() == 'More Info ' ? 'Hide Info <i class="fa fa-angle-double-up"></i>' : 'More Info <i class="fa fa-angle-double-down"></i>');
+    });
+</script>
+
+

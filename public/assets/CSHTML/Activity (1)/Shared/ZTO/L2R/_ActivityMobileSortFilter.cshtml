@@ -1,0 +1,258 @@
+﻿<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivitySearch.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Angular/rzslider.js")"></script>
+<script src="@Url.Content("~/Scripts/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/Gallery/jquery.flexslider.js")"></script>
+<div class="mobile-filter hidden-md hidden-lg">
+    <nav class="nav bar navb ar-default">
+        <div class="container">
+            <div class="navb ar-collapse" id="bs-exa mple-navbar-collapse-1">
+                <ul class="nav navb ar-nav">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-sort" aria-hidden="true"></i> @LanguageResources.Resources.Sort</a>
+                        <ul class="dropdown-menu">
+                            <li id="minP" class="sort-by-price" style="cursor:pointer">
+                                <a class="sort-by-container" ng-click="sortBy('Min_Price','Gross_Curr');"><span>@LanguageResources.Resources.Price</span></a>
+                            </li>
+                            <li class="clearer visible-sms"></li>
+                            <li id="duration" class="sort-by-rating" style="cursor:pointer"><a class="sort-by-container" ng-click="sortBy('DurationHours');"><span>@LanguageResources.Resources.Duration</span></a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a data-toggle="modal" data-target="#modifyModalLabel">
+                            <i class="far fa-edit"></i> @LanguageResources.Resources.Modify
+                        </a>
+                    </li>
+                    <li><a data-toggle="modal" data-target="#filterModalLabel"><i class="fa fa-filter" aria-hidden="true"></i> @LanguageResources.Resources.Filter</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="modal fade" tabindex="-1" id="modifyModalLabel" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="mo bile-modify">
+               
+                    <div class="pa nel style1">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-3 col-xs-12">
+                                <div class="form-group">
+                                    <label>@LanguageResources.Resources.YourDestination</label>
+                                    <activityautocomplete options="CountryCity" place-holder="Enter a City or Location" on-select="onSelect" display-property="CityDisplayName" input-class="search_icon" clear-input="false" ng-model="ActivityCityName"></activityautocomplete>
+                                    <div ng-if="error.depError" class="alertMsg">{{error.depMsg}}</div>
+                                    <span class="txticon-activityM"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                <div class="form-group">
+                                    <label>@LanguageResources.Resources.FromDate</label>
+                                    <div class="datepicker-wrap">
+
+                                        <input type="text" ng-model="ActivityFromDate" activitydatepicker readonly autocomplete="off" date-Type="CHKIN" class="input-text full-width datetextbox" placeholder="Checkin Date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-xs-6">
+                                <div class="form-group">
+                                    <label>@LanguageResources.Resources.ToDate</label>
+                                    <div class="datepicker-wrap">
+                                        <input type="text" ng-model="ActivityToDate" activitydatepicker readonly autocomplete="off" date-Type="CHKOUT" class="input-text full-width datetextbox" placeholder="Checkout Date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-xs-12">
+                                <label>@LanguageResources.Resources.AdultsChild</label>
+                                <div class="drop-alter form-group">
+                                    <a href="javascript:void(0)" class="paxpanellink">
+                                        <i ng-class="Adultcount+Childcount== '1' ? "></i>&nbsp;<SPAN>{{Adultcount}} </SPAN><span ng-if="Adultcount>'1'">@LanguageResources.Resources.Adults</span><span ng-if="Adultcount<'2'">@LanguageResources.Resources.Adult</span>, <span>{{Childcount}}</span> <span ng-if="Childcount<'2'">@LanguageResources.Resources.Child</span><span ng-if="Childcount>'1'">@LanguageResources.Resources.Children</span>
+                                        <div class="new-down-right"><i class="fas fa-chevron-down"></i></div>
+                                    </a>
+                                    @*<a href="javascript:void(0)" class="paxpanellink">{{Adultcount}} Adult, {{Childcount}} Child <strong class="caret"></strong></a>*@
+                                    <div class="pax-count-hotel paxpanel activitypaxpannel">
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <label>{{Adultcount > 1 ? '@LanguageResources.Resources.Adults12yrs' : '@LanguageResources.Resources.Adult12yrs'}}</label>
+                                                <div range-spinner
+                                                        range-min="1"
+                                                        range-step="1"
+                                                        range-max="4"
+                                                        range-default-value="Adultcount"
+                                                        range-decimal-precision="1"
+                                                        range-model="Adultcount"
+                                                        accept-decimal=false
+                                                        name-of-field="adult0"
+                                                        id-of-field="adult0"
+                                                        spiner-of-index="0"
+                                                        spinner-of-type="ADT"
+                                                        spinner-of-subindex="">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6">
+                                                <label>{{Childcount > 1 ? '@LanguageResources.Resources.ChildrenUnder12yrs' : '@LanguageResources.Resources.ChildUnder12yrs'}}</label>
+                                                <div range-spinner
+                                                        range-min="0"
+                                                        range-step="1"
+                                                        range-max="3"
+                                                        range-default-value="Childcount"
+                                                        range-decimal-precision="1"
+                                                        range-model="Childcount"
+                                                        accept-decimal=false
+                                                        name-of-field="child"
+                                                        id-of-field="child"
+                                                        spiner-of-index="0"
+                                                        spinner-of-type="CHD"
+                                                        spinner-of-subindex="">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row" ng-show="Childcount >= 1">
+                                            <div class="col-xs-6">
+                                                <label>  @LanguageResources.Resources.AgeChild1</label>
+                                                <div range-spinner
+                                                        range-min="2"
+                                                        range-step="1"
+                                                        range-max="12"
+                                                        range-default-value="Child1Age"
+                                                        range-decimal-precision="1"
+                                                        range-model="Child1Age"
+                                                        accept-decimal=false
+                                                        name-of-field="Child1Age">
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-6" ng-show="Childcount>=2">
+                                                <label>  @LanguageResources.Resources.AgeChild2</label>
+                                                <div range-spinner
+                                                        range-min="2"
+                                                        range-step="1"
+                                                        range-max="12"
+                                                        range-default-value="Child2Age"
+                                                        range-decimal-precision="1"
+                                                        range-model="Child2Age"
+                                                        accept-decimal=false
+                                                        name-of-field="Child2Age">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row" ng-show="Childcount >= 1">
+                                            <div class="col-xs-6" ng-show="Childcount==3">
+                                                <label>  @LanguageResources.Resources.AgeChild3</label>
+                                                <div range-spinner
+                                                        range-min="2"
+                                                        range-step="1"
+                                                        range-max="12"
+                                                        range-default-value="Child3Age"
+                                                        range-decimal-precision="1"
+                                                        range-model="Child3Age"
+                                                        accept-decimal=false
+                                                        name-of-field="Child3Age">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-6 col-xs-12">
+                                <div class="form-group">
+                                    <label class="hidden-xs">&nbsp;</label>
+                                    <button class="full-width" ng-click="ActivityResult();">@LanguageResources.Resources.SEARCHNOW</button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                           
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade hidden-md hidden-lg " tabindex="-1" id="filterModalLabel" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <div class="panel style1 arrow-right">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#name-filterMobile" class="collapsed">@LanguageResources.Resources.name</a>
+                    </h4>
+                    <div id="name-filterMobile" class="panel-collapse collapse">
+                        <div class="panel-content details">
+                            <span class="text-input-wrapper">
+                                <input type="text" id="txtactivityName" class="input-text full-width" placeholder="@LanguageResources.Resources.Enteractivityname" ng-model="ByActivityname" />
+                                <span ng-if="ByActivityname != ''"><a id="byActname" ng-click="ClearActivityName()">&times;</a></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                @*--category Filter End--*@
+                @*--Price Slider Start--*@
+                <div class="panel style1 arrow-right">
+                    <h4 class="panel-title pricerange">
+                        <a data-toggle="collapse" href="#price-filterMobile" class="collapsed">@LanguageResources.Resources.Price <span style="font-size:10px;visibility:hidden" id="Htlcurrency">(in <span style="font-weight:bold">{{GrossCurrency}}</span>)</span></a>
+                    </h4>
+                    <div id="price-filterMobile" class="collapse">
+                        <div class="panel-content details">
+                            <div class="more-container">
+                                <a href="javascript:void(0)" id="check_div_click_1" ng-click="ResetSlider(true)" style="display:none" class="button btn-mini more button">@LanguageResources.Resources.SHOWALL</a>
+                            </div>
+                            <div class="check_div_1 hotel-price-slider">
+                                <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="{floor: minValue, noSwitching:true}" style="display: block"></rzslider>
+                            </div>
+                        </div>
+                        <!-- end content -->
+                    </div>
+                </div>
+                @*-- Price Slider End--*@
+
+                <div class="panel style1 arrow-right"  ng-if="(Activities | groupBy:'Category' | orderBy:Category:sortRating) != ''">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" href="#category-filterMobile" class="collapsed">@LanguageResources.Resources.Category</a>
+                    </h4>
+                    <div id="category-filterMobile" class="panel-collapse collapse">
+                        <div class="panel-content details">
+                            <div class="more-container">
+                                <a href="javascript:void(0)" id="check_div_click_2" ng-click="Categoryvalueclude('Remove', true,false, null)" style="display:none" class="button btn-mini more">@LanguageResources.Resources.SHOWALL</a>
+                            </div>
+                            <div class="checkbox-filters">
+                                <div style="width:100%;" class="b tn-group" data-toggle="buttons" ng-repeat="activity in Activities | groupBy:'Category' | orderBy:Category:sortRating" ng-show="activity !=''">
+                                    <label class="btn btn-checkbox Categoryfilter active" id="catlbl{{$index}}" ng-click="Categoryvalueclude([activity][0], true, false, $index)">
+                                        <input type="checkbox" name="Categoryfilter" class="customCheck" />
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </label>
+                                    <span href="javascript:void(0)" style="padding: 8px 0; text-transform: uppercase; font-size: 11px; color:#2d3e52" title="{{activity}}">
+                                        {{activity}}<small style="float:right">({{noocategory([activity][0])}})</small>
+                                        <a href="javascript:void(0)" class="only" ng-click="Categoryvalueclude([activity][0], true, true, $index)">@LanguageResources.Resources.Only</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="javascript:void(0)" id="clearAllmobile" ng-click="ClearAllFilters('Remove')" data-dismiss="modal" style="display:none" class="form-group button yellow full-width btn-small select-rooms pull-right">@LanguageResources.Resources.Clearall</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade hidden-md hidden-lg hidden-sm" tabindex="-1" id="mapModalLabel" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="modal-body">
+                <span ng-if="mapWiating">Please Wait..</span>
+                <div id="mobilemap" class="map" style="height:500px"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

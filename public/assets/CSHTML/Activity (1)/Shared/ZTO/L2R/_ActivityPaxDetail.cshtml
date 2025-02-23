@@ -1,0 +1,155 @@
+﻿@model TIRequestResponse.BookingXML
+<div class="person-information" id="dvPaxDetail" data-service="Activity">
+    @Html.HiddenFor(m => m.GeneralInfo.ClientIP, new { @id = "hdnIP" })
+    <input type="hidden" id="IsSubmit" value="false" />
+    <h3 class="cart-service-heading-container">@LanguageResources.Resources.ContactDetails</h3>
+    <div class="booking-section travelo-box">
+        <div class="flp">
+            <div class="row pd-bottom10">
+                <div class="col-sm-4 col-md-4 form-group">
+                    <b>@LanguageResources.Resources.DiallingCode <span class="red-star">*</span></b>
+                    <div class="selector">
+                        @Html.DropDownListFor(m => m.PassengerDetails.Passenger[0].DailingCode, ViewBag.CountryPinCodeList as SelectList, new { @class = "full-width dropdown", @id = "ddlDailingCode" })
+                    </div>
+                    <div class="alertMsg" ng-if="paxDailingCodeMsg !=''">{{paxDailingCodeMsg}}</div>
+                </div>
+                <div class="col-sm-4 col-md-4  form-group">
+                    <b>@LanguageResources.Resources.MobileNumber <span class="red-star">*</span></b>
+                    @Html.TextBoxFor(m => m.PassengerDetails.Passenger[0].MobileNumber, new { @class = "input-text full-width textbox", @placeholder = @LanguageResources.Resources.MobileNo, @maxlength = 10, @onkeydown = "return keyRestrict(event,'0123456789');", @id = "txtMobileNo" })
+                    @*<label class="floatinglabel" for="txtMobileNo">Mobile No</label>*@
+                    <div class="alertMsg" ng-if="paxMobileNumberMsg !=''">{{paxMobileNumberMsg}}</div>
+                </div>
+                <div class="col-sm-4 col-md-4  form-group">
+                    <b>@LanguageResources.Resources.EmailId <span class="red-star">*</span></b>
+                    @Html.TextBoxFor(m => m.PassengerDetails.Passenger[0].EMailID, new { @class = "input-text full-width textbox", @placeholder = @LanguageResources.Resources.EmailId, @id = "txtEmailId" })
+                    @*<label class="floatinglabel" for="txtEmailId">Email Id</label>*@
+                    <div class="alertMsg" ng-if="paxEmailMsg !=''">{{paxEmailMsg}}</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="clearfix"></div>
+    </div>
+    <h3 class="cart-service-heading-container">@LanguageResources.Resources.TravelerInformation</h3>
+    <div class="booking-section travelo-box">
+        <div class="flp">
+            @{int PAXINDEX = -1; }
+            @{int paxnumber = 0; }
+            @foreach (var paxItem in Model.PassengerDetails.Passenger.Select((y, i) => new { value = y, index = i }))
+            {
+                { PAXINDEX++; }
+                { paxnumber++; }
+                @Html.HiddenFor(m => m.PassengerDetails.Passenger[PAXINDEX].PaxType)
+                @Html.HiddenFor(m => m.PassengerDetails.Passenger[PAXINDEX].Age)
+                <div class="form-group row">
+
+                    <div class="col-sm-12 col-md-1 pax-type" style="padding:10px 3px 2px 20px">
+                        @if (paxItem.value.PaxType == "ADT")
+                {
+                            <b>@LanguageResources.Resources.Adult-@paxnumber</b>
+                        }
+                        else
+                        {
+                            <b>@LanguageResources.Resources.Child-@paxnumber</b>
+                        }
+                    </div>
+                    <div class="col-sm-3 col-md-2 ">
+                        <b>@LanguageResources.Resources.Title <span class="red-star">*</span></b>
+                        <div class="selector">
+
+                            @if (paxItem.value.PaxType == "ADT")
+                            {
+                                @Html.DropDownListFor(m => m.PassengerDetails.Passenger[PAXINDEX].Title, new SelectList(new[] { new { TitleText = LanguageResources.Resources.Title, TitleValue = "" }, new { TitleText = LanguageResources.Resources.Mr, TitleValue = LanguageResources.Resources.Mr }, new { TitleText = LanguageResources.Resources.Mrs, TitleValue = LanguageResources.Resources.Mrs }, new { TitleText = LanguageResources.Resources.Miss, TitleValue = LanguageResources.Resources.Miss } }, "TitleValue", "TitleText", Model.PassengerDetails.Passenger[PAXINDEX].Title), new { @class = "full-width dropdown", @id = "ddlTitle" + PAXINDEX })
+                            }
+
+                            else
+                            {
+                                @Html.DropDownListFor(m => m.PassengerDetails.Passenger[PAXINDEX].Title, new SelectList(new[] { new { TitleText = LanguageResources.Resources.Title, TitleValue = "" }, new { TitleText = LanguageResources.Resources.Master, TitleValue = "Mstr" }, new { TitleText = LanguageResources.Resources.Miss, TitleValue = LanguageResources.Resources.Miss} }, "TitleValue", "TitleText", Model.PassengerDetails.Passenger[PAXINDEX].Title), new { @class = "full-width dropdown", @id = "ddlTitle" + PAXINDEX })
+                            }
+                           
+                        </div>
+                        <div class="alertMsg" ng-if="paxValidation[@PAXINDEX].Title !=''">{{paxValidation[@PAXINDEX].Title}}</div>
+                    </div>
+                    <div class="col-sm-5 col-md-5">
+                        <div class="form-group">
+                            <b>@LanguageResources.Resources.FirstName <span class="red-star">*</span></b>
+                            @Html.TextBoxFor(m => m.PassengerDetails.Passenger[PAXINDEX].FirstName, new { @class = "input-text full-width ", @onkeydown = "return keyRestrict(event,'abcdefghijklmnopqrstuvwxyz ');", @onfocusout = "return trimTextValue(this)", @placeholder = LanguageResources.Resources.FirstName, @id = "txtFirstName" + PAXINDEX })
+                            <div class="alertMsg" ng-if="paxValidation[@PAXINDEX].FirstName !=''">{{paxValidation[@PAXINDEX].FirstName}}</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3" style="display:none">
+
+                        <div class="form-group">
+                            <b>@LanguageResources.Resources.MiddleName <span class="red-star"></span></b>
+                            @Html.TextBoxFor(m => m.PassengerDetails.Passenger[PAXINDEX].MiddleName, null, new { @class = "input-text full-width ", @placeholder = LanguageResources.Resources.MiddleName, @id = "txtMiddleName" + PAXINDEX })
+                            @*<label class="floatinglabel" for='@("txtMiddleName" + PAXINDEX)'>Middle Name</label>*@
+                        </div>
+                    </div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group">
+                            <b>@LanguageResources.Resources.LastName <span class="red-star">*</span></b>
+                            @Html.TextBoxFor(m => m.PassengerDetails.Passenger[PAXINDEX].LastName, null, new { @class = "input-text full-width ", @onkeydown = "return keyRestrict(event,'abcdefghijklmnopqrstuvwxyz ');", @onfocusout = "return trimTextValue(this)", @placeholder = LanguageResources.Resources.LastName, @id = "txtLastName" + PAXINDEX })
+                            @*<label class="floatinglabel" for='@("txtLastName" + PAXINDEX)'>Last Name</label>*@
+                            <div class="alertMsg" ng-if="paxValidation[@PAXINDEX].LastName !=''">{{paxValidation[@PAXINDEX].LastName}}</div>
+                        </div>
+                    </div>
+                </div>
+            }
+            
+            <div class="row">
+                <div class="col-sm-12">
+                    <b class="margin-bottom-5">@LanguageResources.Resources.SpecialRequestifAny</b>
+                    <div class="form-group">
+                        @Html.TextAreaFor(m => m.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SpecialReq, new { @class = "input-text full-width" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-6 pull-right padding_con_0">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function getIP(json) {
+        tjq('[id$=hdnIP]').val(json.ip);
+    }
+</script>
+<script type="application/javascript" src="//api.ipify.org?format=jsonp&callback=getIP">
+</script>
+<script>
+    function trimTextValue(ctrl) {
+        ctrl.value = ctrl.value.trim();
+    }
+
+    tjq(document).ready(function () {
+        window.onunload = function (e) {
+            var txtEmailId = tjq("#txtEmailId");
+            var txtMobileNo = tjq("#txtMobileNo");
+            if ((txtEmailId.val() != "" || txtMobileNo.val() != "") && e.currentTarget.performance.navigation.type == "0" && tjq("[id$=IsSubmit]").val() == "false") {
+                tjq.ajax({
+                    url: path + "General/SendQueryOnUnAttemptedBooking",
+                    type: "POST",
+                    data: {
+                        Name: tjq("#txtFirstName0").val(),
+                        LastName: tjq("#txtLastName0").val(),
+                        Email: txtEmailId.val(),
+                        Phone: txtMobileNo.val(),
+                        ProductType: "SSG",
+                        ClientIP: tjq('[id$=hdnIP]').val()
+                        //Type: e.currentTarget.performance.navigation.type
+                    },
+                    success: function (data) {
+                        console.log(thrownError.toString());
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(thrownError.toString());
+                    }
+                });
+            }
+        }
+    });
+</script>
+
+

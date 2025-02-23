@@ -1,0 +1,19 @@
+﻿@model BookingObject.BookingCancellationResponse
+@{Layout = null;}
+<div class="sepera tor">
+    <h4><label><b>@LanguageResources.Resources.Areyousureyouwanttocancelthisbooking</b></label></h4>
+</div><br />
+<div class="form-group">
+    <label><i class="fa fa-hand-o-left" aria-hidden="true"></i>&nbsp;&nbsp;@LanguageResources.Resources.YouareplacingacancellationrequestforbookingReference<span style="color:#07a5d8">@Model.ResponseBody.Cancellation.ReservationRef</span></label>
+    <label><i class="fa fa-hand-o-left" aria-hidden="true"></i>&nbsp;&nbsp;@LanguageResources.Resources.Pleasenotethatyouwillbechargedofamount <span style="color:#07a5d8;"><b>@Model.ResponseBody.Cancellation.Currency @Model.ResponseBody.Cancellation.CancellationCharge</b></span>@LanguageResources.Resources.whichisthepenaltyforcancellation</label>
+</div>
+<div class="form-group" style="text-align:right">
+    <span style="font-size:20px;display:none;color:red !important" id="cancelmsgstatus">&nbsp;&nbsp; <i class="icon soap-icon-check-1" style="vertical-align:baseline !important;"></i> <label style="margin-bottom:0px"><span id="cancelmsg" class="alertMsg" style="margin-bottom:0px"></span></label></span>
+</div>
+<div class="form-group" style="overflow:hidden; text-align:center" id="txtright">
+    <a href="@Url.Content("~/General/MyBooking?refno=" + @Model.ResponseBody.Cancellation.ReservationRef)" class="button btn-small sky-blue1" style=" width: 40% !important;border-right:2px solid #fff">@LanguageResources.Resources.Takemeback</a>
+    <button type="submit" id="btnCancelled" class="button btn-small sky-blue1" style=" width: 40% !important" onclick="GetCancellationStatus('@Model.ResponseBody.Cancellation.ClientId', '@Model.ResponseBody.Cancellation.ReservationRef', '@Model.ResponseBody.Cancellation.ServiceProductId', 'SSG')">@LanguageResources.Resources.Iunderstand</button>
+    <div id="cancellationloader" style="display:none; margin-left:384px;margin-top: 10px;">
+        <div class="loaderlogin"></div>
+    </div>
+</div>

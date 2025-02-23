@@ -1,0 +1,156 @@
+{
+  "booking": {
+    "flight": {
+      "searchTitle": "Please enter flight arrival number",
+      "flightDestinationRequired": "Flight Destination is required",
+      "flightArrivalRequired": "Flight Arrival is required",
+      "flightArrivalFrom": "Flight Arrival From",
+      "flightArrivalTime": "Flight Arrival Time",
+      "flightDepartureTime": "Flight Departure Time",
+      "flightNumber": "Flight Number",
+      "departureStation": "Departure Station",
+      "departureCity": "Departure City",
+      "departureDate": "Departure Date",
+      "departureDateRequired": "Departure date is required",
+      "departureArrival": "Departure/Arrival",
+      "selectFlightDepartureTime": "Select Flight Departure Time",
+      "selectFlightArrivalTime": "Select Flight Arrival Time"
+    },
+    "status": {
+      "booked": "Booked",
+      "confirmed": "Confirmed",
+      "unconfirmed": "UnConfirmed",
+      "cancelled": "Cancelled",
+      "pending": "Pending",
+      "failed": "Failed"
+    },
+    "reference": {
+      "bookingNo": "Booking No",
+      "bookingRef": "Booking Reference",
+      "bookingDate": "Booking Date",
+      "bookingAmount": "Booking Amount",
+      "bookingDetails": "Booking Details",
+      "bookingHistory": "Booking History"
+    }
+  },
+ "navigation": {
+    "myAccount": "My Account",
+    "signIn": "SIGN IN",
+    "createAccount": "Create an Account",
+    "getQuote": "Get a Quote"
+  },
+  "menu": {
+    "dynamicPackages": "Dynamic Packages",
+    "charter": "Charter",
+    "flights": "Flights",
+    "hotels": "Hotels",
+    "transfers": "Transfers",
+    "flightsHotel": "Flights + Hotel",
+    "insurance": "Insurance",
+    "discoverDestinations": "Discover Our Destinations",
+    "mainNav": {
+      "discover": "Discover Our Destinations",
+      "packages": "Dynamic Packages",
+      "charter": "CHARTER",
+      "flights": "Flights",
+      "hotels": "Hotels",
+      "transfers": "Transfers",
+      "flightHotel": "Flight + Hotel",
+      "insurance": "Insurance"
+    }
+  },
+  "search": {
+    "common": {
+      "searchNow": "SEARCH NOW",
+      "where": "Where",
+      "when": "When",
+      "who": "Who",
+      "clearSearch": "Clear search",
+      "modifySearch": "Modify Search",
+      "filterResults": "Filter Results",
+      "sortBy": "Sort results by",
+      "noResults": "No results found"
+    },
+    "location": {
+      "enterCity": "Enter a City or Location",
+      "enterCityHotel": "Enter a City, Location or Hotel",
+      "pickupLocation": "Pickup Location",
+      "dropoffLocation": "Drop-off Location",
+      "cityRequired": "City Name Required",
+      "selectCity": "Select City"
+    }
+  },
+  "common": {
+    "actions": {
+      "add": "Add",
+      "edit": "Edit",
+      "delete": "Delete",
+      "save": "Save",
+      "cancel": "Cancel",
+      "confirm": "Confirm",
+      "back": "Back",
+      "next": "Next",
+      "apply": "Apply",
+      "remove": "Remove",
+      "close": "Close",
+      "show": "Show",
+      "hide": "Hide"
+    },
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Login",
+      "emailRequired": "Email id is required",
+      "passwordRequired": "Password is required",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?"
+    },
+    "register": {
+      "title": "Register",
+      "emailId": "Email Id",
+      "mobileNumber": "Mobile Number",
+      "mobileRequired": "Mobile number is required",
+      "termsAccept": "By signing up, you accept the",
+      "termsConditions": "Terms & Conditions"
+    }
+  },
+  "payment": {
+    "methods": {
+      "creditCard": "Credit Card",
+      "debitCard": "Debit Card",
+      "bankTransfer": "Bank Transfer",
+      "cash": "Cash"
+    },
+    "status": {
+      "paid": "Paid",
+      "unpaid": "Unpaid",
+      "pending": "Pending",
+      "failed": "Failed"
+    },
+    "details": {
+      "amount": "Amount",
+      "paymentDate": "Payment Date",
+      "paymentMode": "Payment Mode",
+      "paymentStatus": "Payment Status",
+      "transactionId": "Transaction ID"
+    }
+  },
+  "header": {
+    "tollFree": "Toll Free",
+    "currency": {
+      "title": "Currency",
+      "change": "Change Currency"
+    },
+    "language": {
+      "title": "Language",
+      "select": "Select Language"
+    }
+  }
+}

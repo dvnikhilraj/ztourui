@@ -1,0 +1,272 @@
+﻿@foreach (var activityBookingItem in Model.ResponseBody.ActivityBooking)
+{
+    <h4>@LanguageResources.Resources.ActivityDetails</h4>
+    <div id="flight-details">
+        <div class="intro table-wrapper full-width hidden-ta ble-s m ">
+            
+                <div class="col-md-12 table-cell table-responsive">
+                    <div class="detailed-features booking-details">
+                        <div class="table-wrapper flights">
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    @if (activityBookingItem.ActivityDetail.ImageUrl != null && activityBookingItem.ActivityDetail.ImageUrl != "")
+                                    {
+                                        <img alt="" src="@activityBookingItem.ActivityDetail.ImageUrl" height="75" width="100">
+                                    }
+                                    else
+                                    {
+                                        <img alt="" src="@Url.Content("~/Images/ZTO/not_avil.jpg")" height="75" width="100">
+                                    }
+
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>@activityBookingItem.ActivityDetail.ActivityName</label><br />
+                                        <span>@LanguageResources.Resources.Address: @activityBookingItem.ActivityDetail.Address</span><br />
+                                        <span>@activityBookingItem.ActivityDetail.City @activityBookingItem.ActivityDetail.Country</span><br />
+                                        @if (activityBookingItem.BookingStatus == "CLP")
+                                        {
+
+                                            <span style="font-weight:bold"><i class="@(activityBookingItem.BookingStatus == "CLP" ? "soap-icon-bad" : "soap-icon-bad") yellow-color" style="font-size: 22px;vertical-align: sub !important;"></i> &nbsp;Canceled</span>
+                                        }
+                                        else
+                                        {
+                                            <span style="font-weight:bold"><i class="@(activityBookingItem.BookingStatus == "HK" || activityBookingItem.BookingStatus.ToUpper()=="CONFIRMED" ? "soap-icon-recommend" : "soap-icon-bad") yellow-color" style="font-size: 22px;vertical-align: sub !important;"></i> &nbsp;@CommonComponents.CommonMethod.FullStatusName(activityBookingItem.BookingStatus)</span>
+                                        }
+
+
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.Pax</label><br />
+                                        <span>@LanguageResources.Resources.Adult @activityBookingItem.ActivityDetail.Adult</span>
+                                        <span>@LanguageResources.Resources.Child @activityBookingItem.ActivityDetail.Child</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.LeadPaxName</label><br />
+                                        <span>@activityBookingItem.ActivityDetail.LeadPaxName</span><br />
+                                        <label>@LanguageResources.Resources.LeadPaxTelNo</label><br />
+                                        <span>@activityBookingItem.ActivityDetail.LeadPaxContactNo</span>
+                                    </div>
+                                    <div class="table-cell timing-detail">
+                                        <div class="timing">
+                                            <div class="check-in">
+                                                <label>@LanguageResources.Resources.TourDate</label>
+                                                <span>@activityBookingItem.ActivityDetail.TourDate</span>
+                                            </div>
+                                            @*<div class="duration text-center">
+                                    <i class="soap-icon-clock"></i>
+                                    <span>Night @activityBookingItem.ActivityDetail.TotalNight</span>
+                                </div>*@
+                                            @*<div class="check-out">
+                                    <label>Check Out</label>
+                                    <span>@activityBookingItem.ActivityDetail.TourDate</span>
+                                </div>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-wrapper flights">
+                                <div class="table-row">
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.TourName</label><br />
+                                        <span>@activityBookingItem.ActivityDetail.TourName</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.TourType</label><br />
+                                        <span>@activityBookingItem.ActivityDetail.TourType</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.TourDuration</label><br />
+                                        <span>@activityBookingItem.ActivityDetail.TourDuration</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+           
+
+        </div>
+    </div><br />
+
+    if (activityBookingItem.PassengerDetail != null && activityBookingItem.PassengerDetail.Count != 0)
+    {
+        <h4>@LanguageResources.Resources.Passenger</h4>
+        <div id="flight-details">
+            <div class="intro table-wrapper full-width hidden-table-sm">
+                <div class="col-md-12 table-cell">
+                    <div class="detailed-features booking-details">
+                        <div class="table-wrapper flights">
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.Pax</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.name</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.TicketNo</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.Baggage</label>
+                                </div>
+                            </div>
+                            @foreach (var passengerDetailtem in activityBookingItem.PassengerDetail)
+                            {
+                                <div class="table-cell">
+                                    <div class="table-cell">
+                                        <span>@passengerDetailtem.PaxType</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <span>@passengerDetailtem.PaxName</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <span>@passengerDetailtem.TicketNo</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <span>@(passengerDetailtem.Baggage != "" ? @passengerDetailtem.Baggage : "Baggage details not available")</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br />
+    }
+
+    if (activityBookingItem.PaymentDetail != null)
+    {
+        <h4>@LanguageResources.Resources.Payment</h4>
+        <div id="flight-details">
+            <div class="intro table-wrapper full-width hidden-table-sm">
+                <div class="col-md-12 table-cell">
+                    <div class="detailed-features booking-details">
+                        <div class="table-wrapper flights">
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.PaymentStatus</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.PaymentMode</label>
+                                </div>
+
+                                @if (Model.ResponseBody.BookingDetail.CouponCode != "")
+                                {
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.PromoCode</label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.PromoDiscount</label>
+                                    </div>
+                                }
+                                @if (activityBookingItem.PaymentDetail.IsRefundFromPG)
+                                {
+                                    <div class="table-cell">
+                                        <label>@LanguageResources.Resources.RefundAmount</label>
+                                    </div>
+                                }
+
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.TotalPrice</label>
+                                </div>
+                            </div>
+
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    @if (activityBookingItem.PaymentDetail.IsRefundFromPG)
+                                    {
+                                        <span>@LanguageResources.Resources.Refunded</span>
+                                    }
+                                    else
+                                    {
+                                        <span>@activityBookingItem.PaymentDetail.PaymentStatus</span>
+                                    }
+                                </div>
+                                <div class="table-cell">
+                                    <span>@*@activityBookingItem.PaymentDetail.PaymentMode*@ Online</span>
+                                </div>
+                                @if (Model.ResponseBody.BookingDetail.CouponCode != "")
+                                {
+                                    <div class="table-cell">
+                                        <span>@Model.ResponseBody.BookingDetail.CouponCode</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <span>@activityBookingItem.PaymentDetail.TransactionCurrency @(Math.Round(Model.ResponseBody.BookingDetail.CouponDiscountAmt * Model.ResponseBody.BookingDetail.TransCurrROE, Model.ResponseBody.BookingDetail.DecimalPreference))</span>
+                                    </div>
+                                }
+                                @if (activityBookingItem.PaymentDetail.IsRefundFromPG)
+                                {
+                                    <div class="table-cell">
+                                        <span>@activityBookingItem.PaymentDetail.TransactionCurrency @activityBookingItem.PaymentDetail.DiscountAmt</span>
+                                    </div>
+                                }
+                                <div class="table-cell">
+                                    <span>@activityBookingItem.PaymentDetail.TotalPrice</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="row margin-bottom-0 booking-row-flex margin-top-15">
+        @*<div class="col-sm-2 col-lg-4 col-md-4"></div>*@
+        @if (activityBookingItem.BookingStatus == "HK" || activityBookingItem.BookingStatus == "CONFIRMED")
+        {
+            @*<div class="col-sm-2 col-lg-4 col-md-4 mrgn-top10-xs"></div>*@
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <a href="#ti-GetCancellationCharge-@activityBookingItem.ActivityDetail.ProductId" class="button btn-small sky-blue1 soap-popupbox form-group" onclick="GetCancellationCharge('@Model.ResponseBody.BookingDetail.ClientId', '@Model.ResponseBody.BookingDetail.ReservationRef', '@activityBookingItem.ActivityDetail.ProductId', 'SSG')">@LanguageResources.Resources.CancelBooking</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <a href="#ti-printbookingdocument-@activityBookingItem.ActivityDetail.ProductId" class="button btn-small sky-blue1 soap-popupbox form-group" onclick="PrintBookingDocument('@Model.ResponseBody.BookingDetail.ReservationRef','SSG', '@activityBookingItem.ActivityDetail.ProductId', '@Model.ResponseBody.BookingDetail.ClientId')">@LanguageResources.Resources.PrintVoucher</a>
+            </div>
+            <div class="col-xs-6 col-sm-3 col-md-2">
+                <a href="#ti-sendbookingdocument-@activityBookingItem.ActivityDetail.ProductId" class="button btn-small sky-blue1 soap-popupbox form-group">@LanguageResources.Resources.EmailVoucher</a>
+            </div>
+        }
+        <div class="col-xs-6 col-sm-3 col-md-2">
+            <a href="#query-dialog" class="button btn-small sky-blue1 soap-popupbox form-group" onclick="queryDetails('@Model.ResponseBody.BookingDetail.ReservationRef','SSG', '@activityBookingItem.ActivityDetail.ProductId', '@Model.ResponseBody.BookingDetail.ClientId')">@LanguageResources.Resources.Query</a>
+        </div>
+        <div class="col-xs-6 col-sm-3 col-md-2">
+            <a href="@Url.Content("~/General/MyBookings")" class="button btn-small sky-blue1 form-group">@LanguageResources.Resources.Back</a>
+        </div>
+    </div>
+
+    <div id="ti-sendbookingdocument-@activityBookingItem.ActivityDetail.ProductId" class="ti-box modal-popup" style="display:none;">
+        <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div class="modal-popup-inner">
+            @{Html.RenderAction("SendBookingDocument", "General", new { refno = Model.ResponseBody.BookingDetail.ReservationRef, serviceType = "SSG", productId = activityBookingItem.ActivityDetail.ProductId, clientId = Model.ResponseBody.BookingDetail.ClientId });}
+        </div>
+        
+    </div>
+    <div id="ti-printbookingdocument-@activityBookingItem.ActivityDetail.ProductId" aria-labelledby="exampleModalCenterTitle" class="ti-box print-modal-popup modal-popup" role="dialog" aria-hidden="true" tabindex="-1" style="display:none;">
+        <div class="modal-header">
+            <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <div id="printbookingloader-@activityBookingItem.ActivityDetail.ProductId" style="display:none;">
+            <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <div class="loaderlogin"></div>
+        </div>
+        <div class="table-responsive modal-popup-inner" id="printbookingcontent-@activityBookingItem.ActivityDetail.ProductId" style="display:none"></div>
+    </div>
+
+    <div id="ti-GetCancellationCharge-@activityBookingItem.ActivityDetail.ProductId" class="ti-box modal-popup" style="display:none;">
+        <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+        </button>
+        <div id="GetCancellationChargeloader-@activityBookingItem.ActivityDetail.ProductId" style="display:none;">
+            <div class="loaderlogin"></div>
+        </div>
+        <div class="modal-popup-inner" id="GetCancellationChargecontent-@activityBookingItem.ActivityDetail.ProductId" style="display:none"></div>
+    </div>
+    <div id="query-dialog" class="ti-box modal-popup query-dialog" style="display:none;">
+        <div class="loaderlogin"></div>
+    </div>
+                }

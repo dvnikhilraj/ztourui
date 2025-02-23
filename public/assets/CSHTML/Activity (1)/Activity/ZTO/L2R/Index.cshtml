@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/L2R/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivitySearch.js")"></script>
+
+<section id="content" class="slideshow-bg   common-banner search-back-img-activity">
+    <div class="search-back container">
+        <div id="main">
+            <section class="search-sec">
+      
+                    <div class="row">
+                        <div class="col-md-12">
+                            @*<h1 class="page-title hidden-xs"><span>@LanguageResources.Resources.FlywithusinComfort</span></h1>
+                                <h2 class="page-description col-md-8 no-float no-padding hidden-xs"><span>@LanguageResources.Resources.Werebringingyou</span></h2>*@
+                            <div class="search-box-wrapper style2">
+                                <div class="search-box">
+                                    <ul class="search-tabs nav nav-pills  clearfix ">
+                                        <li class="active">
+                                            <a href="#activity-tab" data-toggle="tab">
+                                                <div class="tab-back-transparent"></div><i class="fa fa-umbrella"></i>&nbsp;<span>@LanguageResources.Resources.Activities</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    @*<div class="visible-mobile">
+                                            <ul id="mobile-search-tabs" class="search-tabs clearfix">
+                                                <li class="active"><a href=""><i class="fa fa-bed" aria-hidden="true"></i><span class="hidden-xs"> @LanguageResources.Resources.HOTELS_Upper</span></a></li>
+                                                <li><a href="#flights-tab"><i class="soap-icon-plane-right takeoff-effect"></i><span class="hidden-xs"> @LanguageResources.Resources.FLIGHTS_Upper</span></a></li>
+                                                 <li><a href="#activity-tab"><i class="soap-icon-beach"></i><span class="hidden-xs"> ACTIVITY</span></a></li>
+                                                    <li><a href="#cars-tab">CARS</a></li>
+
+                                            </ul>
+                                        </div>*@
+                                    <div class="search-tab-content">
+                                        <div class="tab-pane fade active in" id="hotel-tab" ng-controller="ActivitySearch" ng-cloak>
+                                            @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityH")
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+              
+            </section>
+        </div>
+    </div>
+</section>

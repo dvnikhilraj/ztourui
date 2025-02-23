@@ -1,0 +1,62 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<style>
+    th {
+        border: none !important;
+    }
+</style>
+
+<div class="modal-header">
+    <button type="button" class="close-btn1 close1" style="position: absolute; right: 24px!important; top: 10px;" data-dismiss="modal" ng-click="canxcancel()">
+        <span aria-hidden="true" style="font-size:24px">&times;</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">Cancellation Policy</h4>
+</div>
+<div id="Div1" ng-show="canxWaiting" style="padding-bottom:50px">
+
+    <div class="pageloader">
+        <div class="loader"></div>
+        <div class="loader-section left"></div>
+        <div class="loader-section right"></div>
+    </div>
+</div>
+<div class="row  mrgn_auto mrgn-bottom10" ng-show="canxshow">
+    <div class="">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ta ble-res ponsive">
+                    <table class="table table-bordered" style="width:95%; margin-left:16px">
+                        <thead>
+                            <tr class="highlight ">
+                                <th>Cancellation Charges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="policy in Actpolicy">
+                                <td>
+                                    If you cancel booking between {{formatDate(policy.DateFrom) | date :'dd-MMM-yyyy'}}
+                                    to {{formatDate(policy.DateTo) | date :'dd-MMM-yyyy'}} then Cancellation Charges will be {{policy.GrossCurrency}} {{policy.GrossPrice}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        Note:- In case of multiple cancellation policy with same date
+                                        range if client cancel boking then highest price will be charged.<br />
+                                        * Date and time is calculated based on the locel time of destination.
+                                    </p>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

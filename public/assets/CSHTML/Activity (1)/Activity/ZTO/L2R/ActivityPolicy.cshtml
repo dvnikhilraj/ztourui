@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<style>
+    th {
+        border: none !important;
+    }
+</style>
+
+<div class="modal-header">
+    <button type="button" class="close-btn1 close1" style="position: absolute; right: 24px!important; top: 10px;" data-dismiss="modal" ng-click="canxcancel()">
+        <span aria-hidden="true" style="font-size:24px">&times;</span><span class="sr-only">Close</span>
+    </button>
+    <h4 class="modal-title">@LanguageResources.Resources.CancellationPolicy</h4>
+</div>
+<div id="Div1" ng-show="canxWaiting" style="padding-bottom:50px">
+
+    <div class="pageloader">
+        <div class="loader"></div>
+        <div class="loader-section left"></div>
+        <div class="loader-section right"></div>
+    </div>
+</div>
+<div class="row  mrgn_auto mrgn-bottom10" ng-show="canxshow">
+    <div class="">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ta ble-res ponsive">
+                    <table class="table table-bordered" style="width:95%; margin-left:16px">
+                        <thead>
+                            <tr class="highlight ">
+                                <th>@LanguageResources.Resources.CancellationCharges</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="policy in Actpolicy">
+                                <td>
+                                   @LanguageResources.Resources.Ifyoucancelbookingbetween {{formatDate(policy.DateFrom) | date :'dd-MMM-yyyy'}}
+                                    to {{formatDate(policy.DateTo) | date :'dd-MMM-yyyy'}} @LanguageResources.Resources.thenCancellationChargeswillbe {{policy.GrossCurrency}} {{policy.GrossPrice}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>
+                                        @LanguageResources.Resources._Note @LanguageResources.Resources.notes
+                                        <br />
+                                        <small class="uppercase"><span class="skin-co lor">@LanguageResources.Resources.Dateandtimeiscalculated</span></small>
+
+                                    </p>
+                                    <BR />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
