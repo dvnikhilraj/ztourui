@@ -1,0 +1,238 @@
+﻿@foreach (var activityBookingItem in Model.ResponseBody.ActivityBooking)
+{
+    <h4>Activity Details</h4>
+    <div id="flight-details">
+        <div class="intro table-wrapper full-width hidden-table-sm hidden-xs">
+            <div class="col-md-12 table-cell">
+                <div class="detailed-features booking-details">
+                    <div class="table-wrapper flights">
+                        <div class="table-row">
+                            <div class="table-cell">
+                                @if (activityBookingItem.ActivityDetail.ImageUrl != null && activityBookingItem.ActivityDetail.ImageUrl != "")
+                                {
+                                    <img alt="" src="@activityBookingItem.ActivityDetail.ImageUrl" height="75" width="100">
+                                }
+                                else
+                                {
+                                    <img alt="" src="@Url.Content("~/Images/TI/not_avil.jpg")" height="75"  width="100">
+                                }
+
+                            </div>
+                            <div class="table-cell">
+                                <label>@activityBookingItem.ActivityDetail.ActivityName</label><br />
+                                <span>Address: @activityBookingItem.ActivityDetail.Address</span><br />
+                                <span>@activityBookingItem.ActivityDetail.City @activityBookingItem.ActivityDetail.Country</span><br />
+                                <span style="font-weight:bold"><i class="@(activityBookingItem.BookingStatus == "HK" || activityBookingItem.BookingStatus.ToUpper()=="CONFIRMED" ? "soap-icon-recommend" : "soap-icon-bad") yellow-color" style="font-size: 22px;vertical-align: sub !important;"></i> &nbsp;@CommonComponents.CommonMethod.FullStatusName(activityBookingItem.BookingStatus)</span>
+                                @*<span>Status: @activityBookingItem.BookingStatus</span><br />*@
+                            </div>
+                            <div class="table-cell">
+                                <label>Pax</label><br />
+                                <span>Adult @activityBookingItem.ActivityDetail.Adult</span>
+                                <span>Child @activityBookingItem.ActivityDetail.Child</span>
+                            </div>
+                            <div class="table-row">
+                                <label>Lead Pax Name</label><br />
+                                <span>@activityBookingItem.ActivityDetail.LeadPaxName</span><br />
+                                <label>Lead Pax Tel No</label><br />
+                                <span>@activityBookingItem.ActivityDetail.LeadPaxContactNo</span>
+                            </div>
+                            <div class="table-cell timing-detail">
+                                <div class="timing">
+                                    <div class="check-in">
+                                        <label>Tour Date</label>
+                                        <span>@activityBookingItem.ActivityDetail.TourDate</span>
+                                    </div>
+                                    @*<div class="duration text-center">
+                                            <i class="soap-icon-clock"></i>
+                                            <span>Night @activityBookingItem.ActivityDetail.TotalNight</span>
+                                        </div>*@
+                                    @*<div class="check-out">
+                                            <label>Check Out</label>
+                                            <span>@activityBookingItem.ActivityDetail.TourDate</span>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="table-wrapper flights">
+                        <div class="table-row">
+                            <div class="table-cell">
+                                <label>Tour Name</label><br />
+                                <span>@activityBookingItem.ActivityDetail.TourName</span>
+                            </div>
+                            <div class="table-cell">
+                                <label>Tour Type</label><br />
+                                <span>@activityBookingItem.ActivityDetail.TourType</span>
+                            </div>
+                            <div class="table-cell">
+                                <label>Tour Duration</label><br />
+                                <span>@activityBookingItem.ActivityDetail.TourDuration</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><br />
+
+    if (activityBookingItem.PassengerDetail != null && activityBookingItem.PassengerDetail.Count != 0)
+    {
+        <h4>@LanguageResources.Resources.Passenger</h4>
+        <div id="flight-details">
+            <div class="intro table-wrapper full-width hidden-table-sm">
+                <div class="col-md-12 table-cell">
+                    <div class="detailed-features booking-details">
+                        <div class="table-wrapper flights">
+                            <div class="table-row">
+                                <div class="table-cell">
+                                    <label>Pax</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>Name</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>Ticket No</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>Baggage</label>
+                                </div>
+                            </div>
+                            @foreach (var passengerDetailtem in activityBookingItem.PassengerDetail)
+                            {
+                                <div class="table-row">
+                                    <div class="table-cell">
+                                        <span>@passengerDetailtem.PaxType</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <span>@passengerDetailtem.PaxName</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <span>@passengerDetailtem.TicketNo</span>
+                                    </div>
+                                    <div class="table-cell">
+                                        <span>@(passengerDetailtem.Baggage != "" ? @passengerDetailtem.Baggage : "Baggage details not available")</span>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br />
+    }
+
+    if (activityBookingItem.PaymentDetail != null)
+    {
+        <h4>@LanguageResources.Resources.Payment</h4>
+        <div id="flight-details">
+            <div class="intro table-wrapper full-width hidden-table-sm">
+                <div class="col-md-12 table-cell">
+                    <div class="detailed-features booking-details">
+                        <div class="table-wrapper flights">
+                            <div class="table-row">
+                                @*<div class="table-cell">
+                                    <label>Total Price</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>Payment Mode</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>Payment Status</label>
+                                </div>*@
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.PaymentStatus</label>
+                                </div>
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.PaymentMode</label>
+                                </div>
+
+                                @if (activityBookingItem.PaymentDetail.CouponCode != "")
+                                {
+                                    <div class="table-cell">
+                                        <label>Promo Code</label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>Promo Discount</label>
+                                    </div>
+                                }
+
+                                <div class="table-cell">
+                                    <label>@LanguageResources.Resources.TotalPrice</label>
+                                </div>
+                            </div>
+
+                            <div class="table-row">
+                                @*<div class="table-cell">
+                                    <span>@activityBookingItem.PaymentDetail.TotalPrice</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span>@activityBookingItem.PaymentDetail.PaymentMode</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span>@activityBookingItem.PaymentDetail.PaymentStatus</span>
+                                </div>*@
+                                <div class="table-cell">
+                                    <span>@activityBookingItem.PaymentDetail.PaymentStatus</span>
+                                </div>
+                                <div class="table-cell">
+                                    <span>@activityBookingItem.PaymentDetail.PaymentMode</span>
+                                </div>
+                                @if (activityBookingItem.PaymentDetail.CouponCode != "")
+                                {
+                                    <div class="table-cell">
+                                        <label>@activityBookingItem.PaymentDetail.CouponCode</label>
+                                    </div>
+                                    <div class="table-cell">
+                                        <label>@activityBookingItem.PaymentDetail.DiscountAmt</label>
+                                    </div>
+                                }
+                                <div class="table-cell">
+                                    <span>@activityBookingItem.PaymentDetail.TotalPrice</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><br />
+    }
+
+    <div class="row"  style="margin-top:15px;">
+        @*<div class="col-sm-2 col-lg-4 col-md-4"></div>*@
+        @if (activityBookingItem.BookingStatus == "HK" || activityBookingItem.BookingStatus == "CONFIRMED")
+        {
+            <div class="col-sm-2 col-lg-4 col-md-4 mrgn-top10-xs"></div>
+            <div class="col-sm-2 col-md-2 mrgn-top10-xs">
+                <a href="#ti-GetCancellationCharge-@activityBookingItem.ActivityDetail.ProductId" class="button btn-small sky-blue1 soap-popupbox" onclick="GetCancellationCharge('@Model.ResponseBody.BookingDetail.ClientId', '@Model.ResponseBody.BookingDetail.ReservationRef', '@activityBookingItem.ActivityDetail.ProductId', 'SSG')">@LanguageResources.Resources.CancelBooking</a>
+            </div>
+            <div class="col-sm-2 col-md-2 mrgn-top10-xs">
+                <a href="#ti-printbookingdocument-@activityBookingItem.ActivityDetail.ProductId" class="button btn-small sky-blue1 soap-popupbox" onclick="PrintBookingDocument('@Model.ResponseBody.BookingDetail.ReservationRef','SSG', '@activityBookingItem.ActivityDetail.ProductId', '@Model.ResponseBody.BookingDetail.ClientId')">@LanguageResources.Resources.PrintVoucher</a>
+            </div>
+            <div class="col-sm-2 col-md-2 mrgn-top10-xs">
+                <a href="#ti-sendbookingdocument-@activityBookingItem.ActivityDetail.ProductId" class="button btn-small sky-blue1 soap-popupbox">@LanguageResources.Resources.EmailVoucher</a>
+            </div>
+        }
+        <div class="col-sm-2 col-md-2 mrgn-top10-xs">
+            <a href="@Url.Content("~/General/MyBookings")" class="button btn-small sky-blue1">@LanguageResources.Resources.Back</a>
+        </div>
+    </div>
+
+    <div id="ti-sendbookingdocument-@activityBookingItem.ActivityDetail.ProductId" class="ti-login-box ti-box" style="width:100%;">
+        @{Html.RenderAction("SendBookingDocument", "General", new { refno = Model.ResponseBody.BookingDetail.ReservationRef, serviceType = "SSG", productId = activityBookingItem.ActivityDetail.ProductId, clientId = Model.ResponseBody.BookingDetail.ClientId });}
+    </div>
+    <div id="ti-printbookingdocument-@activityBookingItem.ActivityDetail.ProductId" class="ti-login-box ti-box" style="width:100%">
+        <div id="printbookingloader-@activityBookingItem.ActivityDetail.ProductId" style="display:none;">
+            <div class="loaderlogin"></div>
+        </div>
+        <div id="printbookingcontent-@activityBookingItem.ActivityDetail.ProductId" style="display:none"></div>
+    </div>
+
+    <div id="ti-GetCancellationCharge-@activityBookingItem.ActivityDetail.ProductId" class="ti-login-box ti-box" style="width:100%">
+        <div id="GetCancellationChargeloader-@activityBookingItem.ActivityDetail.ProductId" style="display:none;">
+            <div class="loaderlogin"></div>
+        </div>
+        <div id="GetCancellationChargecontent-@activityBookingItem.ActivityDetail.ProductId" style="display:none"></div>
+    </div>
+
+
+            }

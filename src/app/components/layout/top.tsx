@@ -1,13 +1,12 @@
 "use client";
-
+import { useTranslation } from 'react-i18next';
 import * as React from "react";
-// import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import Image from "next/image";
 import { paths } from "@/paths";
 import { SignIn } from "./signIn";
 import { Register } from "./Register";
-// import { useAppSelector, useAppDispatch } from '@/store';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface TopProps {
   companySettings: {
@@ -27,41 +26,35 @@ interface TopProps {
 
 export function Top({
   companySettings,
-  languageResources,
   userDetails,
-}: //   selectedCurrency
-TopProps): React.JSX.Element {
-  //   const router = useRouter();
-  //   const dispatch = useAppDispatch();
+}: TopProps): React.JSX.Element {
+
+  const { t } = useTranslation();
   const [isSignInOpen, setIsSignInOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [currentCurrency, setCurrentCurrency] = React.useState("EUR");
-  const [selectedLanguage, setSelectedLanguage] = React.useState("English");
   const [isCurrencyHovered, setIsCurrencyHovered] = React.useState(false);
   const [isLanguageHovered, setIsLanguageHovered] = React.useState(false);
   const [isAccountHovered, setIsAccountHovered] = React.useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = React.useState(false);
-  //   const authState = useAppSelector((state) => state.auth);
 
-  //   const handleLanguageChange = React.useCallback((langCode: string, langName: string) => {
-  //     router.push(`?lang=${langCode}`);
-  //   }, [router]);
+  const { currentLanguage, handleLanguageChange } = useLanguage() as { currentLanguage: { code: string, name: string } | undefined, handleLanguageChange: (code: string, name: string) => Promise<void> };
 
   const handleCurrencyChange = (fromCurrency: string, toCurrency: string) => {
+    
     setCurrentCurrency(toCurrency);
   };
 
-  const handleLanguageChange = (langCode: string, langName: string) => {
-    setSelectedLanguage(langName);
+  const onLanguageChange = (code: string, name: string) => {
+    console.log('code', code, 'name', name);
+    handleLanguageChange(code, name);
   };
+
 
   return (
     <>
       <SignIn isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
-      <Register
-        isOpen={isRegisterOpen}
-        onClose={() => setIsRegisterOpen(false)}
-      />
+      <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
 
       <div className="container">
         <div className="navbar-header">
@@ -114,7 +107,7 @@ TopProps): React.JSX.Element {
             </li>
 
             <li>
-              <Link href={`/enquiry?lang=${paths.enquiry}`}>
+              <Link href="/enquiry">
                 <span>
                   <svg
                     className="svg-inline--fa fa-file-alt fa-w-12"
@@ -133,7 +126,7 @@ TopProps): React.JSX.Element {
                     ></path>
                   </svg>{" "}
                 </span>
-                <span className="hidden-xs">{languageResources.GetaQuote}</span>
+                <span className="hidden-xs">{t('navigation.getQuote')}</span>
               </Link>
             </li>
 
@@ -256,7 +249,7 @@ TopProps): React.JSX.Element {
                   </svg>
                 </span>
                 <span id="cultureSelectedLink" className="hidden-xs">
-                  {selectedLanguage}
+                  {currentLanguage?.name}
                 </span>
                 <svg
                   className="svg-inline--fa fa-chevron-down fa-w-14 font-12"
@@ -286,9 +279,10 @@ TopProps): React.JSX.Element {
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
-                          handleLanguageChange("en", "English");
+                          onLanguageChange("en", "English");
                         }}
                         title="en"
+                        className={currentLanguage?.code === 'en' ? 'active' : ''}
                       >
                         English
                       </a>
@@ -298,9 +292,10 @@ TopProps): React.JSX.Element {
                         href="#"
                         onClick={(e) => {
                           e.preventDefault();
-                          handleLanguageChange("ro", "Romanian");
+                          onLanguageChange("ro", "Romanian");
                         }}
                         title="ro"
+                        className={currentLanguage?.code === 'ro' ? 'active' : ''}
                       >
                         Romanian
                       </a>
@@ -323,7 +318,7 @@ TopProps): React.JSX.Element {
                     <i className="far fa-user" style={{ fontSize: "16px" }}></i>
                   </span>
                   <span className="hidden-xs">
-                    {languageResources.MyAccount}
+                    {t('navigation.myAccount')}
                   </span>
                   <i className="fa fa-chevron-down font-12"></i>
                 </a>
@@ -347,7 +342,7 @@ TopProps): React.JSX.Element {
                     <i className="far fa-user" style={{ fontSize: "16px" }}></i>
                   </span>
                   <span className="hidden-xs">
-                    {languageResources.MyAccount}
+                    {t('navigation.myAccount')}
                   </span>
                   <i className="fa fa-chevron-down font-12"></i>
                 </a>
@@ -365,7 +360,7 @@ TopProps): React.JSX.Element {
                         setIsSignInOpen(true);
                       }}
                     >
-                      {languageResources.SIGNIN}
+                      {t('navigation.signIn')}
                     </a>
                   </li>
                   <li>
@@ -377,7 +372,7 @@ TopProps): React.JSX.Element {
                       href="#ti-signup"
                       className="soap-popupbox"
                     >
-                      {languageResources.CreateanAccount}
+                      {t('navigation.createAccount')}
                     </a>
                   </li>
                 </ul>
@@ -411,47 +406,47 @@ TopProps): React.JSX.Element {
                 target="_blank"
                 style={{ color: "white" }}
               >
-                Descopera Destinatiile Noastre
+                {t('menu.discoverDestinations')}
               </Link>
             </span>
 
             <ul className="menu">
               <li className="menu-item-has-children visible">
                 <Link href="/Package">
-                  <span>PACHETE DINAMICE</span>
+                  <span>{t('menu.dynamicPackages')}</span>
                 </Link>
               </li>
 
               <li className="menu-item-has-children visible">
                 <a href="https://charter.ztour-travel.ro" target="_blank">
-                  Charter
+                  {t('menu.charter')}
                 </a>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Flight">Zboruri</Link>
+                <Link href="/Flight">{t('menu.flights')}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Hotel">Hoteluri</Link>
+                <Link href="/Hotel">{t('menu.hotels')}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
                 <a href="https://charter.ztour-travel.ro/tours" target="_blank">
-                  Circuite
+                  {t('menu.tours')}
                 </a>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Transfer">Transferuri</Link>
+                <Link href="/Transfer">{t('menu.transfers')}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/FlightHotel">Zboruri + Hoteluri</Link>
+                <Link href="/FlightHotel">{t('menu.flightsHotels')}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Insurance">Asigurare</Link>
+                <Link href="/Insurance">{t('menu.insurance')}</Link>
               </li>
             </ul>
           </nav>

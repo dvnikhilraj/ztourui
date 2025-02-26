@@ -1,0 +1,90 @@
+﻿@*--category Filter Start--*@
+<div ng-show="!showWaiting" class="filter-wrapper">
+    <div class="panel style1 arrow-right">
+        <h4 class="panel-title panel-title-modify filter-heading" style="">
+            <a href="javascript:void(0)" class="collapsed cursor-default pull-left color-black"><i class="fas fa-filter"></i> @LanguageResources.Resources.Filter </a>
+            <a ng-click="ClearAllFilters()" ng-if="clearAllNew || ByActivityname != '' " class="collapsed cursor-pointer text-right font-size-13 font-normal color-black" style="padding-right:10px;" href="javascript:void(0)"><i class="fas fa-sync-alt"></i>&nbsp; @LanguageResources.Resources.Clearall</a>
+        </h4>
+        <div id="transfer-filter">
+            <div class="panel-group margin-bottom-0" @*id="accordion"*@>
+                <div class="panel style1 arrow-right">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#name-filter" class="clsFilters">@LanguageResources.Resources.name</a>
+                    </h4>
+                    <div id="name-filter" class="panel-collapse collapse in">
+                        <div class="panel-content">
+                            <span class="text-input-wrapper">
+                                <input type="text" id="txtactivityName" class="input-text full-width" placeholder="@LanguageResources.Resources.Enteractivityname" ng-model="ByActivityname" />
+                                <span ng-if="ByActivityname != ''"><a id="byActname" ng-click="ClearActivityName()">&times;</a></span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                @*End Activity Name Filter*@
+
+                @*--Price Slider Start--*@
+                <div class="panel style1 arrow-right">
+                    <h4 class="panel-title pricerange">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#price-filter" class="clsFilters">@LanguageResources.Resources.Price <span style="font-size:11px;">(in <span style="font-weight:bold">{{GrossCurrency}}</span>)</span></a>
+                    </h4>
+                    <div id="price-filter" class="panel-collapse col lapse in">
+                        <div class="panel-content">
+                            <div class="check_div_1 hotel-price-slider">
+                                <rzslider rz-slider-model="minRangeSlider.minValue" rz-slider-high="minRangeSlider.maxValue" rz-slider-options="{floor: minValue,noSwitching:true}" style="display: block"></rzslider>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*-- Price Slider End--*@
+
+                @*--category Filter Start--*@
+                <div class="panel style1 arrow-right" style="display:none">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#location-filter" class="clsFilters">@LanguageResources.Resources.Category</a>
+                    </h4>
+                    <div id="location-filter" class="panel-col lapse coll apse in">
+                        <div class="panel-content">
+                            <a href="javascript:void(0)" id="check_div_click_2" ng-click="Categoryvalueclude('Remove')" style="display:none" class="button btn-mini more">@LanguageResources.Resources.SHOWALL</a>
+                            <ul class="check-square filters-option" ng-repeat="activity in Activities | groupBy:'Category' | orderBy:Category:sortRating" ng-show="activity !=''">
+                                <li>
+                                    <input type="checkbox" name="categoryFilter" ng-model="airlineItem.bchecked" class="customCheck" ng-click="Categoryvalueclude([activity][0])" />
+                                    <a>{{activity}}<small>({{noocategory([activity][0])}})</small></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                @*--category Filter End--*@
+
+                <div class="panel style1 arrow-right">
+                 
+                    <h4 class="panel-title"    ng-if="(Activities | groupBy:'Category' | orderBy:Category:sortRating) != ''">
+                        <a data-toggle="collapse" data-parent="#accordion" href="#accomodation-type-filter" class="clsFilters">@LanguageResources.Resources.Category</a>
+                       
+                    </h4>
+                    <div id="accomodation-type-filter" class="panel-coll apse collapse in" ng-if="(Activities | groupBy:'Category' | orderBy:Category:sortRating).length > 1">
+                        <div class="panel-content details">
+                            <div class="more-container">
+                                @*<a href="javascript:void(0)" id="check_div_click_2" ng-click="Categoryvalueclude('Remove')"  class="button btn-mini more">SHOW ALL</a>*@
+                                <a href="javascript:void(0)" id="check_div_click_2" ng-click="Categoryvalueclude('Remove')" class="button btn-mini more button">@LanguageResources.Resources.SHOWALL</a>
+                            </div>
+                            <div class="checkbox-filters">
+                                <div class="b tn-group" data-toggle="buttons" ng-repeat="activity in Activities | groupBy:'Category' | orderBy:Category:sortRating" ng-show="activity !=''">
+                                    <label class="btn btn-checkbox Categoryfilter active" id="catlbl{{$index}}" ng-click="Categoryvalueclude([activity][0], true, false, $index)">
+                                        <input type="checkbox" name="Categoryfilter" class="customCheck" />
+                                        <span class="glyphicon glyphicon-ok"></span>
+                                    </label>
+                                    <span href="javascript:void(0)" class="text-uppercase" title="{{activity}}">
+                                        {{ activity | limitTo: 17 }}{{activity.length > 17 ? '..' : ''}}<small class="pull-right">({{noocategory([activity][0])}})</small>
+                                        <a href="javascript:void(0)" class="only" ng-click="Categoryvalueclude([activity][0], true, true, $index)">@LanguageResources.Resources.Only</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @*category end*@
+            </div>
+        </div>
+    </div>
+</div>

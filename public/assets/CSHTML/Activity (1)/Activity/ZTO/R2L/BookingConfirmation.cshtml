@@ -1,0 +1,228 @@
+﻿@model TIRequestResponse.BookingXML
+@{
+    ViewBag.Title = "Thankyou";
+    Layout = "~/Views/Shared/TI/L2R/_LayoutInner.cshtml";
+}
+
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivityDetails.js")"></script>
+
+<style>
+    #main {
+        padding-top: 0px;
+    }
+
+    section#content {
+        min-height: 400px;
+        padding-top: 40px;
+        text-align: left;
+        background: #f5f5f5;
+    }
+
+    .skin-color {
+        float: none;
+        line-height: 0;
+        padding-bottom: 0;
+    }
+
+    .listing-style1.hotel .feedback, .listing-style1.cruise .feedback {
+        margin: 21px 0;
+        border-top: 1px solid #f5f5f5;
+        padding-top: 5px;
+        border-bottom: 1px solid #f5f5f5;
+    }
+
+    .booking-details figure .travel-title {
+        margin-left: 94px;
+    }
+</style>
+<div ng-controller="ActivitySearch" ng-cloak>
+    <div class="page-title-container style2">
+        <div class="container">
+            <div class="page-title">
+                @*<h2 class="entry-title">Booking Confirmation</h2>*@
+            </div>
+            @*<ul class="breadcrumbs pull-right">
+                <li><a href="#">HOME</a></li>
+                <li class="active">Booking Confirmation</li>
+            </ul>*@
+            <ul class="breadcrumbs">
+                <li><a href="@Url.Content("~/")">@LanguageResources.Resources.Home</a></li>
+                <li class="active">@LanguageResources.Resources.BookingStatus</li>
+            </ul>
+        </div>
+    </div>
+    <section id="content" class="gray-area">
+        <div class="container confirmbooking">
+            <div class="row">
+                <div id="main" class="col-sm-8 col-md-9">
+                    <div class="booking-information travelo-box">
+                        <h2>@LanguageResources.Resources.BookingStatus</h2>
+                        <hr />
+                        <div class="booking-confirmation clearfix details">
+                            <i class="soap-icon-recommend icon circle hidden-xs"></i>
+                            <div class="message">
+                                @*<h4 class="main-message">
+                                    Thank You. Your booking <a href='@Url.Content("~/General/mybooking?refno=" + Model.ReservationRef)' style="color:#fdb714">
+                                        @Model.ReservationRef
+                                    </a> is @Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.
+                                </h4>*@
+
+                                <h4 class="main-message">
+                                    @LanguageResources.Resources.ThankYouYourBooking @LanguageResources.Resources.Is
+                                    <span class="@(@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "onrequest" ? "redcolor" : "greencolor")">
+                                        @Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus
+                                    </span>.
+                                </h4>
+                                @*@if (!Model.Client.Registered)
+                                {
+                                <p>A confirmation email has been sent to <u>@Model.Client.Email</u> with login details.</p>
+                                }
+                                else
+                                {
+                                <p>A confirmation email has been sent to <u>@Model.Client.Email</u>    </p>
+                                }*@
+                                @if (!Model.Client.Registered && Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "confirmed")
+                                {
+                                    <p>@LanguageResources.Resources.Anemailhasbeensentto <span style="color:#01b7f2; text-decoration:underline">@Model.Client.Email</span> @LanguageResources.Resources.withlogindetails</p>
+                                }
+                                else if (Model.Client.Registered && Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "confirmed")
+                                {
+                                    <p>@LanguageResources.Resources.Anemailhasbeensentto <span style="color:#01b7f2; text-decoration:underline">@Model.Client.Email</span>  </p>
+                                }
+                                else
+                                {
+                                    <p>@LanguageResources.Resources.Togetyourbookingconfirmedcontactuson @CommonComponents.CompanySettings.CompanySetting().ChannelSetting.ContactEmail @LanguageResources.Resources.OR @CommonComponents.CompanySettings.CompanySetting().ChannelSetting.TollFreeNo @LanguageResources.Resources.andshareyourbookingreferenceno <span class="main-message" style="text-decoration:underline">@Model.ReservationRef</span>  </p>
+                                }
+                            </div><br /><br /><br />
+                            @*<a href="#" class="print-button button btn-small">Print Voucher</a>*@
+                            @if (Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.BookingStatus.ToLower() == "confirmed")
+                            {
+                                <a href="#ti-printbookingdocument-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" class="print-button button btn-small soap-popupbox" onclick="PrintBookingDocument('@Model.ReservationRef','SSG', '@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId', '@Model.Client.ClientId')">@LanguageResources.Resources.PrintVoucher</a>
+                                <div id="ti-printbookingdocument-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" class="ti-login-box ti-box" style="width:100%">
+                                    <div id="printbookingloader-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" style="display:none;">
+                                        <div class="loaderlogin"></div>
+                                    </div>
+                                    <div id="printbookingcontent-@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.SightReservationId" style="display:none"></div>
+                                </div>
+                            }
+                        </div>
+                        <hr />
+                        <h2>@LanguageResources.Resources.BookingInfomation</h2>
+                        <dl class="term-description">
+                            <dt>@LanguageResources.Resources.Booking @LanguageResources.Resources.Referencenumber</dt>
+                            <dd>
+                                <a class="button btn-mini dark-blue1 refnum" href='@Url.Content("~/General/mybooking?refno=" + Model.ReservationRef)'>@Model.ReservationRef</a>
+                            </dd>
+                            <dt>@LanguageResources.Resources.First_name</dt>
+                            <dd>@Model.Client.FirstName</dd>
+                            <dt>@LanguageResources.Resources.Last_name</dt>
+                            <dd>@Model.Client.LastName</dd>
+                            <dt>@LanguageResources.Resources.E_mail_address</dt>
+                            <dd>@Model.Client.Email</dd>
+                            <dt>@LanguageResources.Resources.Mobile</dt>
+                            <dd>@Html.Raw(Model.Client.AreaCode + Model.Client.Mobile)</dd>
+                        </dl>
+                        <hr />
+                        <h2>@LanguageResources.Resources.Payment</h2>
+                        <dl class="term-description">
+                            <dt>@LanguageResources.Resources.PaymentRefNo</dt>
+                            <dd class="total-price-value">@Model.PaymentDetail.Payment[0].PGTxnCode</dd>
+                            <dt>@LanguageResources.Resources.PaymentMode</dt>
+                            <dd>@CommonComponents.CommonMethod.FullPaymentMode(Model.PaymentDetail.Payment[0].PayMode)</dd>
+                            <dt>@LanguageResources.Resources.TotalPrice</dt>
+                            <dd>@Model.PaymentDetail.Payment[0].PayCurrency @Model.PaymentDetail.Payment[0].PayAmount   </dd>
+                        </dl>
+                        @if (Model.CouponDetails.Coupon.CouponCode != null)
+                        {
+                            <h2>@LanguageResources.Resources.DiscountDetails</h2>
+                            <dl class="term-description">
+                                <dt>@LanguageResources.Resources.PromoCodeUsed:</dt>
+                                <dd class="total-price-value">@Model.CouponDetails.Coupon.CouponCode</dd>
+                                <dt>@LanguageResources.Resources.DiscountAmount</dt>
+                                <dd>{{GrossCurrency}} {{@Model.CouponDetails.Coupon.DiscountAmount * GrossROE | number:2}}   </dd>
+                            </dl>
+                        }
+                        @*<p class="red-color">Payment is made by @CommonComponents.CommonMethod.FullPaymentMode(Model.PaymentDetail.Payment[0].PayMode).</p>*@
+                        <p class="red-color">@LanguageResources.Resources.Paymentismadeby @CommonComponents.CommonMethod.FullPaymentMode(Model.PaymentDetail.Payment[0].PayMode).</p>
+                    </div>
+                </div>
+                <div class="sidebar col-sm-4 col-md-3 hidden-xs">
+                    <div class="booking-details travelo-box" style="margin-bottom: 12px;">
+                        <h3>Activity Details</h3><hr />
+                        <article class="image-box hotel listing-style1">
+                            <figure class="clearfix">
+                                @if (Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Front_Image != null && Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Front_Image != "")
+                                {
+                                    <img alt="" src="@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Front_Image" style="height:110px !important;width:100% !important;">
+                                }
+                                else
+                                {
+                                    <img alt="" src="@Url.Content("~/Images/TI/not_avil.jpg")" style="height:110px !important;width:100% !important;">
+                                }
+                                @*<div class="travel-title">
+                    <h5 class="box-title">@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Name</h5>
+                    <br />
+                </div>*@
+                            </figure>
+                            <div class="details">
+                                <div class="feedback" style="margin:1px 0">
+                                    <h5 class="box-title travel-title"><i class="soap-icon-beach yellow-color" aria-hidden="true"></i>&nbsp;@Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Name</h5>
+                                    @if (Model.Activityinfo.Activity_Booking_RQ[0].Master.CityName != "")
+                                    {<div class="hotel_address"><i class="soap-icon-hotel-2 yellow-color" aria-hidden="true" style="font-size:13px"></i>&nbsp;<span style="font-size: 10px;">@Model.Activityinfo.Activity_Booking_RQ[0].Master.CityName</span></div>}
+                                </div>
+                                <div class="constant-column-3 timing clearfix">
+                                    <div class="check-in">
+                                        <label>From Date</label>
+                                        <span>
+                                        @CommonComponents.CommonMethod.ChangedDateformat(Model.Activityinfo.Activity_Booking_RQ[0].Master.FromDate, "MM/dd/yyyy", "dd MMM yyyy")
+                                        @*@Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].Master.FromDate).ToString("dd MMM yyyy")*@
+                                        </span>
+                                    </div>
+                                    <div class="duration text-center">
+                                    <i class="soap-icon-clock"></i>
+                                    <span>
+                                        @Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Duration
+                                            @*@Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].Master.ToDate).Subtract(Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].Master.FromDate)).Days Night*@
+                                    
+                                    </span>
+                                    </div>
+                                    <div class="check-out">
+                                        <label>To Date</label>
+                                        <span>
+                                            @CommonComponents.CommonMethod.ChangedDateformat(Model.Activityinfo.Activity_Booking_RQ[0].Master.ToDate, "MM/dd/yyyy", "dd MMM yyyy")
+                                        @*@Convert.ToDateTime(Model.Activityinfo.Activity_Booking_RQ[0].Master.ToDate).ToString("dd MMM yyyy")*@
+                                        
+                                        </span>
+                                    </div>
+                                    
+                                </div>
+                                <div class="guest">
+                                    <small class="uppercase">
+                                        @Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.Tour.Name Tour for
+                                        <span class="skin-color">@Model.PassengerDetails.Passenger.Count() @(Model.PassengerDetails.Passenger.Count() > 1 ? @LanguageResources.Resources.People : @LanguageResources.Resources.Person)   </span>
+                                    </small>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="sidebar col-sm-4 col-md-3">
+                  
+                    <div class="booking-details travelo-box">
+                        <h3>@LanguageResources.Resources.GuestInfo</h3><hr>
+                      
+                          
+                            @foreach (var paxItem in Model.PassengerDetails.Passenger)
+                            {
+                                <dl class="other-details">
+                                    <dt class="feature">@LanguageResources.Resources.name (@paxItem.PaxType) :</dt>
+                                    <dd class="value">@paxItem.Title @paxItem.FirstName @paxItem.LastName</dd>
+                                </dl>
+                            }
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

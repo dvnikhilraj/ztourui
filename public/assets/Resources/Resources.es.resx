@@ -1,0 +1,420 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="aboutticontent" xml:space="preserve">
+    <value>TI Infotech es una compañía de tecnología de información líder y líder basada en la India con un enfoque enfocado en la prestación de servicios de calidad.</value>
+  </data>
+  <data name="AboutTIInfotech" xml:space="preserve">
+    <value>Acerca de TI Infotech</value>
+  </data>
+  <data name="AboutUs" xml:space="preserve">
+    <value>Sobre nosotros</value>
+  </data>
+  <data name="AccreditedBy" xml:space="preserve">
+    <value>Acreditado por</value>
+  </data>
+  <data name="Activities" xml:space="preserve">
+    <value>Ocupaciones</value>
+  </data>
+  <data name="AddCity" xml:space="preserve">
+    <value>Añadir ciudad</value>
+  </data>
+  <data name="AddRoom" xml:space="preserve">
+    <value>Añadir Habitación</value>
+  </data>
+  <data name="Adult12yrs" xml:space="preserve">
+    <value>Adulto 12+ años</value>
+  </data>
+  <data name="AdultChildRooms" xml:space="preserve">
+    <value>Adultos / niños y habitaciones</value>
+  </data>
+  <data name="ADULT_Upper" xml:space="preserve">
+    <value>ADULTO</value>
+  </data>
+  <data name="AgeChild1" xml:space="preserve">
+    <value>Edad Niño 1</value>
+  </data>
+  <data name="AgeChild2" xml:space="preserve">
+    <value>Edad Niño 2</value>
+  </data>
+  <data name="BOOKONLINEORCALLUS247" xml:space="preserve">
+    <value>RESERVA EN LÍNEA O LLAME A NOSOTROS 24/7</value>
+  </data>
+  <data name="Business" xml:space="preserve">
+    <value>Negocio</value>
+  </data>
+  <data name="Cars" xml:space="preserve">
+    <value>Carros</value>
+  </data>
+  <data name="CheckIn" xml:space="preserve">
+    <value>Registrarse</value>
+  </data>
+  <data name="CheckOut" xml:space="preserve">
+    <value>Revisa</value>
+  </data>
+  <data name="ChildUnder12yrs" xml:space="preserve">
+    <value>Niño menor de 12 años</value>
+  </data>
+  <data name="CHILD_Upper" xml:space="preserve">
+    <value>NIÑO</value>
+  </data>
+  <data name="Clicktoaddmoreroomsandoccupancy" xml:space="preserve">
+    <value>Haga clic para añadir más habitaciones y ocupación</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contáctenos</value>
+  </data>
+  <data name="CONTACT_US" xml:space="preserve">
+    <value>CONTÁCTENOS</value>
+  </data>
+  <data name="dribble" xml:space="preserve">
+    <value>regatear</value>
+  </data>
+  <data name="Economy" xml:space="preserve">
+    <value>Economía</value>
+  </data>
+  <data name="Emailidisrequired" xml:space="preserve">
+    <value>Identificación de correo electrónico es necesario!</value>
+  </data>
+  <data name="EnteraCityLocationorHotel" xml:space="preserve">
+    <value>Introduzca una Ciudad, Ubicación o Hotel</value>
+  </data>
+  <data name="EnterCityLocationorHotel" xml:space="preserve">
+    <value>Introduzca la ciudad, la ubicación o el hotel</value>
+  </data>
+  <data name="Enteryouremail" xml:space="preserve">
+    <value>Introduce tu correo electrónico...</value>
+  </data>
+  <data name="ExploreOurBestHotels" xml:space="preserve">
+    <value>Explora Nuestros Mejores Hoteles</value>
+  </data>
+  <data name="facebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="FAQ" xml:space="preserve">
+    <value>Preguntas más frecuentes</value>
+  </data>
+  <data name="FeaturedHotelDestinations" xml:space="preserve">
+    <value>Destinos destacados de hoteles</value>
+  </data>
+  <data name="Firstclass" xml:space="preserve">
+    <value>primero</value>
+  </data>
+  <data name="flickr" xml:space="preserve">
+    <value>Flickr</value>
+  </data>
+  <data name="Flights" xml:space="preserve">
+    <value>Vuelos</value>
+  </data>
+  <data name="FLIGHTS_Upper" xml:space="preserve">
+    <value>VUELOS</value>
+  </data>
+  <data name="FlywithusinComfort" xml:space="preserve">
+    <value>Vuela con nosotros en Comfort!</value>
+  </data>
+  <data name="GoingTocityspecificairport" xml:space="preserve">
+    <value>Going To (ciudad, aeropuerto específico)</value>
+  </data>
+  <data name="googleplus" xml:space="preserve">
+    <value>Google Mas</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Casa</value>
+  </data>
+  <data name="Hotels" xml:space="preserve">
+    <value>Hoteles</value>
+  </data>
+  <data name="HOTELS_Upper" xml:space="preserve">
+    <value>HOTELES</value>
+  </data>
+  <data name="INFANT_Upper" xml:space="preserve">
+    <value>INFANTIL</value>
+  </data>
+  <data name="LeavingFromcityspecificairport" xml:space="preserve">
+    <value>Saliendo de (ciudad, aeropuerto específico)</value>
+  </data>
+  <data name="linkedin" xml:space="preserve">
+    <value>Vinculado</value>
+  </data>
+  <data name="MailingList" xml:space="preserve">
+    <value>Lista de correo</value>
+  </data>
+  <data name="More" xml:space="preserve">
+    <value>Más</value>
+  </data>
+  <data name="MultiCity" xml:space="preserve">
+    <value>Multi ciudad</value>
+  </data>
+  <data name="NonStopFlights" xml:space="preserve">
+    <value>Vuelos a Non Stop</value>
+  </data>
+  <data name="OneWay" xml:space="preserve">
+    <value>Un camino</value>
+  </data>
+  <data name="Orginanddestinationcannotbesame" xml:space="preserve">
+    <value>Origen y destino no pueden ser iguales</value>
+  </data>
+  <data name="People" xml:space="preserve">
+    <value>Gente</value>
+  </data>
+  <data name="Person" xml:space="preserve">
+    <value>Persona</value>
+  </data>
+  <data name="Pleaseenterdestinationcity" xml:space="preserve">
+    <value>Introduzca la ciudad de destino</value>
+  </data>
+  <data name="Pleaseenterorigincity" xml:space="preserve">
+    <value>Introduzca la ciudad de origen</value>
+  </data>
+  <data name="PrivacyPolicy" xml:space="preserve">
+    <value>Política de privacidad</value>
+  </data>
+  <data name="QuickLinks" xml:space="preserve">
+    <value>enlaces rápidos</value>
+  </data>
+  <data name="REGISTER" xml:space="preserve">
+    <value>REGISTRO</value>
+  </data>
+  <data name="Removethisroom" xml:space="preserve">
+    <value>Quitar esta habitación</value>
+  </data>
+  <data name="Room" xml:space="preserve">
+    <value>Habitación</value>
+  </data>
+  <data name="Rooms" xml:space="preserve">
+    <value>Habitaciones</value>
+  </data>
+  <data name="RoundTrip" xml:space="preserve">
+    <value>Viaje ida y vuelta</value>
+  </data>
+  <data name="Saveupto40onActivities" xml:space="preserve">
+    <value>Ahorre hasta un 40% en actividades</value>
+  </data>
+  <data name="Saveupto40onCars" xml:space="preserve">
+    <value>Ahorre hasta un 40% en los coches</value>
+  </data>
+  <data name="Saveupto40onFlights" xml:space="preserve">
+    <value>Ahorre hasta un 40% en Vuelos</value>
+  </data>
+  <data name="Saveupto60onHotels" xml:space="preserve">
+    <value>Ahorre hasta un 60% en hoteles</value>
+  </data>
+  <data name="SEARCHNOW" xml:space="preserve">
+    <value>BUSCAR AHORA</value>
+  </data>
+  <data name="SEEALL" xml:space="preserve">
+    <value>VER TODO</value>
+  </data>
+  <data name="SIGNIN" xml:space="preserve">
+    <value>REGISTRARSE</value>
+  </data>
+  <data name="Signupforourmailing" xml:space="preserve">
+    <value>Regístrese en nuestra lista de correo para obtener las últimas actualizaciones y ofertas.</value>
+  </data>
+  <data name="TermsofServices" xml:space="preserve">
+    <value>Términos de servicios</value>
+  </data>
+  <data name="TollFreeNo" xml:space="preserve">
+    <value>Llamada gratuita No</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>Transferir</value>
+  </data>
+  <data name="Traveller" xml:space="preserve">
+    <value>Viajero</value>
+  </data>
+  <data name="Travellers" xml:space="preserve">
+    <value>Viajeros</value>
+  </data>
+  <data name="twitter" xml:space="preserve">
+    <value>gorjeo</value>
+  </data>
+  <data name="vimeo" xml:space="preserve">
+    <value>Vimeo</value>
+  </data>
+  <data name="Werebringingyou" xml:space="preserve">
+    <value>Te traemos una experiencia de vuelo moderna, cómoda y conectada.</value>
+  </data>
+  <data name="Werespectyourprivacy" xml:space="preserve">
+    <value>respetamos tu privacidad</value>
+  </data>
+  <data name="When" xml:space="preserve">
+    <value>Cuando</value>
+  </data>
+  <data name="Where" xml:space="preserve">
+    <value>Dónde</value>
+  </data>
+  <data name="Who" xml:space="preserve">
+    <value>Quien</value>
+  </data>
+  <data name="YourDestination" xml:space="preserve">
+    <value>Tu destino</value>
+  </data>
+  <data name="Yrs11" xml:space="preserve">
+    <value>2-11 años</value>
+  </data>
+  <data name="Yrs12" xml:space="preserve">
+    <value>12 años</value>
+  </data>
+  <data name="Yrs2" xml:space="preserve">
+    <value>Menos de 2 años</value>
+  </data>
+  <data name="AlreadyaTIInfotechmember" xml:space="preserve">
+    <value>¿Ya es miembro de TI Infotech?</value>
+  </data>
+  <data name="Bysigningup" xml:space="preserve">
+    <value>Al registrarse, usted acepta la</value>
+  </data>
+  <data name="Donthaveanaccount" xml:space="preserve">
+    <value>¿No tiene una cuenta?</value>
+  </data>
+  <data name="EmailId" xml:space="preserve">
+    <value>Email Id</value>
+  </data>
+  <data name="Forgotpassword" xml:space="preserve">
+    <value>Se te olvidó tu contraseña?</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>INICIAR SESIÓN</value>
+  </data>
+  <data name="MobileNumber" xml:space="preserve">
+    <value>Número de teléfono móvil</value>
+  </data>
+  <data name="Mobilenumberisrequired" xml:space="preserve">
+    <value>Se requiere número móvil!</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="Passwordisrequired" xml:space="preserve">
+    <value>Se requiere contraseña !</value>
+  </data>
+  <data name="Pleaseenteryourregisteredemailaddress" xml:space="preserve">
+    <value>Ingrese su dirección de correo electrónico registrada. Recibirá la contraseña en su buzón.</value>
+  </data>
+  <data name="SIGNUP" xml:space="preserve">
+    <value>REGÍSTRATE</value>
+  </data>
+  <data name="SUBMIT" xml:space="preserve">
+    <value>ENVIAR</value>
+  </data>
+  <data name="termsandconditions" xml:space="preserve">
+    <value>términos y Condiciones</value>
+  </data>
+</root>

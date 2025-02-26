@@ -1,0 +1,129 @@
+﻿<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivitySearch.js")"></script>
+
+<div class="row">
+    <div class="form-group col-sm-6 col-md-4">
+        <activityautocomplete options="CountryCity" place-holder="Enter a City or Location" on-select="onSelect" display-property="CityDisplayName" input-class="search_icon" clear-input="false" ng-model="ActivityCityName"></activityautocomplete>
+        <div ng-if="error.depError" class="alertMsg">{{error.depMsg}}</div>
+    </div>
+    <div class="form-group col-sm-6 col-md-4">        
+        <div class="ro w">
+            <div class="col-xs-6">               
+                    <div class="datepicker-wrap">
+                        <div class="datepickerTI"></div>
+                        <input type="text" ng-model="ActivityFromDate" activitydatepicker readonly autocomplete="off" date-Type="CHKIN" class="input-text full-width datetextbox" placeholder="Checkin Date" />
+                    </div>             
+            </div>
+            <div class="col-xs-6">                
+                    <div class="datepicker-wrap">
+                        <div class="datepickerTI"></div>
+                        <input type="text" ng-model="ActivityToDate" activitydatepicker readonly autocomplete="off" date-Type="CHKOUT" class="input-text full-width datetextbox" placeholder="Checkout Date" />
+                    </div>
+                </div>         
+        </div>
+    </div>
+    <div class="form-group col-md-4 col-xs-12">
+        <div class="col-xs-12 margin-top-15-xs">
+            <div class="drop-alter-activity drop-alter-activityM">
+
+                <a href="javascript:void(0)" class="paxpanellink"><i ng-class="Adultcount+Childcount== '1' ? 'soap-icon-man-3 yellow-color' : 'soap-icon-family yellow-color'" style="font-size:15px;vertical-align:baseline !important;"></i>&nbsp;<SPAN>{{Adultcount}} </SPAN><span ng-if="Adultcount>'1'">@LanguageResources.Resources.Adults</span><span ng-if="Adultcount<'2'">@LanguageResources.Resources.Adult</span>, <span>{{Childcount}}</span> <span ng-if="Childcount<'2'">@LanguageResources.Resources.Child</span><span ng-if="Childcount>'1'">@LanguageResources.Resources.Children</span><strong class="caret"></strong></a>
+                @*<a href="javascript:void(0)" class="paxpanellink">{{Adultcount}} Adult, {{Childcount}} Child <strong class="caret"></strong></a>*@
+                <div class="pax-count-hotel paxpanel activitypaxpannel">
+                    <div class="row" style="padding:14px;">
+                        <div class="col-sm-6">
+                            {{Adultcount > 1 ? '@LanguageResources.Resources.Adults12yrs' : '@LanguageResources.Resources.Adult12yrs'}}
+                            <div range-spinner
+                                 range-min="1"
+                                 range-step="1"
+                                 range-max="4"
+                                 range-default-value="Adultcount"
+                                 range-decimal-precision="1"
+                                 range-model="Adultcount"
+                                 accept-decimal=false
+                                 name-of-field="adult0"
+                                 id-of-field="adult0"
+                                 spiner-of-index="0"
+                                 spinner-of-type="ADT"
+                                 spinner-of-subindex="">
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            {{Childcount > 1 ? '@LanguageResources.Resources.ChildrenUnder12yrs' : '@LanguageResources.Resources.ChildUnder12yrs'}}
+                            <div range-spinner
+                                 range-min="0"
+                                 range-step="1"
+                                 range-max="3"
+                                 range-default-value="Childcount"
+                                 range-decimal-precision="1"
+                                 range-model="Childcount"
+                                 accept-decimal=false
+                                 name-of-field="child"
+                                 id-of-field="child"
+                                 spiner-of-index="0"
+                                 spinner-of-type="CHD"
+                                 spinner-of-subindex="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row" style="padding: 0px 15px 8px 15px;" ng-show="Childcount >= 1">
+                        <div class="col-sm-6">
+                            <span class="sub" style="font-size: 9px;margin:0">  @LanguageResources.Resources.AgeChild1</span>
+                            <div range-spinner
+                                 range-min="2"
+                                 range-step="1"
+                                 range-max="12"
+                                 range-default-value="Child1Age"
+                                 range-decimal-precision="1"
+                                 range-model="Child1Age"
+                                 accept-decimal=false
+                                 name-of-field="Child1Age">
+                            </div>
+                        </div>
+                        <div class="col-sm-6" ng-show="Childcount>=2">
+                            <span class="sub" style="font-size: 9px;margin:0">  @LanguageResources.Resources.AgeChild2</span>
+                            <div range-spinner
+                                 range-min="2"
+                                 range-step="1"
+                                 range-max="12"
+                                 range-default-value="Child2Age"
+                                 range-decimal-precision="1"
+                                 range-model="Child2Age"
+                                 accept-decimal=false
+                                 name-of-field="Child2Age">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row" style="padding: 0px 15px 8px 15px;" ng-show="Childcount >= 1">
+                        <div class="col-sm-6" ng-show="Childcount==3">
+                            <span class="sub" style="font-size: 9px;margin:0">  @LanguageResources.Resources.AgeChild3</span>
+                            <div range-spinner
+                                 range-min="2"
+                                 range-step="1"
+                                 range-max="12"
+                                 range-default-value="Child3Age"
+                                 range-decimal-precision="1"
+                                 range-model="Child3Age"
+                                 accept-decimal=false
+                                 name-of-field="Child3Age">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <div class="col-md-2">
+                <h4 class="title-inner">&nbsp;</h4>
+                <div class="form-group">
+                    <label style="text-transform: uppercase;font-weight: normal;font-size: 10px;">&nbsp;</label>
+                    <button class="full-width" ng-click="ActivityResult();">SEARCH NOW</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+

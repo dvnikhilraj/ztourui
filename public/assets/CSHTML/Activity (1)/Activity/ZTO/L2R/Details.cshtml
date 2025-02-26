@@ -1,0 +1,581 @@
+﻿
+@{
+    ViewBag.Title = "Tours";
+    Layout = "~/Views/Shared/" + CommonComponents.CompanySettings.CompanySetting().CompanyId + "/L2R/_LayoutInner.cshtml";
+}
+<script>
+    if (!!window.performance && window.performance.navigation.type === 2) {
+        window.location.reload();
+    }
+    window.onpageshow = function (event) {
+        if (event.persisted) {
+            window.location.reload();
+        }
+    };
+</script>
+<link rel="stylesheet" href="@Url.Content("~/Css/" + CommonComponents.CompanySettings.CompanySetting().CompanyId + "/Gallery/flexslider.css")" type="text/css" media="screen" />
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivityDetails.js")"></script>
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/Generic.js")"></script>
+<style>
+    
+
+  
+
+    hr {
+        margin-top: 5px !important;
+        margin-bottom: 5px !important;
+    }
+
+    .travelo-box {
+        margin-bottom: 0px !important;
+    }
+
+    .roombookbtn {
+        height: 50px;
+        line-height: 15px;
+        width: 239px;
+        border-radius: 3px;
+    }
+
+    .roomDetailHeader {
+        font-weight: bold;
+        font-size: 14px;
+    }
+
+    .price-section a {
+        color: #337ab7 !important;
+        text-transform: none !important;
+        font-size: 11px;
+    }
+
+    input[type=radio] {
+        position: absolute;
+        /*visibility: hidden;*/
+    }
+
+    .check {
+        display: block;
+        position: absolute;
+        border: 5px solid #AAAAAA;
+        border-radius: 100%;
+        height: 25px;
+        width: 25px;
+        top: -2px;
+        left: 4px;
+        z-index: 5;
+        transition: border .25s linear;
+        -webkit-transition: border .25s linear;
+    }
+
+    input[type=radio]:checked ~ .check {
+        border: 5px solid #0DFF92;
+    }
+
+        input[type=radio]:checked ~ .check::before {
+            background: #0DFF92;
+        }
+
+    .loadameneity {
+        text-align: center;
+    }
+
+        .loadameneity a {
+            padding: 5px;
+            border: 0px solid;
+            text-decoration: underline;
+        }
+
+    #hotel-amenities .icon-box.style1 > i {
+        display: block;
+        width: 27px;
+        float: left;
+        background: #fff;
+        line-height: 27px;
+        color: #838383;
+        font-size: 2em;
+        margin-right: 15px;
+    }
+
+    #hotel-availability .spinner {
+        margin: 20px 20px 0 497px;
+        width: 50px;
+        height: 23px;
+        text-align: left;
+        font-size: 10px;
+        float: left;
+    }
+
+    #hotel-availability .spinnerMainDiv {
+        height: 70px;
+    }
+
+    spinnerRoomDiv .spinner {
+        /*margin: 20px 20px 0 497px;*/
+        width: 50px;
+        height: 23px;
+        text-align: left;
+        font-size: 10px;
+        float: left;
+    }
+
+
+
+    .font11 {
+        font-size: 11px;
+    }
+
+    .affix {
+        top: 0px;
+        /*width: 100%;*/
+        z-index: 999;
+    }
+
+        .affix + .container-fluid {
+            padding-top: 0px;
+        }
+
+    .loader {
+        top: 34% !important;
+    }
+
+    #carousel .flex-viewport {
+        overflow: hidden !important;
+        position: relative !important;
+        margin: 0 auto !important;
+        width: 100% !important;
+        text-align: center !important;
+    }
+
+    .li-class {
+        margin-right: 5px;
+        float: none !important;
+        display: inline-block !important;
+        width: 100px !important;
+        float: none !important;
+        display: inline-block !important;
+        text-align: center !important;
+        margin: 0px auto !important;
+    }
+    .flexslider .flex-direction-nav a,
+    .flexslider .flex-direction-nav a {
+        display: block;
+        width: 28px;
+        top: 56%;
+    }
+
+    .flex-direction-nav .flex-next {
+        right: 0px !important;
+        background: #fff;
+        padding: 4px;
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+        opacity: 0.7 !important;
+    }
+
+    .flex-direction-nav .flex-prev {
+        left: 0px !important;
+        background: #fff;
+        padding: 4px;
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
+        opacity: 0.7 !important;
+    }
+
+    .flex-direction-nav .flex-next:hover {
+        opacity: 1 !important;
+    }
+
+    .flex-direction-nav .flex-prev:hover {
+        opacity: 1 !important;
+    }
+
+    .loading {
+        border-radius: 50%;
+        width: 17px;
+        height: 17px;
+        border: 0.15rem solid rgba(0, 0, 0, 0.2);
+        border-top-color: white;
+        -webkit-animation: spin 1s infinite linear;
+        animation: spin 1s infinite linear;
+        position: absolute;
+        right: 58px;
+        top: auto;
+        margin-top: -22px;
+    }
+
+    .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
+        vertical-align: inherit;
+        position: relative;
+    }
+</style>
+
+
+<style>
+    .border-bottom {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .padding-10 {
+        padding: 7px;
+    }
+
+    /*.button-select-room {
+        margin-top: 15px !important;
+        float: right;
+        width: 80px !important;
+        line-height: 25px !important;
+        height: 25px !important;
+        font-weight: bold !important;
+        font-size: 12px !important;
+    }*/
+
+
+
+    .font-13 {
+        font-size: 13px;
+    }
+
+    .padding-bottom-5 {
+        padding-bottom: 5px;
+    }
+
+    .room-price-bg {
+        padding: 10px !important;
+        background: #f0f0f0;
+        width: 100%;
+    }
+
+    .room-bold {
+        font-weight: bold;
+        color: #232323;
+    }
+     .loading {
+        border-radius: 50%;
+        width: 17px;
+        height: 17px;
+        border: 0.15rem solid rgba(0, 0, 0, 0.2);
+        border-top-color: white;
+        -webkit-animation: spin 1s infinite linear;
+        animation: spin 1s infinite linear;
+        position: absolute;
+        right: 58px;
+        top: auto;
+        margin-top: -22px;
+    }
+</style>
+
+
+
+<div id="ActivityMain" ng-controller="ActivityDetails" ng-cloak>
+    <section id="content" jstcache="0">
+        <div class="container" jstcache="0">
+            <div class="ro w" jstcache="0">
+                <div id="main1" class="col-m d-12 ro w roomp agepadding" jstcache="0">
+                    <div data-spy="affix" data-offset-top="197" class="top_modify_room affix-top" id="fixedTop">
+                        <div class="row" style="padding: 12px 0px 5px 10px;">
+                            <div class="col-sm-12 col-xs-12 pop" style="text-align:center">
+                                <span style="font-size:13px;font-weight:bold">
+                                    {{ActivitySearchRQ.SearchRequest.Master.DisplayCountryCityName}} &nbsp;&nbsp; |
+                                </span> &nbsp;&nbsp;<span class="ng-binding">
+                                    <label class="customDir ng-binding">
+                                        @*<i class="soap-icon-clock"></i>&nbsp;Duration:{{ActivityRS.Duration}} &nbsp;*@
+                                        <i class="soap-icon-calendar" style="font-size: 18px;vertical-align:baseline !important"></i>&nbsp;{{ActivitySearchRQ.SearchRequest.Master.FromDate | dayName | date:'EEE'}}, {{FromDate | date:'dd-MMM-yyyy'}}&nbsp;
+                                        <i class="soap-icon-right" style="vertical-align:baseline !important"></i>&nbsp;
+                                        <i class="soap-icon-calendar" style="font-size: 18px;vertical-align:baseline !important"></i>&nbsp;{{ActivitySearchRQ.SearchRequest.Master.ToDate | dayName | date:'EEE'}}, {{ToDate | date:'dd-MMM-yyyy'}}
+                                    </label> &nbsp;&nbsp; | &nbsp;&nbsp;<label>{{ActivitySearchRQ.SearchRequest.Adult > 1 ? ActivitySearchRQ.SearchRequest.Adult +'Adults' : ActivitySearchRQ.SearchRequest.Adult + '@LanguageResources.Resources.Adult'}}, {{ActivitySearchRQ.SearchRequest.Child.Age.length > 1 ? ActivitySearchRQ.SearchRequest.Child.Age.length +' @LanguageResources.Resources.Children' : ActivitySearchRQ.SearchRequest.Child.Age.length +' @LanguageResources.Resources.Child'}}</label>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="row hidden-xs" ng-if="ShowAllContent">
+                            <div class="col-sm-12 col-xs-12 pop" style="margin-bottom:7px" id="RoomMenu">
+                                <ul>
+                                    <li ng-if="noGallery"><a id="galleryid" href="" ng-click="gotoElement('hotelgellery')">@LanguageResources.Resources.Gallery</a> | </li>
+                                    <li><a id="tourlistid" href="" ng-click="gotoElement('TOURLIST')">@LanguageResources.Resources.Rates</a></li>
+                                    <li ng-repeat="dt in ActivityDetailRS.DetailResponse.Details.Descriptions.Description">
+                                        <span ng-if="dt.Type == 'Summary'">
+                                            | <a id="tourSummaryId" href="" ng-click="gotoElement('tourSummary')">@LanguageResources.Resources.Summary</a>
+                                        </span>
+                                        <span ng-if="dt.Type == 'Note'">
+                                            | <a id="tourNoteId" href="" ng-click="gotoElement('tourNotes')">@LanguageResources.Resources.Note</a>
+                                        </span>
+                                        <span ng-if="dt.Type == 'DeparturePoint'">
+                                            | <a id="tourDeparturePointId" href="" ng-click="gotoElement('tourDeparturePoint')">@LanguageResources.Resources.DeparturePoint</a>
+                                        </span>
+                                    </li>
+
+                                    @*<li ng-repeat="dt in ActivityDetailRS.DetailResponse.Details.Descriptions.Description"> | <a id="detailid{{$index}}" href="" ng-click="gotoElement(dt.Type)">{{dt.Type=="DeparturePoint"?'Departure Point':dt.Type}}</a></li>*@
+                                    @*<li ng-if="AmenetiesAvailable"> | <a id="amenetyId" href="" ng-click="gotoElement('hotel-amenities')">@LanguageResources.Resources.Amenities</a></li>*@
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div ng-show="ShowAllLoader">
+                        <div class="pageloader" style="height: 250px;background:#fff">
+                            <div class="loader"></div>
+                            <div class="loader-section left"></div>
+                            <div class="loader-section right"></div>
+                        </div>
+                    </div>
+                    <div ng-show="ShowAllContent">
+                        <div class="tab-container style1" id="hotel-main-content" jstcache="0">
+
+                            <div class="tab-content scroll_auto margin-top-5">
+                                <div class="row">
+                                    <div class="col-sm-6 col-xs-6 pop">
+                                        <h2 class="box-title travel-title padding-bottom-10 capitalize" style="padding-bottom:5px">
+                                            @*<i class="fa fa-bed hotel-color" aria-hidden="true"></i>*@
+                                            {{ActivityRS.Name}}
+                                        </h2>
+
+                                        <span ng-if="ActivityRS.Duration != ''">@LanguageResources.Resources.Duration:{{ActivityRS.Duration}}</span>
+                                    </div>
+
+                                    <div class="col-sm-4 col-xs-6 pop txt-right">
+                                        <span class="font11 text-right" style="clear:both; display:block">@LanguageResources.Resources.Pricestartingfrom </span>
+                                        <h2 class="box-title travel-title  room-price price">
+                                            <span class="price">
+                                                <small>{{GrossCurrency}}</small>
+                                                <span style="font-size: 18px; font-weight:bold; padding-bottom:2px;">{{ActivityRS.MinP * GrossROE | number: 2 }}</span>
+                                            </span>
+                                        </h2>
+                                        <div style="display:block; clear:both; text-align:right">
+                                            <span class="font11">@LanguageResources.Resources.InclusiveAllTaxes</span>
+                                            <span class="font11"></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-sm-2 col-xs-12 pop txt-right scrollToDiv" style="margin-top:9px">
+                                        <a href="" title="" class="button yellow full-width btn-small select-rooms form-group" ng-click="gotoElement('TOURLIST')">@LanguageResources.Resources.SelectTour</a>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div ng-show="noGallery" id="hotelgellery" class="tab-container scrollelement" style="margin-top: 9px !important;" jstcache="0">
+                            <ul class="tabs nav-tabs padspaceLR0">
+                                <li class="photoTab active"><a data-toggle="tab" href="#photos-tab">@LanguageResources.Resources.Gallery</a></li>
+                            </ul>
+                            <div class="tab-content overflow">
+                                <div class="tab-pane fade active in scrollING2 scrollelement" id="photos-tab" style="display:none">
+                                    <div id="slider" class="flexslider">
+                                        <ul ng-show="GalleryWaiting">
+                                            <li style="text-align: center;">{{GalleryImage}}</li>
+                                            <li ng-if="msgTrue" style="position:relative;top:28px;text-align:center">@LanguageResources.Resources.Gallerynotfound</li>
+                                        </ul>
+                                        <ul class="slides">
+                                            <li ng-repeat="image in ActivityDetailRS.DetailResponse.Details.Images.Image" style="width:841px;height:381px;background: #f5f5f5;">
+                                                <img ng-src="{{image.Text}}" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div id="carousel" class="flexslider hidden-xs">
+                                        <ul class="slides">
+                                            <li ng-repeat="image in ActivityDetailRS.DetailResponse.Details.Images.Image" style="width:100px !important">
+                                                <img ng-src="{{image.Text}}" style="height:70px;width:100px" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div id="hotelroom" class="tab-container listing-style3 activitytop" style="margin-top: 9px !important; float:left; width:100%;">
+                            <ul class="tabs nav-tabs padspaceLR0">
+                                <li class="active">
+                                    <a href="#TOURLIST" id="TOURLIST" data-toggle="tab" aria-expanded="false" style="cursor:default">@LanguageResources.Resources.Rates</a>
+                                </li>
+                            </ul>
+                            <div class="tab-content" >
+                                <div class="tab-pane fade active in scrollING2" id="TOURLIST">
+                                    @*/* -------------------------------- */*@
+                                    <br class="hidden-lg" />
+                                    <div class="row image-box style10 hidden-lg hidden-md hidden-sm" ng-repeat="tours in ActivityRS.Tours.Tour  track by $index" ng-init="outerIndex=$index">
+                                        <div class="col-sms-6 col-sm-6 col-md-3 hidden-sm hidden-md">
+                                            <div class="room-box-responsive">
+                                                <div class="border-bottom padding-10 room-bold"> {{tours.Name}}</div>
+                                                <div class="padding-10">
+                                                    <div class="padding-bottom-10 service-date-container">
+                                                        <i class="fa fa-check yellow-color font-13" aria-hidden="true"></i>&nbsp;
+                                                        <span ng-if="tours.Avl=='Y'" style="color: green;">@LanguageResources.Resources.Available</span>
+                                                        <span ng-if="tours.Avl!='Y'" style="color: red;">@LanguageResources.Resources.OnRequest</span>
+                                                        @*<span class="capitalize ng-binding">{{room.MealDesc}}</span>*@
+                                                        <div class="service-date">
+                                                            <select class="ful l-width" id="DDL{{outerIndex}}">
+                                                                <option ng-repeat="Dates in tours.DateList.Date" value="{{Dates.Text}}">{{formatDate(Dates.Text) | date :'dd-MMM-yyyy'}}</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="can-policy">
+                                                        <span class="capitalize ng-binding"><a ng-click="ActivityPolicy(outerIndex, tours)" href="#ti-policy" class="soap-popupbox">@LanguageResources.Resources.CancellationPolicy</a></span>
+                                                    </div>                                                      
+                                                    </div>
+                                                <div class="details room-price-bg"> 
+                                                    <div class="txt-center spinnerRoomDiv" id="PrebookWaitingmobile{{outerIndex}}" style="display:none">
+                                                        <div class="loading"></div>
+                                                    </div>
+                                                    @*<a href="#" class="button btn-mini">SEE ALL</a>*@
+                                                    <div class="service-price">
+                                                        <span class="alertMsg" style="width:auto">{{tours.PreBookReponse}}</span>
+                                                        <span class="price price-room" style="text-align:right"><small>{{GrossCurrency}}</small> {{(tours.GrossPrice)*(GrossROE) | number:2}}</span>
+                                                    </div>
+                                                    <div class="select-btn">
+                                                        <a href="javascript:void(0)" title="" class="button yellow full-width btn-small" ng-click="ActivityPreBook(outerIndex, tours)" id="btn{{outerIndex}}">@LanguageResources.Resources.Select</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    @*/*-----------------------------*/*@
+                                    <table class="table table-bordered hidden-xs">
+                                        <thead>
+                                            <tr class="gridHeader">
+                                                <th style="width:30%">@LanguageResources.Resources.TourName</th>
+                                                <th style="width:15%">@LanguageResources.Resources.TourDate</th>
+                                                <th style="width:15%">@LanguageResources.Resources.CancellationPolicy</th>
+                                                <th style="width:12%" class="ng-binding">@LanguageResources.Resources.Status</th>
+                                                <th style="width:19%" class="ng-binding">@LanguageResources.Resources.Price</th>
+                                                <th style="width:9%"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="tours in ActivityRS.Tours.Tour  track by $index" ng-init="outerIndex=$index">
+                                                <td>{{tours.Name}}</td>
+                                                <td>
+                                                    <select class="full-width" id="DDL{{outerIndex}}">
+                                                        <option ng-repeat="Dates in tours.DateList.Date" value="{{Dates.Text}}">{{formatDate(Dates.Text) | date :'dd-MMM-yyyy'}}</option>
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <span>
+                                                        <a ng-click="ActivityPolicy(outerIndex, tours)" href="#ti-policy" class="soap-popupbox" style="cursor:pointer">@LanguageResources.Resources.Cancellation</a>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span ng-if="tours.Avl=='Y'" style="color: green;">@LanguageResources.Resources.Availability</span>
+                                                    <span ng-if="tours.Avl!='Y'" style="color: red;">@LanguageResources.Resources.OnRequest</span>
+                                                </td>
+                                                <td>
+                                                    <span class="price price-room" style="text-align:right"><small>{{GrossCurrency}}</small> {{(tours.GrossPrice)*(GrossROE) | number:2}}</span>
+                                                </td>
+                                                <td style="vertical-align: middle;">
+                                                    <a href="javascript:void(0)" title="" class="button yellow full-width btn-small relative" ng-click="ActivityPreBook(outerIndex, tours)"  id="btn{{outerIndex}}">
+                                                    @LanguageResources.Resources.Select
+                                                        <div class="txt-center spinnerRoomDiv" id="PrebookWaiting{{outerIndex}}" style="display:none">
+                                                            <div class="loading"></div>
+                                                        </div>
+                                                    </a>
+                                                    <span class="alertMsg" style="width:auto">{{tours.PreBookReponse}}</span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </div>
+                                </div>
+                        </div>
+                        @*Added by shashi for Tabs*@
+
+                        <div class="tab-container scrollelement" style="margin-top: 9px !important;" jstcache="0" ng-repeat="dt in ActivityDetailRS.DetailResponse.Details.Descriptions.Description">
+
+                            <div ng-if="dt.Type == 'Summary'">
+                                <ul class="tabs nav-tabs padspaceLR0">
+                                    <li class="photoTab active" ng-click="Addmapclass()">
+                                        <a data-toggle="tab" href="#tourSummary" style="cursor:default">@LanguageResources.Resources.Summary</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content overflow">
+                                    <div class="tab-pane fade active in scrollING2" id="tourSummary">
+                                        <div id="sli der" class="flexs lider text-justify">
+                                            {{dt.Text}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div ng-if="dt.Type == 'Note'">
+                                <ul class="tabs nav-tabs padspaceLR0">
+                                    <li class="photoTab active" ng-click="Addmapclass()">
+                                        <a data-toggle="tab" href="#tourNotes" style="cursor:default">@LanguageResources.Resources.Note</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content overflow">
+                                    <div class="tab-pane fade active in scrollING2" id="tourNotes">
+                                        <div id="sli der" class="flexs lider text-justify">
+                                            {{dt.Text}}
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div ng-if="dt.Type == 'DeparturePoint'">
+                                <ul class="tabs nav-tabs padspaceLR0">
+                                    <li class="photoTab active" ng-click="Addmapclass()">
+                                        <a data-toggle="tab" href="#tourDeparturePoint" style="cursor:default">@LanguageResources.Resources.DeparturePoint</a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content overflow">
+                                    <div class="tab-pane fade active in scrollING2" id="tourDeparturePoint">
+                                        <div id="sli der" class="flexs lider text-justify">
+                                            {{dt.Text}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+                <div id="ti-policy" class="ti-box modal-popup" style="display:none;">
+                    <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <div class="modal-popup-inner">
+                        <div id="loginloader" ng-show="PolicyWaiting">
+                            <div class="loaderlogin"></div>
+                        </div>
+                        <div ng-show="NoActivitypolicy">{{NoActivitypolicy}}</div>
+                        <div ng-show="PolicyAvailable">
+                            <div id="policyAnimate">
+                                <h3>@LanguageResources.Resources.CancellationChargeand</h3>
+                                <div class="cancellation-policy-alt" ng-if="CanxmsgType!=''">
+                                    <h5 class="heading mt-0" data-toggle="collapse" data-target="#toggle-canx-policy">
+                                        <span class="refund-font-16" ng-if="CanxmsgType=='Freecancellation'"><span style="color:green"> @LanguageResources.Resources.Free @LanguageResources.Resources.Cancellation</span> @LanguageResources.Resources.till {{ActivityMinDate}}</span>
+                                        <span class="refund-font-16" ng-if="CanxmsgType=='NonRefundable'">@LanguageResources.Resources.ThisTariffis <span style="color:red"> @LanguageResources.Resources.NonRefundable</span></span>
+                                    </h5>
+                                </div>
+                                <div>
+                                    <div ng-repeat="policy in PolicyRS">
+                                        <p>
+                                            <i class="fas fa-hand-point-right"></i>&nbsp; @LanguageResources.Resources.Ifyoucancelbookingbetween <b>{{ :: formatDate(policy.DateFrom) | date:'dd-MMM-yyyy'}}</b>
+                                            @LanguageResources.Resources.to  <b>{{::formatDate(policy.DateTo) | date:'dd-MMM-yyyy'}}</b> @LanguageResources.Resources.thenCancellationChargeswillbe <b>{{GrossCurrency}} {{::(policy.GrossPrice)*(GrossROE) | number:2}}</b>
+                                        </p>
+                                    </div>
+                                    <div>
+                                        <p>
+                                            @LanguageResources.Resources._Note @LanguageResources.Resources.notes
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<script src="@Url.Content("~/Scripts/"+CommonComponents.CompanySettings.CompanySetting().CompanyId+"/Gallery/jquery.flexslider.js")"></script>
+
+
+
+
+
+
+

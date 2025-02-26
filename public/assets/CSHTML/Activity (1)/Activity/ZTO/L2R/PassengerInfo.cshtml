@@ -1,0 +1,205 @@
+﻿@model TIRequestResponse.BookingXML
+@{
+    ViewBag.Title = "PassengerInfo";
+    Layout = "~/Views/Shared/" + CommonComponents.CompanySettings.CompanySetting().CompanyId + "/L2R/_LayoutInner.cshtml";
+}
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 10);
+    window.onunload = function () { null };
+</script>
+<script type="text/javascript" src="@Url.Content("~/Angularjs/Controller/ActivityDetails.js")"></script>
+<style>
+    hr {
+        margin-top: 8px !important;
+        margin-bottom: 8px !important;
+    }
+
+    .booking-details .other-details dt, .booking-details .other-details dd {
+        padding: .8em 0 !important;
+    }
+
+    .detailed-logo figure {
+        padding: 10px 0 !important;
+    }
+</style>
+
+<form action="@Url.Content("~/Home/Activity/SubmitPassengerInfo")" method="post" name="passenger">
+    <section class="gray-area">
+        <div class="container">
+            <div class="row" ng-app="mainApp" ng-controller="ActivityDetails" ng-cloak>
+                <div class="sidebar col-sms-6 col-sm-4 col-md-4">
+                    @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityFareDetails")
+                </div>
+                <div id="content" class="col-sms-6 col-sm-8 col-md-8 paxpage passenger-info-wrapper">
+                    <div id="main">
+                        @*<div class="booking-section travelo-box">*@
+                        @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityPaxDetail")
+                        @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityPolicyDetails")
+                        <h3 class="cart-service-heading-container">@LanguageResources.Resources.Cancellation Policy</h3>
+                        <div class="booking-section travelo-box">
+
+                            @if (Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.CancellationPolicy.Policy != null)
+                            {
+                                string x = (Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.CancellationPolicy.Policy.ToList().OrderBy(item => item.DateFrom)).First().DateFrom;
+                                DateTime mindate = Convert.ToDateTime(x);
+                                DateTime Today = Convert.ToDateTime(DateTime.Today.ToShortDateString());
+
+                                if (mindate > Today)
+                                {
+                                    mindate = mindate.AddDays(-1);
+                                    <div class="cancellation-policy-alt">
+                                        <h5 class="heading mt-0" data-toggle="collapse" style="display:inline;">
+                                            <span class="refund-font-16">@LanguageResources.Resources.Free @LanguageResources.Resources.Cancellation @LanguageResources.Resources.till @mindate.ToString("dd-MMM-yyyy")</span>
+                                        </h5>
+                                    </div>
+
+                                }
+                                else if (mindate <= Today)
+                                {
+                                    <div class="cancellation-policy-alt">
+                                        <h5 class="heading mt-0" data-toggle="collapse" style="display:inline;">
+                                            <span class="refund-font-16">@LanguageResources.Resources.ThisTariff </span>
+                                        </h5>
+                                    </div>
+                                }
+                            }
+                            @foreach (var canxp in Model.Activityinfo.Activity_Booking_RQ[0].SightSeeing.CancellationPolicy.Policy)
+            {
+                                <div class="text-justify">
+                                    <i class="fa fa-hand-o-right"></i>&nbsp; @LanguageResources.Resources.Ifyoucancelbookingbetween <b>@Convert.ToDateTime(@canxp.DateFrom).ToString("dd-MMM-yyyy")</b>
+                                    @LanguageResources.Resources.to <b>@Convert.ToDateTime(@canxp.DateTo).ToString("dd-MMM-yyyy")</b> @LanguageResources.Resources.thenCancellationChargeswillbe <b>{{GrossCurrency}} {{@canxp.Gross_Price * GrossROE | number:2}}  </b>
+                                </div>
+                            }
+                            <div>
+                                <p class="text-justify">@LanguageResources.Resources._Note @LanguageResources.Resources.notes</p>
+                            </div>
+
+
+
+                            <div id="termandbutton">
+                                <div class="row pd-bottom10">
+                                    <div class="col-lg-12">
+                                        <div class="checkbox custom_checkbox cancellation_policy">
+                                            <input type="checkbox" value="" id="TermConditions" name="TermConditions" style="margin-left: 0px !important;float: left;cursor:pointer" data-toggle="checkbox" onchange="TermConditionsCheck()">
+                                            <label class="text-justify" for="TermConditions">
+                                                <span style="cursor:default">@LanguageResources.Resources.IhavereadandaccepttheCancellationPolicyandthe</span>
+                                                <a href="#ti-termandcondition" class="soap-popupbox link_paragraph" onclick="TermAndCondition()">
+                                                    @LanguageResources.Resources.BookingTermsandConditions
+                                                </a>
+                                            </label>
+                                                <div id="ti-termandcondition" class="modal-popup ti-box" style="display: none;">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <div id="termandconditionloader" style="display:none;">
+                                                        <div class="loaderlogin"></div>
+                                                    </div>
+                                                    <div class="modal-popup-inner" id="termandconditioncontent" style="display:none"></div>
+                                                </div>
+                                            
+                                            <div class="alertMsg" id="id_conditions"></div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" id="bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <!-- <button type="button" class="close close1" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button> -->
+                                                    <iframe class="iframe_width" src="@Url.Action("TermAndConditions", "Home")"></iframe>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pd-bottom10">
+                                    <div class="col-lg-12">
+                                        <div class="checkbox custom_checkbox cancellation_policy">
+                                            <input type="checkbox" value="" id="TravelContract" name="TravelContract" style="margin-left: 0px !important;float: left;cursor:pointer" data-toggle="checkbox" onchange="TermConditionsCheck()">
+                                            <label class="text-justify">
+                                                <span style="cursor:default">@LanguageResources.Resources.Ihavereadandagree</span>
+                                                <a href="#TravelContractPopup" class="soap-popupbox link_paragraph" onclick="TravelContract()">
+                                                    @LanguageResources.Resources.TravelContract
+                                                </a>
+                                                <div id="TravelContractPopup" class="ti-login-box ti-box full-width border-0">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="custom-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                                                    </div>
+                                                    <div id="TravelContractPopuploader" style="display:none;">
+                                                        <div class="loaderlogin"></div>
+                                                    </div>
+                                                    <div class="modal-popup-inner" id="TravelContractPopupcontent" style="display:none"></div>
+                                                </div>
+                                            </label>
+                                            <div class="alertMsg" id="TravelContract_Condition"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (Model.GeneralInfo.IsRefundable)
+                                {
+                                    @Html.Partial("~/Areas/Common/Views/Common/" + CommonComponents.CompanySettings.ViewBasePath() + "PaymentOptions.cshtml", Model)
+                                }
+                                <div class="row pd-bottom10 form-group">
+                                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 pull-right padding_con_0 details">
+
+                                        <a id="btnPaxSubmit" class="full-width btn btn-default  search-btn border-radius-20" ng-click="ValidatePaxInfo(true);">@LanguageResources.Resources.PayAndBook</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        @*</div>*@
+                    </div>
+                </div>
+
+
+                @*<div class="">
+                        @Html.Partial(CommonComponents.CompanySettings.ViewBasePath() + "_ActivityFareDetails")
+                    </div>*@
+            </div>
+        </div>
+    </section>
+</form>
+
+
+
+<script>
+    function scrollFunction() {
+        if (tjq(window).width() >=768) {
+            var sidebar = tjq(".sidebar > .booking-details"),
+                headerHeight = tjq("#toparea").innerHeight();
+            var windowScroll = tjq(window).scrollTop(),
+                footerPosition = tjq("footer").position().top,
+                sidebarHeight = tjq(sidebar).innerHeight(),
+                scrollHeight = footerPosition - sidebarHeight;
+            if (windowScroll >= headerHeight) {
+                sidebar.addClass("sidebarFixed");
+            } else {
+                sidebar.removeClass("sidebarFixed")
+            }
+            if (windowScroll >= scrollHeight) {
+                tjq(sidebar).addClass("relative");
+                tjq(sidebar).css({
+                    'top': (scrollHeight - headerHeight) + 'px'
+                })
+            } else {
+                tjq(sidebar).removeClass("relative");
+                tjq(sidebar).css({
+                    'top': 0 + 'px'
+                })
+            }
+        }
+    }
+
+
+    tjq(window).scroll(scrollFunction);
+    tjq(window).resize(scrollFunction);
+    tjq(".moreinfobtn").click(scrollFunction);
+    tjq(".invalid .value .button").click(scrollFunction);
+
+    //footer margin for pax page only manage sidebar
+    tjq(document).ready(function () {
+        tjq("footer").css("margin-top", "30px");
+    })
+</script>
