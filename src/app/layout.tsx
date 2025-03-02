@@ -119,13 +119,6 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
               <button id="acceptCookie">Accept</button>
             </div>
           </div>
-
-          {/* Scripts */}
-          {/* <Script src="/js/jquery-1.11.1.min.js" strategy="beforeInteractive" />
-          <Script src="/js/jquery.noconflict.js" />
-          <Script src="/js/jquery-ui.1.10.4.min.js" />
-          <Script src="/js/bootstrap.min.js" />
-          <Script src="/js/slick.js" /> */}
         </ReduxProvider>
         </body>
       </html>

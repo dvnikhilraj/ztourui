@@ -12,25 +12,34 @@ export const useLanguage = () => {
   const currentLanguage = useSelector((state: RootState) => state.language.currentLanguage);
 
   useEffect(() => {
+    const handleInitialized = () => {
+      setInitialized(true);
+    };
+
     if (!initialized) {
-      i18n.on('initialized', () => {
-        setInitialized(true);
-      });
+      i18n.on('initialized', handleInitialized);
     }
+
     return () => {
-      i18n.off('initialized');
+      i18n.off('initialized', handleInitialized);
     };
   }, [i18n, initialized]);
 
   useEffect(() => {
     if (initialized && currentLanguage) {
-      i18n.changeLanguage(currentLanguage.code);
+      try {
+        i18n.addResourceBundle(currentLanguage.code, 'translation', {}, true, true);
+        i18n.changeLanguage(currentLanguage.code);
+      } catch (error) {
+        console.error('Error loading language resources:', error);
+      }
     }
   }, [currentLanguage, i18n, initialized]);
 
   const handleLanguageChange = useCallback(async (code: string, name: string) => {
     try {
       if (initialized) {
+        await i18n.addResourceBundle(code, 'translation', {}, true, true);
         await i18n.changeLanguage(code);
         dispatch(setLanguage({ code, name }));
       }

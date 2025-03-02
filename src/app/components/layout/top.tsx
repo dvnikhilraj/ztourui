@@ -1,12 +1,12 @@
 "use client";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { paths } from "@/paths";
 import { SignIn } from "./signIn";
 import { Register } from "./Register";
-import { useLanguage } from '@/hooks/useLanguage';
+import { useLanguage } from "@/hooks/useLanguage";
 
 interface TopProps {
   companySettings: {
@@ -28,7 +28,6 @@ export function Top({
   companySettings,
   userDetails,
 }: TopProps): React.JSX.Element {
-
   const { t } = useTranslation();
   const [isSignInOpen, setIsSignInOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -38,23 +37,27 @@ export function Top({
   const [isAccountHovered, setIsAccountHovered] = React.useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = React.useState(false);
 
-  const { currentLanguage, handleLanguageChange } = useLanguage() as { currentLanguage: { code: string, name: string } | undefined, handleLanguageChange: (code: string, name: string) => Promise<void> };
+  const { currentLanguage, handleLanguageChange } = useLanguage() as {
+    currentLanguage: { code: string; name: string } | undefined;
+    handleLanguageChange: (code: string, name: string) => Promise<void>;
+  };
 
   const handleCurrencyChange = (fromCurrency: string, toCurrency: string) => {
-    
     setCurrentCurrency(toCurrency);
   };
 
   const onLanguageChange = (code: string, name: string) => {
-    console.log('code', code, 'name', name);
+    console.log("code", code, "name", name);
     handleLanguageChange(code, name);
   };
-
 
   return (
     <>
       <SignIn isOpen={isSignInOpen} onClose={() => setIsSignInOpen(false)} />
-      <Register isOpen={isRegisterOpen} onClose={() => setIsRegisterOpen(false)} />
+      <Register
+        isOpen={isRegisterOpen}
+        onClose={() => setIsRegisterOpen(false)}
+      />
 
       <div className="container">
         <div className="navbar-header">
@@ -126,14 +129,18 @@ export function Top({
                     ></path>
                   </svg>{" "}
                 </span>
-                <span className="hidden-xs">{t('navigation.getQuote')}</span>
+                <span className="hidden-xs">{t("navigation.getQuote")}</span>
               </Link>
             </li>
 
             <li
               className="dropdown"
-              onMouseEnter={() => setIsCurrencyHovered(true)}
-              onMouseLeave={() => setIsCurrencyHovered(false)}
+              onMouseEnter={() => {
+                setIsCurrencyHovered(true);
+              }}
+              onMouseLeave={() => {
+                setIsCurrencyHovered(false);
+              }}
             >
               <a
                 href="#"
@@ -177,45 +184,44 @@ export function Top({
                   />
                 </svg>
               </a>
-              {isCurrencyHovered &&
-              (<ul className="dropdown-menu main-navigation" role="menu">
-                <li className="dropdown" id="currencycompile">
-                  <ul
-                    className="dropdown"
-                    aria-labelledby="language-dropdown"
-                    id="CurrencyList"
-                  >
-                    <li className={currentCurrency === "EUR" ? "active" : ""}>
-                      <a
-                        href="#"
-                        title="EUR"
-                        onClick={() => handleCurrencyChange("EUR", "EUR")}
-                      >
-                        EUR
-                      </a>
-                    </li>
-                    <li className={currentCurrency === "RON" ? "active" : ""}>
-                      <a
-                        href="#"
-                        title="RON"
-                        onClick={() => handleCurrencyChange("EUR", "RON")}
-                      >
-                        RON
-                      </a>
-                    </li>
-                    <li className={currentCurrency === "USD" ? "active" : ""}>
-                      <a
-                        href="#"
-                        title="USD"
-                        onClick={() => handleCurrencyChange("EUR", "USD")}
-                      >
-                        USD
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-              )}
+              
+                <ul className="dropdown-menu main-navigation" role="menu" style={{ display: isCurrencyHovered ? "block" : "none" }}>
+                  <li className="dropdown" id="currencycompile">
+                    <ul
+                      className="dropdown"
+                      aria-labelledby="language-dropdown"
+                      id="CurrencyList"
+                    >
+                      <li className={currentCurrency === "EUR" ? "active" : ""}>
+                        <a
+                          href="#"
+                          title="EUR"
+                          onClick={() => handleCurrencyChange("EUR", "EUR")}
+                        >
+                          EUR
+                        </a>
+                      </li>
+                      <li className={currentCurrency === "RON" ? "active" : ""}>
+                        <a
+                          href="#"
+                          title="RON"
+                          onClick={() => handleCurrencyChange("EUR", "RON")}
+                        >
+                          RON
+                        </a>
+                      </li>
+                      <li className={currentCurrency === "USD" ? "active" : ""}>
+                        <a
+                          href="#"
+                          title="USD"
+                          onClick={() => handleCurrencyChange("EUR", "USD")}
+                        >
+                          USD
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
             </li>
 
             <li
@@ -282,7 +288,9 @@ export function Top({
                           onLanguageChange("en", "English");
                         }}
                         title="en"
-                        className={currentLanguage?.code === 'en' ? 'active' : ''}
+                        className={
+                          currentLanguage?.code === "en" ? "active" : ""
+                        }
                       >
                         English
                       </a>
@@ -295,7 +303,9 @@ export function Top({
                           onLanguageChange("ro", "Romanian");
                         }}
                         title="ro"
-                        className={currentLanguage?.code === 'ro' ? 'active' : ''}
+                        className={
+                          currentLanguage?.code === "ro" ? "active" : ""
+                        }
                       >
                         Romanian
                       </a>
@@ -317,9 +327,7 @@ export function Top({
                   <span>
                     <i className="far fa-user" style={{ fontSize: "16px" }}></i>
                   </span>
-                  <span className="hidden-xs">
-                    {t('navigation.myAccount')}
-                  </span>
+                  <span className="hidden-xs">{t("navigation.myAccount")}</span>
                   <i className="fa fa-chevron-down font-12"></i>
                 </a>
                 {/* Add logged in user menu options */}
@@ -341,9 +349,7 @@ export function Top({
                   <span>
                     <i className="far fa-user" style={{ fontSize: "16px" }}></i>
                   </span>
-                  <span className="hidden-xs">
-                    {t('navigation.myAccount')}
-                  </span>
+                  <span className="hidden-xs">{t("navigation.myAccount")}</span>
                   <i className="fa fa-chevron-down font-12"></i>
                 </a>
                 <ul
@@ -360,7 +366,7 @@ export function Top({
                         setIsSignInOpen(true);
                       }}
                     >
-                      {t('navigation.signIn')}
+                      {t("navigation.signIn")}
                     </a>
                   </li>
                   <li>
@@ -372,7 +378,7 @@ export function Top({
                       href="#ti-signup"
                       className="soap-popupbox"
                     >
-                      {t('navigation.createAccount')}
+                      {t("navigation.createAccount")}
                     </a>
                   </li>
                 </ul>
@@ -406,47 +412,47 @@ export function Top({
                 target="_blank"
                 style={{ color: "white" }}
               >
-                {t('menu.discoverDestinations')}
+                {t("menu.discoverDestinations")}
               </Link>
             </span>
 
             <ul className="menu">
               <li className="menu-item-has-children visible">
                 <Link href="/Package">
-                  <span>{t('menu.dynamicPackages')}</span>
+                  <span>{t("menu.dynamicPackages")}</span>
                 </Link>
               </li>
 
               <li className="menu-item-has-children visible">
                 <a href="https://charter.ztour-travel.ro" target="_blank">
-                  {t('menu.charter')}
+                  {t("menu.charter")}
                 </a>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Flight">{t('menu.flights')}</Link>
+                <Link href="/Flight">{t("menu.flights")}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Hotel">{t('menu.hotels')}</Link>
+                <Link href="/Hotel">{t("menu.hotels")}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
                 <a href="https://charter.ztour-travel.ro/tours" target="_blank">
-                  {t('menu.tours')}
+                  {t("menu.tours")}
                 </a>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Transfer">{t('menu.transfers')}</Link>
+                <Link href="/Transfer">{t("menu.transfers")}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/FlightHotel">{t('menu.flightsHotels')}</Link>
+                <Link href="/FlightHotel">{t("menu.flightsHotels")}</Link>
               </li>
 
               <li className="menu-item-has-children visible">
-                <Link href="/Insurance">{t('menu.insurance')}</Link>
+                <Link href="/Insurance">{t("menu.insurance")}</Link>
               </li>
             </ul>
           </nav>

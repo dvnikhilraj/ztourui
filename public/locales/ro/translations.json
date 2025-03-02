@@ -44,8 +44,9 @@
     "charter": "Charter",
     "flights": "Zboruri",
     "hotels": "Hoteluri",
+    "tours":"Tours",
     "transfers": "Transferuri",
-    "flightsHotel": "Zboruri + Hoteluri",
+    "flightsHotels": "Zboruri + Hoteluri",
     "insurance": "Asigurare",
     "discoverDestinations": "Descopera Destinatiile Noastre",
     "mainNav": {

@@ -44,8 +44,9 @@
     "charter": "Charter",
     "flights": "Flights",
     "hotels": "Hotels",
+    "tours":"Tours",
     "transfers": "Transfers",
-    "flightsHotel": "Flights + Hotel",
+    "flightsHotels": "Flights + Hotel",
     "insurance": "Insurance",
     "discoverDestinations": "Discover Our Destinations",
     "mainNav": {
