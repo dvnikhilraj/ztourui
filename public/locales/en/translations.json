@@ -1,5 +1,5 @@
 {
-  "booking": {
+ "booking": {
     "flight": {
       "searchTitle": "Please enter flight arrival number",
       "flightDestinationRequired": "Flight Destination is required",
@@ -33,7 +33,7 @@
       "bookingHistory": "Booking History"
     }
   },
- "navigation": {
+  "navigation": {
     "myAccount": "My Account",
     "signIn": "SIGN IN",
     "createAccount": "Create an Account",
@@ -44,7 +44,7 @@
     "charter": "Charter",
     "flights": "Flights",
     "hotels": "Hotels",
-    "tours":"Tours",
+    "tours": "Tours",
     "transfers": "Transfers",
     "flightsHotels": "Flights + Hotel",
     "insurance": "Insurance",
@@ -152,6 +152,66 @@
     "language": {
       "title": "Language",
       "select": "Select Language"
+    }
+  },
+  "activities": {
+    "form": {
+      "destination": "Your Destination",
+      "destinationPlaceholder": "Enter a City or Location",
+      "fromDate": "From Date",
+      "toDate": "To Date",
+      "checkInDate": "Check-in Date",
+      "checkOutDate": "Check-out Date",
+      "adultsChildren": "Adults & Children",
+      "travelers": "Travelers",
+      "traveler": "Traveler",
+      "children": "Children",
+      "child": "Child",
+      "adult12yrs": "Adult 12+ years",
+      "adults12yrs": "Adults 12+ years",
+      "childUnder12yrs": "Child under 12 years",
+      "childrenUnder12yrs": "Children under 12 years",
+      "ageChild1": "Age Child 1",
+      "ageChild2": "Age Child 2",
+      "ageChild3": "Age Child 3",
+      "searchNow": "SEARCH NOW",
+      "errors": {
+        "destination": "Please enter a destination"
+      }
+    },
+    "search": {
+      "title": "Search Activities",
+      "modify": "Modify Search",
+      "filter": "Filter",
+      "sort": "Sort Results By",
+      "sortBy": {
+        "price": "Price",
+        "duration": "Duration"
+      }
+    },
+    "results": {
+      "duration": "Duration",
+      "select": "Select",
+      "details": "Details",
+      "rates": "Rates",
+      "gallery": "Gallery",
+      "price": "Price"
+    },
+    "filter": {
+      "title": "Filter",
+      "clearAll": "Clear all filters",
+      "name": "Name",
+      "priceRange": "Price Range",
+      "categories": "Categories",
+      "enterActivityName": "Enter activity name.."
+    },
+    "noResults": {
+      "title": "Oops!",
+      "subtitle": "No activities found",
+      "message": "We could not find any options as per your search criteria",
+      "suggestion": "Please update your search criteria and try again",
+      "filterMessage": "We could not find any options with your selected filters",
+      "clearFilters": "Clear all filters"
     }
   }
 }

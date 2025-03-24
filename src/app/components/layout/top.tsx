@@ -2,50 +2,72 @@
 import { useTranslation } from "react-i18next";
 import * as React from "react";
 import Link from "next/link";
+import '@public/assets/css/ZTO/header.css';
 import Image from "next/image";
 import { paths } from "@/paths";
 import { SignIn } from "./signIn";
 import { Register } from "./Register";
 import { useLanguage } from "@/hooks/useLanguage";
+import { useAppDispatch, useAppSelector } from "@/store";
+import { setCurrency } from "@/store/reducers/currencySlice";
 
 interface TopProps {
-  companySettings: {
-    companyId: string;
-    companyName: string;
-    channelSetting: {
-      tollFreeNo: string;
-    };
-    multiLingualLanguages: string;
-  };
   languageResources: Record<string, string>;
   userDetails: any;
-  selectedCurrency: {
-    changeCurrency: string;
-  };
 }
 
-export function Top({
-  companySettings,
-  userDetails,
-}: TopProps): React.JSX.Element {
+export function Top({ userDetails }: TopProps): React.JSX.Element {
   const { t } = useTranslation();
   const [isSignInOpen, setIsSignInOpen] = React.useState(false);
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  const [currentCurrency, setCurrentCurrency] = React.useState("EUR");
   const [isCurrencyHovered, setIsCurrencyHovered] = React.useState(false);
   const [isLanguageHovered, setIsLanguageHovered] = React.useState(false);
   const [isAccountHovered, setIsAccountHovered] = React.useState(false);
   const [isRegisterOpen, setIsRegisterOpen] = React.useState(false);
-
+  const { data: companySettings } = useAppSelector((state) => state.companySettings);
   const { currentLanguage, handleLanguageChange } = useLanguage() as {
     currentLanguage: { code: string; name: string } | undefined;
     handleLanguageChange: (code: string, name: string) => Promise<void>;
   };
 
-  const handleCurrencyChange = (fromCurrency: string, toCurrency: string) => {
-    setCurrentCurrency(toCurrency);
+  const dispatch = useAppDispatch();
+  const { currentCurrency } = useAppSelector((state) => state.currency);
+
+  
+  React.useEffect(() => {
+    if (companySettings?.CompanyCurrency) {
+      dispatch(setCurrency({ 
+        code: companySettings.CompanyCurrency,
+        name: getCurrencyName(companySettings.CompanyCurrency)
+      }));
+    }
+  }, [companySettings?.CompanyCurrency, dispatch]);
+
+  
+  const getCurrencyName = (code: string): string => {
+    const currencies: Record<string, string> = {
+      'EUR': 'Euro',
+      'RON': 'Romanian Leu',
+      'USD': 'US Dollar'
+    };
+    return currencies[code] || code;
   };
 
+    const availableLanguages = React.useMemo(() => {
+    if (!companySettings?.MultiLingualLanguages) return [];
+    return companySettings.MultiLingualLanguages.split(',').map(lang => {
+      const [code, name] = lang.split(':');
+      return { code, name };
+    });
+  }, [companySettings?.MultiLingualLanguages]);
+
+  const handleCurrencyChange = (toCurrency: string) => {
+    dispatch(setCurrency({ 
+      code: toCurrency,
+      name: toCurrency 
+    }));
+  };
+  
   const onLanguageChange = (code: string, name: string) => {
     console.log("code", code, "name", name);
     handleLanguageChange(code, name);
@@ -74,8 +96,8 @@ export function Top({
 
           <Link href={`/?lang=${paths.home}`} className="navbar-brand">
             <Image
-              src={`/assets/images/ZTO/logo.png`}
-              alt="logo"
+              src={`/assets/images/${companySettings?.ChannelSetting.CompanyId}/logo${companySettings?.ChannelSetting.Logo1}`}
+              alt={companySettings?.CompanyName || 'Z Tour'}
               width={150}
               height={50}
               priority
@@ -84,7 +106,7 @@ export function Top({
 
           <ul className="nav navbar-nav navbar-right top-menu">
             <li>
-              <a href={`tel:${companySettings.channelSetting.tollFreeNo}`}>
+              <a href={`tel:${companySettings?.ChannelSetting?.TollFreeNo}`}>
                 <span>
                   <svg
                     className="svg-inline--fa fa-phone-alt fa-w-16"
@@ -104,7 +126,7 @@ export function Top({
                   </svg>
                 </span>
                 <span className="hidden-xs">
-                  {companySettings.channelSetting.tollFreeNo}
+                  {companySettings?.ChannelSetting?.TollFreeNo}
                 </span>
               </a>
             </li>
@@ -133,187 +155,176 @@ export function Top({
               </Link>
             </li>
 
-            <li
-              className="dropdown"
-              onMouseEnter={() => {
-                setIsCurrencyHovered(true);
-              }}
-              onMouseLeave={() => {
-                setIsCurrencyHovered(false);
-              }}
-            >
-              <a
-                href="#"
-                className="dropdown-toggle"
-                data-toggle="dropdown"
-                role="Currency"
-                aria-expanded="false"
+            {companySettings?.IsMultiCurrencyBusiness && (
+              <li
+                className="dropdown"
+                onMouseEnter={() => {
+                  setIsCurrencyHovered((prev)=> !prev);
+                }}
+                onMouseLeave={() => {
+                  setIsCurrencyHovered((prev)=> !prev);
+                }}
               >
-                <span>
+                <a
+                  href="#"
+                  className="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="Currency"
+                  aria-expanded="false"
+                >
+                  <span>
+                    <svg
+                      className="svg-inline--fa fa-credit-card fa-w-18"
+                      style={{ fontSize: "16px" }}
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="far"
+                      data-icon="credit-card"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 576 512"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"
+                      />
+                    </svg>
+                  </span>
+                  <span className="hidden-xs">{currentCurrency.name}</span>
                   <svg
-                    className="svg-inline--fa fa-credit-card fa-w-18"
-                    style={{ fontSize: "16px" }}
+                    className="svg-inline--fa fa-chevron-down fa-w-14 font-12"
                     aria-hidden="true"
                     focusable="false"
-                    data-prefix="far"
-                    data-icon="credit-card"
+                    data-prefix="fa"
+                    data-icon="chevron-down"
                     role="img"
                     xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 576 512"
+                    viewBox="0 0 448 512"
                   >
                     <path
                       fill="currentColor"
-                      d="M527.9 32H48.1C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48.1 48h479.8c26.6 0 48.1-21.5 48.1-48V80c0-26.5-21.5-48-48.1-48zM54.1 80h467.8c3.3 0 6 2.7 6 6v42H48.1V86c0-3.3 2.7-6 6-6zm467.8 352H54.1c-3.3 0-6-2.7-6-6V256h479.8v170c0 3.3-2.7 6-6 6zM192 332v40c0 6.6-5.4 12-12 12h-72c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h72c6.6 0 12 5.4 12 12zm192 0v40c0 6.6-5.4 12-12 12H236c-6.6 0-12-5.4-12-12v-40c0-6.6 5.4-12 12-12h136c6.6 0 12 5.4 12 12z"
+                      d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
                     />
                   </svg>
-                </span>
-                <span className="hidden-xs">{currentCurrency}</span>
-                <svg
-                  className="svg-inline--fa fa-chevron-down fa-w-14 font-12"
-                  aria-hidden="true"
-                  focusable="false"
-                  data-prefix="fa"
-                  data-icon="chevron-down"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
+                </a>
+                
+                  <ul className="dropdown-menu main-navigation" role="menu" style={{ display: isCurrencyHovered ? "block" : "none" }}>
+                    <li className="dropdown" id="currencycompile">
+                      <ul
+                        className="dropdown"
+                        aria-labelledby="language-dropdown"
+                        id="CurrencyList"
+                      >
+                        <li className={currentCurrency.code === "EUR" ? "active" : ""}>
+                          <a
+                            href="#"
+                            title="EUR"
+                            onClick={() => handleCurrencyChange("EUR")}
+                          >
+                            EUR
+                          </a>
+                        </li>
+                        <li className={currentCurrency.code === "RON" ? "active" : ""}>
+                          <a
+                            href="#"
+                            title="RON"
+                            onClick={() => handleCurrencyChange("RON")}
+                          >
+                            RON
+                          </a>
+                        </li>
+                        <li className={currentCurrency.code === "USD" ? "active" : ""}>
+                          <a
+                            href="#"
+                            title="USD"
+                            onClick={() => handleCurrencyChange("USD")}
+                          >
+                            USD
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+              </li>
+            )}
+
+            {companySettings?.IsMultilingual && (
+              <li
+                className="dropdown"
+                onMouseEnter={() => setIsLanguageHovered(true)}
+                onMouseLeave={() => setIsLanguageHovered(false)}
+              >
+                <a
+                  href="#"
+                  className="dropdown-toggle"
+                  data-toggle="dropdown"
+                  role="button"
+                  aria-expanded="false"
                 >
-                  <path
-                    fill="currentColor"
-                    d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
-                  />
-                </svg>
-              </a>
-              
-                <ul className="dropdown-menu main-navigation" role="menu" style={{ display: isCurrencyHovered ? "block" : "none" }}>
-                  <li className="dropdown" id="currencycompile">
-                    <ul
-                      className="dropdown"
-                      aria-labelledby="language-dropdown"
-                      id="CurrencyList"
+                  <span className="hidden-sm hidden-md hidden-lg">
+                    <svg
+                      className="svg-inline--fa fa-globe fa-w-16"
+                      style={{ fontSize: "16px" }}
+                      aria-hidden="true"
+                      focusable="false"
+                      data-prefix="fas"
+                      data-icon="globe"
+                      role="img"
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 496 512"
                     >
-                      <li className={currentCurrency === "EUR" ? "active" : ""}>
-                        <a
-                          href="#"
-                          title="EUR"
-                          onClick={() => handleCurrencyChange("EUR", "EUR")}
-                        >
-                          EUR
-                        </a>
-                      </li>
-                      <li className={currentCurrency === "RON" ? "active" : ""}>
-                        <a
-                          href="#"
-                          title="RON"
-                          onClick={() => handleCurrencyChange("EUR", "RON")}
-                        >
-                          RON
-                        </a>
-                      </li>
-                      <li className={currentCurrency === "USD" ? "active" : ""}>
-                        <a
-                          href="#"
-                          title="USD"
-                          onClick={() => handleCurrencyChange("EUR", "USD")}
-                        >
-                          USD
-                        </a>
-                      </li>
+                      <path
+                        fill="currentColor"
+                        d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4 73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"
+                      />
+                    </svg>
+                  </span>
+                  <span id="cultureSelectedLink" className="hidden-xs">
+                    {currentLanguage?.name}
+                  </span>
+                  <svg
+                    className="svg-inline--fa fa-chevron-down fa-w-14 font-12"
+                    aria-hidden="true"
+                    focusable="false"
+                    data-prefix="fa"
+                    data-icon="chevron-down"
+                    role="img"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path
+                      fill="currentColor"
+                      d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
+                    />
+                  </svg>
+                </a>
+                <ul
+                  className="dropdown-menu main-navigation"
+                  role="menu"
+                  style={{ display: isLanguageHovered ? "block" : "none" }}
+                >
+                  <li className="dropdown">
+                    <ul className="dropdown" id="cultureDropDown">
+                      {availableLanguages.map(({ code, name }) => (
+                        <li key={code}>
+                          <a
+                            href="#"
+                            onClick={(e) => {
+                              e.preventDefault();
+                              onLanguageChange(code, name);
+                            }}
+                            title={code}
+                            className={currentLanguage?.code === code ? "active" : ""}
+                          >
+                            {name}
+                          </a>
+                        </li>
+                      ))}
                     </ul>
                   </li>
                 </ul>
-            </li>
-
-            <li
-              className="dropdown"
-              onMouseEnter={() => setIsLanguageHovered(true)}
-              onMouseLeave={() => setIsLanguageHovered(false)}
-            >
-              <a
-                href="#"
-                className="dropdown-toggle"
-                data-toggle="dropdown"
-                role="button"
-                aria-expanded="false"
-              >
-                <span className="hidden-sm hidden-md hidden-lg">
-                  <svg
-                    className="svg-inline--fa fa-globe fa-w-16"
-                    style={{ fontSize: "16px" }}
-                    aria-hidden="true"
-                    focusable="false"
-                    data-prefix="fas"
-                    data-icon="globe"
-                    role="img"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 496 512"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M336.5 160C322 70.7 287.8 8 248 8s-74 62.7-88.5 152h177zM152 256c0 22.2 1.2 43.5 3.3 64h185.3c2.1-20.5 3.3-41.8 3.3-64s-1.2-43.5-3.3-64H155.3c-2.1 20.5-3.3 41.8-3.3 64zm324.7-96c-28.6-67.9-86.5-120.4-158-141.6 24.4 33.8 41.2 84.7 50 141.6h108zM177.2 18.4C105.8 39.6 47.8 92.1 19.3 160h108c8.7-56.9 25.5-107.8 49.9-141.6zM487.4 192H372.7c2.1 21 3.3 42.5 3.3 64s-1.2 43-3.3 64h114.6c5.5-20.5 8.6-41.8 8.6-64s-3.1-43.5-8.5-64zM120 256c0-21.5 1.2-43 3.3-64H8.6C3.2 212.5 0 233.8 0 256s3.2 43.5 8.6 64h114.6c-2-21-3.2-42.5-3.2-64zm39.5 96c14.5 89.3 48.7 152 88.5 152s74-62.7 88.5-152h-177zm159.3 141.6c71.4-21.2 129.4 73.7 158-141.6h-108c-8.8 56.9-25.6 107.8-50 141.6zM19.3 352c28.6 67.9 86.5 120.4 158 141.6-24.4-33.8-41.2-84.7-50-141.6h-108z"
-                    />
-                  </svg>
-                </span>
-                <span id="cultureSelectedLink" className="hidden-xs">
-                  {currentLanguage?.name}
-                </span>
-                <svg
-                  className="svg-inline--fa fa-chevron-down fa-w-14 font-12"
-                  aria-hidden="true"
-                  focusable="false"
-                  data-prefix="fa"
-                  data-icon="chevron-down"
-                  role="img"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 448 512"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
-                  />
-                </svg>
-              </a>
-              <ul
-                className="dropdown-menu main-navigation"
-                role="menu"
-                style={{ display: isLanguageHovered ? "block" : "none" }}
-              >
-                <li className="dropdown">
-                  <ul className="dropdown" id="cultureDropDown">
-                    <li>
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onLanguageChange("en", "English");
-                        }}
-                        title="en"
-                        className={
-                          currentLanguage?.code === "en" ? "active" : ""
-                        }
-                      >
-                        English
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="#"
-                        onClick={(e) => {
-                          e.preventDefault();
-                          onLanguageChange("ro", "Romanian");
-                        }}
-                        title="ro"
-                        className={
-                          currentLanguage?.code === "ro" ? "active" : ""
-                        }
-                      >
-                        Romanian
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
+              </li>
+            )}
 
             {userDetails ? (
               <li className="dropdown" id="loginUser">

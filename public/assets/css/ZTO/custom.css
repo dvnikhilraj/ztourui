@@ -911,11 +911,11 @@ input[type="button"].button {
 }
 
 .gv_navPrev {
-  background: url(../../Images/TI/prev.png) right top no-repeat;
+  /* background: url(../../Images/TI/prev.png) right top no-repeat; */
 }
 
 .gv_panelNavNext {
-  background: url(../../Images/TI/panel-next.png) left top no-repeat;
+  /* background: url(../../Images/TI/panel-next.png) left top no-repeat; */
 }
 
 #map ul.list-inline {
@@ -1581,16 +1581,16 @@ span > img {
 }
 
 .car .amenities a.passenger_icon {
-  background: url(../../Images/TI/icon/passenger_icon.jpg) no-repeat scroll left
-    top rgba(0, 0, 0, 0);
+  /* background: url(../../Images/TI/icon/passenger_icon.jpg) no-repeat scroll left */
+    /* top rgba(0, 0, 0, 0); */
   float: left;
   font-size: 13px;
   padding-left: 14px;
 }
 
 .car .amenities a.car_door_icon {
-  background: url(../../Images/TI/icon/car_door_icon.jpg) no-repeat scroll left
-    center rgba(0, 0, 0, 0);
+  /* background: url(../../Images/TI/icon/car_door_icon.jpg) no-repeat scroll left
+    center rgba(0, 0, 0, 0); */
   float: left;
   font-size: 13px;
   margin-left: 10px;
@@ -1598,8 +1598,8 @@ span > img {
 }
 
 .car .amenities a.car_MaxBaggage_icon {
-  background: url(../../Images/TI/icon/baggage.png) no-repeat scroll left center
-    rgba(0, 0, 0, 0);
+  /* background: url(../../Images/TI/icon/baggage.png) no-repeat scroll left center
+    rgba(0, 0, 0, 0); */
   float: left;
   font-size: 13px;
   margin-left: 10px;
@@ -1607,8 +1607,8 @@ span > img {
 }
 
 .car .amenities a.ac_icon {
-  background: url(../../Images/TI/icon/ac_icon.jpg) no-repeat scroll left center
-    rgba(0, 0, 0, 0);
+  /* background: url(../../Images/TI/icon/ac_icon.jpg) no-repeat scroll left center
+    rgba(0, 0, 0, 0); */
   float: left;
   font-size: 13px;
   margin-left: 10px;
@@ -1616,8 +1616,8 @@ span > img {
 }
 
 .car .amenities a.automatic_icon {
-  background: url(../../Images/TI/icon/automatic_icon.jpg) no-repeat scroll left
-    center rgba(0, 0, 0, 0);
+  /* background: url(../../Images/TI/icon/automatic_icon.jpg) no-repeat scroll left
+    center rgba(0, 0, 0, 0); */
   float: left;
   font-size: 13px;
   margin-left: 10px;
@@ -1719,7 +1719,7 @@ a.arrows.fa-chevron-right {
 
 .inactive-header,
 .inactive-header:hover {
-  background: url("../../Images/TI/active-header.png") left 50% no-repeat;
+  /* background: url("../../Images/TI/active-header.png") left 50% no-repeat; */
   padding: 0 0 0 20px;
 }
 
@@ -1801,7 +1801,7 @@ a.button.btn-mini.more {
   vertical-align: middle;
   margin: 0 1.65%;
   height: 50px;
-  background: url("../../Images/TI/bottom-sprite.png") 0 0 no-repeat;
+  /* background: url("../../Images/TI/bottom-sprite.png") 0 0 no-repeat; */
 }
 
 .footer-info-partner {
@@ -2481,7 +2481,7 @@ input.search-form:hover {
   width: 40px;
   height: 40px;
   background-color: #fff;
-  background: url(../assets/loader.gif) no-repeat center center;
+  /* background: url(../assets/loader.gif) no-repeat center center; */
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
   -webkit-box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
   margin-top: -20px;
@@ -2509,7 +2509,7 @@ input.search-form:hover {
 }
 
 .tp-loader.spinner5 {
-  background: url(../assets/loader.gif) no-repeat 10px 10px;
+  /* background: url(../assets/loader.gif) no-repeat 10px 10px; */
   background-color: #fff;
   margin: -22px -22px;
   width: 44px;
@@ -4151,31 +4151,31 @@ input[type="checkbox"] {
 }
 
 .slidebgimg1 {
-  background-image: url(../../Images/TI/banner/homepage10_bg.jpg);
+  /* background-image: url(../../Images/TI/banner/homepage10_bg.jpg); */
 }
 
 .slidebgimg2 {
-  background-image: url(../../Images/TI/banner/homepage10_bg2.jpg);
+  /* background-image: url(../../Images/TI/banner/homepage10_bg2.jpg); */
 }
 
 .slidebgimg3 {
-  background-image: url(../../Images/TI/banner/homepage10_bg3.jpg);
+  /* background-image: url(../../Images/TI/banner/homepage10_bg3.jpg); */
 }
 
 .slidebgimg4 {
-  background-image: url(../../Images/TI/banner/homepage10_bg4.jpg);
+  /* background-image: url(../../Images/TI/banner/homepage10_bg4.jpg); */
 }
 
 .slidebgimg5 {
-  background-image: url(../../Images/TI/banner/homepage10_bg5.jpg);
+  /* background-image: url(../../Images/TI/banner/homepage10_bg5.jpg); */
 }
 
 .slidebgimg6 {
-  background-image: url(../../Images/TI/banner/homepage10_bg6.jpg);
+  /* background-image: url(../../Images/TI/banner/homepage10_bg6.jpg); */
 }
 
 .slidebgimg7 {
-  background-image: url(../../Images/TI/banner/homepage10_bg7.jpg);
+  /* background-image: url(../../Images/TI/banner/homepage10_bg7.jpg); */
 }
 
 #hotel-features,
@@ -5909,8 +5909,8 @@ flightautocomplete .autocomplete-input {
 }
 
 #header .mobile-menu-toggle {
-  background: url(../../Images/TI/icon/mobile-menu.png) no-repeat center center
-    #ffffff !important;
+  /* background: url(../../Images/TI/icon/mobile-menu.png) no-repeat center center
+    #ffffff !important; */
 }
 
 #header .mobile-menu-toggle {

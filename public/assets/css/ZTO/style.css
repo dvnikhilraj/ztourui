@@ -489,8 +489,8 @@ img.full-width {
 /* Icons */
 @font-face {
     font-family: 'soap-icons';
-    src: url("../../fonts/soap-icons.eot?26664784");
-    src: url("../../fonts/soap-icons.eot?26664784#iefix") format("embedded-opentype"), url("../../fonts/soap-icons.woff?26664784") format("woff"), url("../../fonts/soap-icons.ttf?26664784") format("truetype"), url("../../fonts/soap-icons.svg?26664784#soap-icons") format("svg");
+    src: url("/assets/css/ZTO/fonts//soap-icons.eot?26664784");
+    src: url("/assets/css/ZTO/fonts//soap-icons.eot?26664784#iefix") format("embedded-opentype"), url("/assets/css/ZTO/fonts//soap-icons.woff?26664784") format("woff"), url("/assets/css/ZTO/fonts//soap-icons.ttf?26664784") format("truetype"), url("/assets/css/ZTO/fonts//soap-icons.svg?26664784#soap-icons") format("svg");
     font-weight: normal;
     font-style: normal;
 }
@@ -1353,7 +1353,7 @@ img.full-width {
 }
 
 .global-map-area {
-    background: url("../../Images/TCSLITE/global-map.jpg") no-repeat;
+    /* background: url("../../Images/TCSLITE/global-map.jpg") no-repeat; */
 }
 
     .global-map-area .description p {
@@ -2508,7 +2508,7 @@ blockquote {
         -ms-transform: rotateY(180deg) scale(0.5, 0.5);
         -o-transform: rotateY(180deg) scale(0.5, 0.5);
         transform: rotateY(180deg) scale(0.5, 0.5);
-        background: url(../../Images/TCSLITE/icon/hover-effect.png) no-repeat center;
+        /* background: url(../../Images/TCSLITE/icon/hover-effect.png) no-repeat center; */
         filter: alpha(opacity=0);
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
         -moz-opacity: 0;
@@ -7031,7 +7031,7 @@ button, .btn-default {
 }
 
     .lang-flag.en-us {
-        background: url(../../Images/TCSLITE/icon/flags/en-us.png) no-repeat left center;
+        /* background: url(../../Images/TCSLITE/icon/flags/en-us.png) no-repeat left center; */
     }
 
 
@@ -7295,7 +7295,7 @@ button, .btn-default {
             }
 
     .page-title-container.style2 {
-        background: url("../../Images/TCSLITE/bg.png") no-repeat center top #dbdbdb;
+        /* background: url("../../Images/TCSLITE/bg.png") no-repeat center top #dbdbdb; */
         height: 53px;
         line-height: 53px;
         text-align: right;
@@ -7342,7 +7342,7 @@ button, .btn-default {
                 height: 39px;
                 top: 10px;
                 right: -100px;
-                background: url("../../Images/TCSLITE/bird.png") no-repeat;
+                /* background: url("../../Images/TCSLITE/bird.png") no-repeat; */
             }
 
             .page-title-container.style2 .breadcrumbs:before {
@@ -7352,7 +7352,7 @@ button, .btn-default {
                 height: 71px;
                 bottom: -28px;
                 left: -135px;
-                background: url("../../Images/TCSLITE/palm.png") no-repeat;
+                /* background: url("../../Images/TCSLITE/palm.png") no-repeat; */
             }
 
     .page-title-container.style3 {
@@ -11060,7 +11060,7 @@ button.ui-button::-moz-focus-inner {
             }
 
     #footer.style1 {
-        background: url("../../Images/TCSLITE/themes/footer/style01/sand.png") no-repeat center top;
+        /* background: url("../../Images/TCSLITE/themes/footer/style01/sand.png") no-repeat center top; */
         padding-top: 132px;
         margin-top: 40px;
     }
@@ -11139,7 +11139,7 @@ button.ui-button::-moz-focus-inner {
         }
 
         #footer.style1 .logo a {
-            background-image: url("../../Images/TCSLITE/logo/skin2-logo.png");
+            /* background-image: url("../../Images/TCSLITE/logo/skin2-logo.png"); */
         }
 
         #footer.style1 .copyright p {
@@ -11151,7 +11151,7 @@ button.ui-button::-moz-focus-inner {
         }
 
     #footer.style2 {
-        background: url("../../Images/TCSLITE/themes/footer/style02/sky.png") no-repeat center top;
+        /* background: url("../../Images/TCSLITE/themes/footer/style02/sky.png") no-repeat center top; */
         padding-top: 132px;
         margin-top: 80px;
     }
@@ -11230,7 +11230,7 @@ button.ui-button::-moz-focus-inner {
         }
 
         #footer.style2 .logo a {
-            background-image: url("../../images/logo/skin3-logo.png");
+            /* background-image: url("../../images/logo/skin3-logo.png"); */
         }
 
         #footer.style2 .copyright p {
@@ -11242,7 +11242,7 @@ button.ui-button::-moz-focus-inner {
         }
 
     #footer.style3 {
-        background: url("../../Images/TCSLITE/themes/footer/style03/sea.png") no-repeat center 60px #f8f7f3;
+        /* background: url("../../Images/TCSLITE/themes/footer/style03/sea.png") no-repeat center 60px #f8f7f3; */
         padding-top: 192px;
     }
 
@@ -11323,7 +11323,7 @@ button.ui-button::-moz-focus-inner {
         }
 
         #footer.style3 .logo a {
-            background-image: url("../../Images/TCSLITE/logo/skin3-logo.png");
+            /* background-image: url("../../Images/TCSLITE/logo/skin3-logo.png"); */
         }
 
         #footer.style3 .copyright p {
@@ -11336,7 +11336,7 @@ button.ui-button::-moz-focus-inner {
         }
 
     #footer.style4 > .footer-wrapper {
-        background: url("../../Images/TCSLITE/themes/footer/style04/sky.png") no-repeat center bottom;
+        /* background: url("../../Images/TCSLITE/themes/footer/style04/sky.png") no-repeat center bottom; */
         padding-bottom: 0;
     }
 
@@ -11373,7 +11373,7 @@ button.ui-button::-moz-focus-inner {
     }
 
     #footer.style5 > .footer-wrapper {
-        background: url("../../Images/TCSLITE/themes/footer/style05/sky.png") no-repeat center bottom;
+        /* background: url("../../Images/TCSLITE/themes/footer/style05/sky.png") no-repeat center bottom; */
         padding-bottom: 0;
     }
 
@@ -11410,7 +11410,7 @@ button.ui-button::-moz-focus-inner {
     }
 
     #footer.style6 > .footer-wrapper {
-        background: url("../../Images/TCSLITE/themes/footer/style06/sky.png") no-repeat center bottom;
+        /* background: url("../../Images/TCSLITE/themes/footer/style06/sky.png") no-repeat center bottom; */
         padding-bottom: 0;
     }
 
@@ -12609,7 +12609,7 @@ button.ui-button::-moz-focus-inner {
         }
 
     .loading-page.style3 {
-        background: url(../../Images/TCSLITE/hotels/bg.jpg) no-repeat center bottom; /*background: url("http://placehold.it/2080x1228") no-repeat center bottom;*/
+        /* background: url(../../Images/TCSLITE/hotels/bg.jpg) no-repeat center bottom; background: url("http://placehold.it/2080x1228") no-repeat center bottom; */
     }
 
         .loading-page.style3 .container {
@@ -12922,7 +12922,7 @@ button.ui-button::-moz-focus-inner {
         width: 100px;
         height: 102px;
         color: #fff;
-        background: url(../../Images/TCSLITE/icon/discount.png) no-repeat;
+        /* background: url(../../Images/TCSLITE/icon/discount.png) no-repeat; */
     }
 
 .image-box .discount {

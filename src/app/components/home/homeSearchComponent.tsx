@@ -23,7 +23,7 @@ export function HomeSearchComponent(): React.JSX.Element {
               <div className="search-box-wrapper style2">
                 <div className="search-box">
                   <ul className="nav nav-pills search-tabs clearfix">
-                    <li className={activeTab === "package-tab" ? "active" : ""}>
+                    {/* <li className={activeTab === "package-tab" ? "active" : ""}>
                       <a
                         href="#package-tab"
                         data-toggle="tab"
@@ -67,7 +67,7 @@ export function HomeSearchComponent(): React.JSX.Element {
                         <i className="fa fa-hotel"></i>
                         <span className="hidden-xs hidden-sm">Hotels</span>
                       </a>
-                    </li>
+                    </li> */}
 
                     <li
                       className={activeTab === "activity-tab" ? "active" : ""}
@@ -83,7 +83,7 @@ export function HomeSearchComponent(): React.JSX.Element {
                       </a>
                     </li>
 
-                    <li>
+                    {/* <li>
                       <a
                         href="https://charter.ztour-travel.ro/tours"
                         target="_blank"
@@ -139,7 +139,7 @@ export function HomeSearchComponent(): React.JSX.Element {
                         <i className="fas fa-shield-alt"></i>
                         <span className="hidden-xs hidden-sm">Insurance</span>
                       </a>
-                    </li>
+                    </li> */}
                   </ul>
                   <div className="search-tab-content">
                     <ActivityFormComponent />

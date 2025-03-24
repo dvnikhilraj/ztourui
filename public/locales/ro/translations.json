@@ -153,5 +153,41 @@
       "title": "Limbă",
       "select": "Selectează Limba"
     }
+  },
+  "activities": {
+    "search": {
+      "title": "Căutare Activități",
+      "modify": "Modifică Căutarea",
+      "filter": "Filtru",
+      "sort": "Sortează după",
+      "sortBy": {
+        "price": "Preț",
+        "duration": "Durată"
+      }
+    },
+    "results": {
+      "duration": "Durată",
+      "select": "Selectează",
+      "details": "Detalii",
+      "rates": "Tarife",
+      "gallery": "Galerie",
+      "price": "Preț"
+    },
+    "filter": {
+      "title": "Filtru",
+      "clearAll": "Șterge toate filtrele",
+      "name": "Nume",
+      "priceRange": "Interval de preț",
+      "categories": "Categorii",
+      "enterActivityName": "Introduceți numele activității.."
+    },
+    "noResults": {
+      "title": "Oops!",
+      "subtitle": "Nu am găsit activități",
+      "message": "Nu am găsit nicio opțiune după criteriile de căutare selectate",
+      "suggestion": "Vă rugăm actualizați criteriile de căutare și încercați din nou",
+      "filterMessage": "Nu am găsit nicio opțiune cu filtrele selectate",
+      "clearFilters": "Șterge toate filtrele"
+    }
   }
 }

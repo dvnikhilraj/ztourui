@@ -1,0 +1,12 @@
+hr {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+}
+
+.booking-details .other-details dt, .booking-details .other-details dd {
+    padding: .8em 0 !important;
+}
+
+.detailed-logo figure {
+    padding: 10px 0 !important;
+}

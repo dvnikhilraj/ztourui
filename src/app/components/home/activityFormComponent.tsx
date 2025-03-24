@@ -1,11 +1,25 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { apiPaths } from '@/config/apiPaths';
+import { useRouter } from 'next/navigation';
+import { useAppSelector } from '@/store';
+import { useLanguage } from '@/hooks/useLanguage';
 
 interface City {
-  id: number;
-  name: string;
-  countryName: string;
+  CountryCode: string;
+  CountryName: string;
+  CityCode: string;
+  CityName: string;
+  CityDisplayName: string;
+}
+
+interface CityResponse {
+  CityResponse: {
+    Details: {
+      City: City[];
+    };
+    Error: null;
+  };
 }
 
 interface ActivityFormState {
@@ -14,15 +28,30 @@ interface ActivityFormState {
   showPaxPanel: boolean;
   cities: City[];
   showCityList: boolean;
+  selectedCity: {
+    cityCode: string;
+    cityName: string;
+    countryCode: string;
+    countryName: string;
+  } | null;
+  // Remove adults and children from state
 }
 
 export function ActivityFormComponent(): React.JSX.Element {
+  const router = useRouter();
+  const { currentLanguage } = useLanguage() as {
+    currentLanguage: { code: string; name: string } | undefined;
+    handleLanguageChange: (code: string, name: string) => Promise<void>;
+  };
+  const { currentCurrency } = useAppSelector((state) => state.currency);
   const [formData, setFormData] = useState<ActivityFormState>({
     destination: '',
     fromDate: '',
     showPaxPanel: false,
     cities: [],
-    showCityList: false
+    showCityList: false,
+    selectedCity: null,
+    // Remove adults and children initialization
   });
 
   const autocompleteRef = useRef<HTMLDivElement>(null);
@@ -48,10 +77,12 @@ export function ActivityFormComponent(): React.JSX.Element {
         },
         body: JSON.stringify({ searchRequest: searchTerm }),
       });
-      const data = await response.json();
-      setFormData(prev => ({ ...prev, cities: data, showCityList: true }));
+      const data: CityResponse = await response.json();
+      const cities = data.CityResponse.Details.City || [];
+      setFormData(prev => ({ ...prev, cities, showCityList: true }));
     } catch (error) {
       console.error('Error fetching cities:', error);
+      setFormData(prev => ({ ...prev, cities: [], showCityList: false }));
     }
   };
 
@@ -59,7 +90,7 @@ export function ActivityFormComponent(): React.JSX.Element {
     const value = e.target.value;
     setFormData(prev => ({ ...prev, destination: value }));
 
-    // Only fetch if 4 or more characters
+    
     if (value.length >= 4) {
       fetchCities(value);
     } else {
@@ -70,7 +101,13 @@ export function ActivityFormComponent(): React.JSX.Element {
   const handleCitySelect = (city: City) => {
     setFormData(prev => ({
       ...prev,
-      destination: `${city.name}, ${city.countryName}`,
+      destination: city.CityDisplayName,
+      selectedCity: {
+        cityCode: city.CityCode,
+        cityName: city.CityName,
+        countryCode: city.CountryCode,
+        countryName: city.CountryName
+      },
       cities: [],
       showCityList: false
     }));
@@ -81,14 +118,30 @@ export function ActivityFormComponent(): React.JSX.Element {
   };
 
   const handleSearch = () => {
-    // Implement search functionality
-    console.log('Search with:', formData);
+    const tomorrow = new Date(formData.fromDate);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    
+    const searchParams = new URLSearchParams({
+      city: formData.selectedCity?.cityName || '',
+      country: formData.selectedCity?.countryName || '',
+      searchdate: `${formData.fromDate}$${tomorrow.toLocaleDateString('en-US', {
+        month: '2-digit', 
+        day: '2-digit', 
+        year: 'numeric'
+      })}`,
+      guest: '1$0', // Hardcode guest values
+      otherparam: `${currentCurrency?.code || 'EUR'}$1$${formData.selectedCity?.countryCode || ''}$${formData.selectedCity?.cityCode || ''}$${formData.selectedCity?.countryCode || ''}`,
+      ck: '',
+      lang: currentLanguage?.code || 'ro'
+    });
+
+    router.replace(`/activity/result?${searchParams.toString()}`);
   };
 
   return (
     <div className="row">
       {/* Destination Input */}
-      <div className="col-sm-4 col-md-3 col-xs-12">
+      <div className="col-sm-4 col-md-4 col-xs-12">
         <label className="searchbox-text">Your Destination</label>
         <div className="form-group relative" ref={autocompleteRef}>
           <input
@@ -111,11 +164,12 @@ export function ActivityFormComponent(): React.JSX.Element {
             <div className="autocomplete-options-container">
               {formData.cities.map((city, index) => (
                 <div
-                  key={index}
+                  key={city.CityCode}
                   className="autocomplete-option"
                   onClick={() => handleCitySelect(city)}
                 >
-                  {city.name}, {city.countryName}
+                  <i className="fas fa-map-marker-alt"></i>
+                  <span>{city.CityDisplayName}</span>
                 </div>
               ))}
             </div>
@@ -124,7 +178,7 @@ export function ActivityFormComponent(): React.JSX.Element {
       </div>
 
       {/* Date Input */}
-      <div className="col-sm-4 col-md-2 col-xs-6">
+      <div className="col-sm-4 col-md-4 col-xs-6">
         <label className="searchbox-text">From Date</label>
         <div className="form-group relative">
           <div className="datepicker-wrap">
@@ -139,7 +193,7 @@ export function ActivityFormComponent(): React.JSX.Element {
       </div>
 
       {/* Search Button */}
-      <div className="col-sm-4 col-md-2 col-xs-12">
+      <div className="col-sm-4 col-md-4 col-xs-12">
         <label className="searchbox-text hidden-xs">&nbsp;</label>
         <div className="form-group">
           <button
