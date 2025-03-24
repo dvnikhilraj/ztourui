@@ -1,28 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
-// import '@public/assets/css/ZTO/bootstrap.css';
-// import '@public/assets/css/ZTO/style.css';
-
-// import '@public/assets/css/ZTO/Home/all.min.css';
-// import '@public/assets/css/ZTO/style-home.css';
-// import '@public/assets/css/ZTO/Home/slicknav.min.css';
-// import '@public/assets/css/ZTO/Home/select2.min.css';
-// import '@public/assets/css/ZTO/custom.css';
-// import '@public/assets/css/ZTO/Home/responsive.css';
-
-// import '@public/assets/css/ZTO/header.css';
-
-// import '@public/assets/css/ZTO/footer.css';
-// import '@public/assets/css/ZTO/theme.css';
-
-// import '@public/assets/css/ZTO/inline_style.css';
-
-// import '@public/assets/css/ZTO/Home/stylehome.css';
-
 import { useSearchParams } from "next/navigation";
 import { useTranslation } from "react-i18next";
-import { ActivityCard } from "@components/activity/activityCard";
-import { MobileSortFilter } from "@components/activity/mobileSortFilter";
 import { ActivityWaiting } from "@components/activity/activityWaiting";
 import { ActivityFilter } from "@components/activity/activityFilter";
 import { Activity } from "@/types/Activity/activity";
@@ -141,25 +120,7 @@ export default function ActivityResultPage() {
   }
 
   return (
-    <>
-      <link rel="stylesheet" href="/assets/css/ZTO/bootstrap.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/style.css" />
-
-      {/* Home specific styles */}
-      <link rel="stylesheet" href="/assets/css/ZTO/Home/all.min.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/style-home.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/Home/slicknav.min.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/Home/select2.min.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/custom.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/Home/responsive.css" />
-
-      {/* Header and Footer */}
-      <link rel="stylesheet" href="/assets/css/ZTO/header.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/footer.css" />
-
-      {/* Theme and inline styles */}
-      <link rel="stylesheet" href="/assets/css/ZTO/theme.css" />
-      <link rel="stylesheet" href="/assets/css/ZTO/inline_style.css" />
+    
       <div className="activity-main-wrapper">
         <section id="content" style={{ minHeight: "353px" }}>
           <div className="container">
@@ -238,6 +199,6 @@ export default function ActivityResultPage() {
           </div>
         </section>
       </div>
-    </>
+    
   );
 }

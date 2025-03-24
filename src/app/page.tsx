@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import Head from "next/head";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { fetchCompanySettings } from "@store/reducers/companySettingsSlice";
 import { HomeBannerCarousel } from "./components/home/homeBannerCarousel";
@@ -34,30 +33,15 @@ export default function Home() {
   }
 
   return (
-    <>
-      {/* <Head> */}
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/all.min.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/bootstrap.min.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/slick.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/slick-theme.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/header.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/footer.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/stylehome.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/custom.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/select2.min.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/Home/responsive.css" />
-        <link rel="stylesheet" href="/assets/css/ZTO/inline_style.css" />
-      {/* </Head> */}
-      <div id="main">
-        <HomeBannerCarousel />
-        <HomeSearchComponent />
-        <div id="content" style={{ minHeight: "338px" }}>
-          <ExoticHolidaysComponent />
-          <PackageCharterComponent />
-          <AboutUsComponent />
-          <PartnersComponent />
-        </div>
+    <div id="main">
+      <HomeBannerCarousel />
+      <HomeSearchComponent />
+      <div id="content" style={{ minHeight: "338px" }}>
+        <ExoticHolidaysComponent />
+        <PackageCharterComponent />
+        <AboutUsComponent />
+        <PartnersComponent />
       </div>
-    </>
+    </div>
   );
 }

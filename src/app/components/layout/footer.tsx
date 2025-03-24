@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-
+import '@public/assets/css/ZTO/footer.css';
 
 const ContactInfo = () => (
   <div className="contact-box">
