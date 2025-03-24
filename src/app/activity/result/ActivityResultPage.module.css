@@ -1,0 +1,61 @@
+
+/* Base styles */
+@import url('/assets/css/ZTO/bootstrap.css');
+@import url('/assets/css/ZTO/style.css');
+
+/* Home specific styles */
+@import url('/assets/css/ZTO/Home/all.min.css');
+@import url('/assets/css/ZTO/style-home.css');
+@import url('/assets/css/ZTO/Home/slicknav.min.css');
+@import url('/assets/css/ZTO/Home/select2.min.css');
+@import url('/assets/css/ZTO/custom.css');
+@import url('/assets/css/ZTO/Home/responsive.css');
+
+/* Header and Footer */
+@import url('/assets/css/ZTO/header.css');
+@import url('/assets/css/ZTO/footer.css');
+
+/* Theme and inline styles */
+@import url('/assets/css/ZTO/theme.css');
+@import url('/assets/css/ZTO/inline_style.css');
+
+/* Component specific styles */
+.activityMainWrapper {
+  min-height: 353px;
+}
+
+.searchBoxWrapper {
+  display: none;
+}
+
+.searchBoxWrapperVisible {
+  display: block;
+}
+
+.filterSidebar {
+  display: none;
+}
+
+.filterSidebarVisible {
+  display: block;
+}
+
+.noResults {
+  background: #fff;
+  padding: 30px;
+  text-align: left;
+}
+
+.noResultsIcon {
+  border-right: 1px solid #eaeaea;
+}
+
+.noResultsMessage {
+  color: #9e9e9e;
+  font-size: 16px;
+}
+
+.noResultsSuggestion {
+  color: #9e9e9e;
+  font-size: 11px;
+}
