@@ -30,7 +30,7 @@
       "@types/*": ["./src/types/*"],
       "@styles/*": ["./src/styles/*"],
       "@assets/*": ["./public/assets/*"],
-      "@models/*": ["src/types/*"],
+      "@models/*": ["./src/types"],
       "@public/*": ["./public/*"],
     }
   },

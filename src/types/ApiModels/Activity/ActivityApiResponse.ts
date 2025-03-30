@@ -1,90 +1,97 @@
-interface Component {
-    ComponentName: string;
-    ImagePath: string;
-    ImageTag: string;
-    Available: boolean;
-  }
-  
-  interface ValidDay {
-    DayName: string;
-    IsValid: boolean;
-  }
-  
-  interface ComponentDetail {
-    Component: Component[];
-  }
-  
-  interface Package {
-    Idx: number;
-    Provider: number;
-    SupCode: string;
-    PackageId: string;
-    Name: string;
-    DisplayName: string | null;
-    PackageType: string;
-    RegionId: string;
-    RegionName: string;
-    CountryId: string;
-    CountryName: string;
-    NoOfDays: string;
-    Thumbnail: string;
-    BigImage: string;
-    GrossPrice: string;
-    CompNet: string;
-    CompGross: string;
-    ShortDesc: string;
-    ComponentCode: string;
-    ComponentDetail: ComponentDetail;
-    ValidDays: ValidDay[];
-    Available: boolean;
-    DefaultCity: string;
-    SupplierEmail: string;
-  }
-  
-  interface PackagesSearch {
-    Currency: string;
-    Total: number;
-    Package: Package[];
-  }
-  
-  interface SearchDetails {
-    Error: null | string;
-    Search: {
-      Packages: PackagesSearch;
+interface Master {
+  CityCode: string;
+  CountryCode: string;
+  FromDate: string;
+  ToDate: string;
+  Nationality: string;
+  ResponseMode: string;
+  Mode: string;
+  AdditionalMarkup: string;
+  CityName: string;
+  CountryName: string;
+  LanguageCode: string;
+  LangCode: string;
+}
+
+interface Authentication {
+  AuthenticationKey: string;
+  Channel: string;
+  OnBehalfBooking: string;
+  SubAgent: {
+    Id: string;
+    UserId: string;
+    BranchId: string;
+    SaBranchId: string;
+  };
+  CompanyId: string;
+  ServiceType: string;
+}
+
+interface Tour {
+  IsAPI: boolean;
+  Id: string;
+  Code: string;
+  Name: string;
+  DisplayName: string;
+  TypeCode: string;
+  Duration: string;
+  DurationHours: string;
+  Avl: string;
+  ROE: string;
+  SuppPrice: string;
+  SuppCurrency: string;
+  CompNet: string;
+  CompGross: string;
+  EPDNet: string;
+  EPDGross: string;
+  AGNet: string;
+  AGGross: string;
+  SANet: string;
+  SAGross: string;
+  GrossPrice: string;
+  ProcessToken: string;
+  DateList: {
+    Date: Array<{ Text: string }>;
+  };
+  CID: string;
+  LoyaltyPoints: string;
+}
+
+interface SightSeeing {
+  SightId: number;
+  Code: string;
+  Name: string;
+  DisplayName: string;
+  CityCode: string;
+  CityName: string;
+  Desc: string;
+  Duration: string;
+  DurationHours: string;
+  Image: string;
+  Type: string;
+  Category: string;
+  MinP: string;
+  Token: string;
+  Provider: string;
+  CID: string;
+  TrackingId: string;
+  Tours: {
+    Tour: Tour[];
+  };
+  LoyaltyPoints: string;
+}
+
+interface ActivityApiSearchResponse {
+  SearchResponse: {
+    Master: Master;
+    Authentication: Authentication;
+    SightSeeings: {
+      SightSeeing: SightSeeing[];
+      Currency: string;
+      Total: number;
+      TrackingId: string;
     };
-  }
-  
-  interface Master {
-    CountryCode: string;
-    RegionCode: string;
-    DateOfTravel: string;
-    Duration: string;
-    DepartureCity: string;
-    Comp_Curr: string;
-    LangCode: string;
-    SessionId: string;
-  }
-  
-  interface Authentication {
-    AuthenticationKey: string;
-    Channel: string;
-    OnBehalfBooking: string;
-    CompanyId: string;
-    ServiceType: string;
-    SubAgent: {
-      Id: number;
-      UserId: number;
-      BranchId: number;
-      SaBranchId: number;
-    };
-  }
-  
-  interface SearchResponse {
-    Response: {
-      Master: Master;
-      Authentication: Authentication;
-      ResponseDetails: SearchDetails;
-    };
-  }
-  
-  export type { SearchResponse, Package, Component, ValidDay };
+  };
+}
+
+export type { ActivityApiSearchResponse, SightSeeing, Tour, Master, Authentication };

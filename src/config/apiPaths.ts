@@ -1,7 +1,8 @@
 export const apiPaths = {
-  basePath: 'https://uat.ztour-travel.ro',
+  basePath: 'http://AcitivityAPI.ztour-travel.ro',
   activities: {
     cityList: '/Activity/CityList',
+    search : '/api/activity/Search'
   },
 } as const;
 

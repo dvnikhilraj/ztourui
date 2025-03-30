@@ -1,9 +1,9 @@
 'use client';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { ActivityApiSearchResponse } from '@/types/ApiModels/Activity/ActivityApiResponse';
 interface FilterProps {
-  activities: any[];
+  activities: ActivityApiSearchResponse | null;
   onFilterChange: (filters: any) => void;
 }
 

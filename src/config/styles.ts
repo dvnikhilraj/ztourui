@@ -20,7 +20,7 @@ export const PAGE_STYLESHEETS = {
     "/assets/css/ZTO/Home/slicknav.min.css",
     "/assets/css/ZTO/Home/select2.min.css",
     "/assets/css/ZTO/custom.css",
-    "/assets/css/ZTO/Home/responsive.css",
+    "/assets/css/ZTO/responsive.css",
     "/assets/css/ZTO/header.css",
     "/assets/css/ZTO/footer.css",
     "/assets/css/ZTO/theme.css",
