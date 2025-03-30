@@ -7,7 +7,7 @@ export function HomeSearchComponent(): React.JSX.Element {
   const [activeTab, setActiveTab] = useState("activity-tab");
 
   const handleTabClick = (tabId: string, e: React.MouseEvent) => {
-    // Only update state for tabs that aren't external links
+    
     if (!e.currentTarget.getAttribute("target")) {
       e.preventDefault();
       setActiveTab(tabId);

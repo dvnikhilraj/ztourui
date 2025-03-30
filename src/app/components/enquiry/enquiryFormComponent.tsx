@@ -101,8 +101,7 @@ export function EnquiryFormComponent() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    // Add validation logic here
-    // Submit form data to API
+    
   };
 
   const handleReset = () => {
@@ -183,7 +182,7 @@ export function EnquiryFormComponent() {
                 <div className="panel-body">
                   <div className="flight-div">
                     <div className="wizard" id="flight-wizard">
-                      {/* Date Selection */}
+                   
                       <div className="setup-content" id="step-1">
                         <div className="input-daterange row" data-date-format="MM d, D">
                           <div className="col-sm-3 hidden-xs">&nbsp;</div>
@@ -220,7 +219,7 @@ export function EnquiryFormComponent() {
                         </div>
                       </div>
 
-                      {/* Services Section */}
+                   
                       <div className="setup-content" id="step-2">
                         {/* Hotel Service */}
                         <div className="hotel" id="hotel">
@@ -700,12 +699,10 @@ export function EnquiryFormComponent() {
                           </div>
                         </div>
 
-                        {/* Continue adding other service sections similarly... */}
+                     
                       </div>
 
-                      {/* Add the rest of the form sections... */}
-
-                      {/* Submit Buttons */}
+                  
                       <div className="row responsive-row">
                         <div className="col-xs-6">
                           <button type="button" className="full-width" onClick={handleReset} id="enquiryreset">

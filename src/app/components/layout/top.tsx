@@ -470,10 +470,10 @@ export function Top({ userDetails }: TopProps): React.JSX.Element {
         </div>
 
         <div id="ti-signup" className="ti-signup-box ti-box">
-          {/* Add registration form component */}
+         
         </div>
         <div id="ti-login" className="ti-login-box ti-box">
-          {/* Add login form component */}
+     
         </div>
       </header>
     </>

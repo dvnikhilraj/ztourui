@@ -1,5 +1,5 @@
 export interface ActivityGalleryProps {
-    images: Array<{ text: string }>;
+    images: string[];
     noGallery?: boolean;
   }
   

@@ -15,7 +15,7 @@ const carouselItems: CarouselItem[] = [
     imageSrc: '/assets/images/ZTO/home/ZTour_Home_Page_Banner_Blue.png',
     altText: 'banner_homepage'
   },
-  // Add more items as needed
+ 
 ];
 
 export function HomeBannerCarousel(): React.JSX.Element {
@@ -32,7 +32,7 @@ export function HomeBannerCarousel(): React.JSX.Element {
         className="carousel slide padding-top-carousel" 
         data-ride="carousel"
       >
-        {/* Indicators */}
+   
         <ol className="carousel-indicators indicators-bottom-margin">
           {carouselItems.map((item, index) => (
             <li

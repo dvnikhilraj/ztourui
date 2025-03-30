@@ -1,12 +1,15 @@
 export interface ActivityDetails {
+  id : string;
+  city : string;
+  image : string;
+  price : string;
   name: string;
   duration: string;
   displayCountryCityName: string;
   fromDate: string;
-  toDate: string;
   minPrice: number;
   currency: string;
-  images: Array<{ text: string }>;
+  images: string[];
   descriptions: Array<{
     type: string;
     text: string;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useTranslation } from 'react-i18next';
 import DatePicker from 'react-datepicker';
@@ -13,52 +13,73 @@ interface ActivityFormData {
   adultCount: number;
   childCount: number;
   childAges: number[];
+  lang: string;
 }
 
-export function ActivityNoResultForm() {
+interface ActivityNoResultFormProps {
+  initialFilters: {
+    city: string;
+    country: string;
+    searchDate: string | null;
+    guest: string[];
+    otherParam: string[];
+    lang: string;
+  };
+}
+
+export function ActivityNoResultForm({ initialFilters }: ActivityNoResultFormProps) {
   const { t } = useTranslation();
   const router = useRouter();
-
+console.log(initialFilters);
   const [formData, setFormData] = useState<ActivityFormData>({
-    destination: '',
+    destination: initialFilters.city || '',
     fromDate: null,
-    toDate: null,
-    adultCount: 1,
-    childCount: 0,
-    childAges: []
+    toDate:null,
+    adultCount: parseInt(initialFilters.guest[0], 10) || 1,
+    childCount: parseInt(initialFilters.guest[1], 10) || 0,
+    childAges: [],
+    lang: initialFilters.lang || 'ro',
   });
 
   const [showPaxPanel, setShowPaxPanel] = useState(false);
   const [error, setError] = useState({ depError: false, depMsg: '' });
 
+  useEffect(() => {
+    
+    setFormData((prev) => ({
+      ...prev,
+      childAges: Array(formData.childCount).fill(2),
+    }));
+  }, [formData.childCount]);
+
   const handleDestinationChange = (value: string) => {
-    setFormData(prev => ({ ...prev, destination: value }));
+    setFormData((prev) => ({ ...prev, destination: value }));
     setError({ depError: false, depMsg: '' });
   };
 
   const handleDateChange = (date: Date | null, field: 'fromDate' | 'toDate') => {
-    setFormData(prev => ({ ...prev, [field]: date }));
+    setFormData((prev) => ({ ...prev, [field]: date }));
   };
 
   const handleCountChange = (type: 'adult' | 'child', value: number) => {
     if (type === 'adult' && (value >= 1 && value <= 4)) {
-      setFormData(prev => ({ ...prev, adultCount: value }));
+      setFormData((prev) => ({ ...prev, adultCount: value }));
     } else if (type === 'child' && (value >= 0 && value <= 3)) {
-      setFormData(prev => ({ 
-        ...prev, 
+      setFormData((prev) => ({
+        ...prev,
         childCount: value,
-        childAges: value < prev.childAges.length 
-          ? prev.childAges.slice(0, value) 
-          : [...prev.childAges, ...Array(value - prev.childAges.length).fill(2)]
+        childAges: value < prev.childAges.length
+          ? prev.childAges.slice(0, value)
+          : [...prev.childAges, ...Array(value - prev.childAges.length).fill(2)],
       }));
     }
   };
 
   const handleChildAgeChange = (index: number, age: number) => {
     if (age >= 2 && age <= 12) {
-      setFormData(prev => ({
+      setFormData((prev) => ({
         ...prev,
-        childAges: prev.childAges.map((a, i) => i === index ? age : a)
+        childAges: prev.childAges.map((a, i) => (i === index ? age : a)),
       }));
     }
   };
@@ -75,21 +96,22 @@ export function ActivityNoResultForm() {
       toDate: formData.toDate?.toISOString() || '',
       adults: formData.adultCount.toString(),
       children: formData.childCount.toString(),
-      childAges: formData.childAges.join(',')
+      childAges: formData.childAges.join(','),
+      lang: formData.lang,
     });
 
     router.push(`/activity/result?${searchParams.toString()}`);
   };
 
   return (
-    <div className="container">
+    
       <div className="panel-content" style={{ padding: '15px 21px 10px' }}>
         <div className="row">
           <div className="col-sm-4 col-md-3 col-xs-12 form-group">
             <label>{t('activities.form.destination')}</label>
             <input
               type="text"
-              style={{ paddingLeft: '34px' }} 
+              style={{ paddingLeft: '34px' }}
               className="input-text full-width search_icon"
               placeholder={t('activities.form.destinationPlaceholder')}
               value={formData.destination}
@@ -132,18 +154,13 @@ export function ActivityNoResultForm() {
           <div className="col-sm-4 col-md-3 col-xs-12">
             <label>{t('activities.form.adultsChildren')}</label>
             <div className="drop-alter relative form-group">
-              <a 
-                href="javascript:void(0)" 
+              <a
+                href="javascript:void(0)"
                 className="paxpanellink"
                 onClick={() => setShowPaxPanel(!showPaxPanel)}
               >
-                <i className="font-size-15" style={{ verticalAlign: 'baseline !important' }}></i>
-                &nbsp;
-                <span>{formData.adultCount} </span>
-                <span>{formData.adultCount > 1 ? t('activities.form.travelers') : t('activities.form.traveler')}</span>
-                , 
-                <span>{formData.childCount}</span>
-                <span>{formData.childCount !== 1 ? t('activities.form.children') : t('activities.form.child')}</span>
+                <span>{formData.adultCount} {t('activities.form.adults')}</span>,{' '}
+                <span>{formData.childCount} {t('activities.form.children')}</span>
                 <div className="new-down-right">
                   <i className="fas fa-chevron-down"></i>
                 </div>
@@ -151,8 +168,7 @@ export function ActivityNoResultForm() {
 
               {showPaxPanel && (
                 <div className="pax-count-hotel paxpanel activitypaxpannel">
-                  {/* Adults and Children counters */}
-                  {/* Child age selectors */}
+                  
                 </div>
               )}
             </div>
@@ -161,11 +177,8 @@ export function ActivityNoResultForm() {
           <div className="col-sm-4 col-md-2 col-xs-12">
             <label className="hidden-xs">&nbsp;</label>
             <div className="form-group">
-              <button 
+              <button
                 className="full-width icon-check animated bounce"
-                data-animation-type="bounce"
-                data-animation-duration="1"
-                style={{ animationDuration: '1s', visibility: 'visible' }}
                 onClick={handleSubmit}
               >
                 {t('activities.form.searchNow')}
@@ -174,6 +187,6 @@ export function ActivityNoResultForm() {
           </div>
         </div>
       </div>
-    </div>
+   
   );
 }

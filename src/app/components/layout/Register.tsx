@@ -19,7 +19,7 @@ export const Register: React.FC<RegisterProps> = ({ isOpen, onClose }) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your registration logic here
+    
   };
 
   return (

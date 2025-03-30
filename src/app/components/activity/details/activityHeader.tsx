@@ -8,6 +8,18 @@ export const ActivityHeader = ({
   activeSection 
 }: ActivityHeaderProps) => {
   const { t } = useTranslation();
+  const fromDate = new Date(activity.fromDate);
+  const toDate = new Date(fromDate);
+  toDate.setDate(fromDate.getDate() + 1);
+
+  
+  const formatDate = (date: Date) =>
+    date.toLocaleDateString('en-US', {
+      weekday: 'short',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
 
   return (
     <div data-spy="affix" data-offset-top="197" className="top_modify_room affix-top" id="fixedTop">
@@ -18,10 +30,10 @@ export const ActivityHeader = ({
           </span>
           <span className="customDir">
             <i className="soap-icon-calendar" style={{ fontSize: '18px', verticalAlign: 'baseline' }}></i>
-            &nbsp;{activity.fromDate}&nbsp;
+            &nbsp;{formatDate(fromDate)}&nbsp;
             <i className="soap-icon-right" style={{ verticalAlign: 'baseline' }}></i>&nbsp;
             <i className="soap-icon-calendar" style={{ fontSize: '18px', verticalAlign: 'baseline' }}></i>
-            &nbsp;{activity.toDate}
+            &nbsp;{formatDate(toDate)}
           </span>
         </div>
       </div>

@@ -4,7 +4,6 @@ export interface ActivityHeaderProps {
       duration: string;
       displayCountryCityName: string;
       fromDate: string;
-      toDate: string;
       minPrice: number;
       currency: string;
     };

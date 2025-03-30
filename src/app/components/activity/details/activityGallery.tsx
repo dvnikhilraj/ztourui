@@ -15,7 +15,7 @@ export const ActivityGallery = ({ images, noGallery }: ActivityGalleryProps) => 
             {images.map((image, index) => (
               <li key={index} className={index === activeImage ? 'active' : ''}>
                 <Image
-                  src={image.text}
+                  src={image}
                   alt={`Gallery image ${index + 1}`}
                   width={800}
                   height={600}

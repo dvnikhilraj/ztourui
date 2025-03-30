@@ -67,14 +67,13 @@ export default function PassengerInfoPage() {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
     
-    // Click handlers for specific buttons
+   
     const moreInfoBtn = document.querySelector('.moreinfobtn');
     const invalidValueBtn = document.querySelector('.invalid .value .button');
     
     moreInfoBtn?.addEventListener('click', handleScroll);
     invalidValueBtn?.addEventListener('click', handleScroll);
 
-    // Set footer margin
     const footer = document.querySelector('footer');
     if (footer) {
       footer.style.marginTop = '30px';
@@ -89,7 +88,7 @@ export default function PassengerInfoPage() {
   }, []);
 
   useEffect(() => {
-    // Fetch fare details from API or state management
+   
     const fetchFareDetails = async () => {
       try {
         const response = await fetch('/api/activity/fare-details');
@@ -122,10 +121,10 @@ export default function PassengerInfoPage() {
 
   const handleValidateAndSubmit = () => {
     if (!termsAccepted || !travelContractAccepted) {
-      // Show error message
+    
       return;
     }
-    // Handle form submission
+
   };
 
   return (

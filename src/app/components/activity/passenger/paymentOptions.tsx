@@ -50,7 +50,7 @@ export const PaymentOptions = ({ isRefundable }: PaymentOptionsProps) => {
             </div>
           </div>
           
-          {/* Payment Info Section */}
+       
           {selectedPayment === 'card' && (
             <div className="payment-info card-info" id="creditCardInfo">
               <div className="row">

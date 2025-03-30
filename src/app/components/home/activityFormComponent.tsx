@@ -34,7 +34,7 @@ interface ActivityFormState {
     countryCode: string;
     countryName: string;
   } | null;
-  // Remove adults and children from state
+  
 }
 
 export function ActivityFormComponent(): React.JSX.Element {
@@ -51,13 +51,13 @@ export function ActivityFormComponent(): React.JSX.Element {
     cities: [],
     showCityList: false,
     selectedCity: null,
-    // Remove adults and children initialization
+   
   });
 
   const autocompleteRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Add click outside listener
+    
     const handleClickOutside = (event: MouseEvent) => {
       if (autocompleteRef.current && !autocompleteRef.current.contains(event.target as Node)) {
         setFormData(prev => ({ ...prev, showCityList: false }));
@@ -124,11 +124,7 @@ export function ActivityFormComponent(): React.JSX.Element {
     const searchParams = new URLSearchParams({
       city: formData.selectedCity?.cityName || '',
       country: formData.selectedCity?.countryName || '',
-      searchdate: `${formData.fromDate}$${tomorrow.toLocaleDateString('en-US', {
-        month: '2-digit', 
-        day: '2-digit', 
-        year: 'numeric'
-      })}`,
+      searchdate: `${formData.fromDate}`,
       guest: '1$0', // Hardcode guest values
       otherparam: `${currentCurrency?.code || 'EUR'}$1$${formData.selectedCity?.countryCode || ''}$${formData.selectedCity?.cityCode || ''}$${formData.selectedCity?.countryCode || ''}`,
       ck: '',
@@ -140,7 +136,7 @@ export function ActivityFormComponent(): React.JSX.Element {
 
   return (
     <div className="row">
-      {/* Destination Input */}
+    
       <div className="col-sm-4 col-md-4 col-xs-12">
         <label className="searchbox-text">Your Destination</label>
         <div className="form-group relative" ref={autocompleteRef}>
@@ -159,7 +155,7 @@ export function ActivityFormComponent(): React.JSX.Element {
             </span>
           )}
           
-          {/* City Autocomplete Dropdown */}
+       
           {formData.showCityList && formData.cities.length > 0 && (
             <div className="autocomplete-options-container">
               {formData.cities.map((city, index) => (
@@ -177,7 +173,7 @@ export function ActivityFormComponent(): React.JSX.Element {
         </div>
       </div>
 
-      {/* Date Input */}
+   
       <div className="col-sm-4 col-md-4 col-xs-6">
         <label className="searchbox-text">From Date</label>
         <div className="form-group relative">
@@ -192,7 +188,6 @@ export function ActivityFormComponent(): React.JSX.Element {
         </div>
       </div>
 
-      {/* Search Button */}
       <div className="col-sm-4 col-md-4 col-xs-12">
         <label className="searchbox-text hidden-xs">&nbsp;</label>
         <div className="form-group">

@@ -16,7 +16,7 @@ export const ForgotPassword: React.FC<ForgotPasswordProps> = ({ isOpen, onClose 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Add your forgot password logic here
+   
   };
 
   return (

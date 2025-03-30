@@ -13,7 +13,7 @@ export const ActivityPolicyDetails = ({
     <div className="booking-section travelo-box">
       <h3 className="cart-service-heading-container">{t('CancellationPolicy')}</h3>
       
-      {/* Free Cancellation Section */}
+    
       {cancellationPolicy.Policy.length > 0 && (() => {
         const mindate = new Date(cancellationPolicy.Policy[0].DateFrom);
         const today = new Date();
@@ -42,7 +42,7 @@ export const ActivityPolicyDetails = ({
         }
       })()}
 
-      {/* Policy Items */}
+     
       {cancellationPolicy.Policy.map((item, index) => (
         <div key={index} className="text-justify">
           <i className="fa fa-hand-o-right"></i>&nbsp;
@@ -52,7 +52,7 @@ export const ActivityPolicyDetails = ({
         </div>
       ))}
 
-      {/* Notes Section */}
+    
       <div>
         <p className="text-justify">{t('_Note')} {t('notes')}</p>
       </div>

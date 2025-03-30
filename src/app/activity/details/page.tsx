@@ -1,6 +1,8 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSearchParams } from 'next/navigation';
 import Image from 'next/image';
 import { ActivityHeader } from '@components/activity/details/activityHeader';
 import { ActivityGallery } from '@components/activity/details/activityGallery';
@@ -12,27 +14,44 @@ import styles from './styles.module.css';
 
 export default function ActivityDetailsPage() {
   const { t } = useTranslation();
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(true);
   const [showContent, setShowContent] = useState(false);
   const [activityDetails, setActivityDetails] = useState<ActivityDetails | null>(null);
   const [activeSection, setActiveSection] = useState('');
 
   useEffect(() => {
-    const fetchActivityDetails = async () => {
-      try {
-        const response = await fetch('/api/activity/details');
-        const data = await response.json();
-        setActivityDetails(data);
-        setShowContent(true);
-      } catch (error) {
-        console.error('Error fetching activity details:', error);
-      } finally {
-        setLoading(false);
-      }
+    // Fetch values from the URL
+    const id = searchParams.get('id') || '';
+    const name = searchParams.get('name') || '';
+    const city = searchParams.get('city') || '';
+    const duration = searchParams.get('duration') || '';
+    const price = searchParams.get('price') || '';
+    const currency = searchParams.get('currency') || '';
+    const image = searchParams.get('image') || '';
+    const fromDate = searchParams.get('fromDate') || '';
+    console.log("fr"+fromDate);
+ 
+    const details: ActivityDetails = {
+      id,
+      name,
+      city,
+      duration,
+      price,
+      currency,
+      image,
+      displayCountryCityName: `${city}`, 
+      fromDate: fromDate, 
+      minPrice: 0, 
+      images: [image], 
+      tours: [], 
+      descriptions: [], 
     };
-
-    fetchActivityDetails();
-  }, []);
+console.log('Activity Details:', details); 
+    setActivityDetails(details);
+    setShowContent(true);
+    setLoading(false);
+  }, [searchParams]);
 
   const handleGotoElement = (elementId: string) => {
     setActiveSection(elementId);
@@ -47,7 +66,7 @@ export default function ActivityDetailsPage() {
       <div className="container">
         <div id="main1" className="col-md-12 row roompagepadding">
           <div data-spy="affix" data-offset-top="197" className="top_modify_room affix-top" id="fixedTop">
-            {/* content */}
+           
           </div>
           {loading ? (
             <div className="pageloader" style={{ height: '250px', background: '#fff' }}>
@@ -65,7 +84,7 @@ export default function ActivityDetailsPage() {
                     activeSection={activeSection}
                   />
 
-                  {activityDetails.images.length > 0 && (
+                  {activityDetails.images && activityDetails.images.length > 0 && (
                     <ActivityGallery 
                       images={activityDetails.images}
                       noGallery={true}
@@ -75,7 +94,7 @@ export default function ActivityDetailsPage() {
                   <ActivityRates 
                     tours={activityDetails.tours}
                     currency={activityDetails.currency}
-                    onPolicyClick={() => {/* handle policy click */}}
+                    onPolicyClick={() => {}}
                   />
 
                   {activityDetails.descriptions.map((desc, index) => (

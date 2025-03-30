@@ -69,7 +69,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <div id="toparea">
                   <Top
                     languageResources={mockLanguageResources}
-                    userDetails={null} // Replace with actual user details from auth state
+                    userDetails={null} 
                   />
                 </div>
 
@@ -80,10 +80,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <main></main>
 
                 <Footer />
-                {/* Add Footer component here */}
+               
               </div>
 
-              {/* Cookie Consent */}
               <div id="cookiePopup">
                 <div className="constant clear">
                   <b>Consimțământul pentru cookie-uri Z-Tour</b>
@@ -91,7 +90,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                 <p>
                   Pentru a vă oferi o mai bună experiență de navigare, acest
                   website foloseste cookie-uri...
-                  {/* Add rest of cookie consent text */}
+            
                 </p>
                 <div className="accept">
                   <button id="acceptCookie">Accept</button>

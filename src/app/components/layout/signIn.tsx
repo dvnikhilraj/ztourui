@@ -20,14 +20,14 @@ export const SignIn: React.FC<SignInProps> = ({ isOpen, onClose }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Add your login logic here
+   
     setLoading(false);
   };
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    // Add your forgot password logic here
+  
     setLoading(false);
   };
 

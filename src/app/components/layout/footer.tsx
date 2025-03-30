@@ -62,7 +62,7 @@ const SocialMedia = () => (
 
 const Newsletter = () => {
   const handleSubmit = () => {
-    // Add newsletter submission logic here
+  
   };
 
   return (

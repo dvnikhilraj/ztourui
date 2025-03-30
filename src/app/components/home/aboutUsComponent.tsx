@@ -57,7 +57,7 @@ export function AboutUsComponent(): React.JSX.Element {
           ))}
         </div>
 
-        {/* Hidden Images Section */}
+   
         <div className="row m-t-30" style={{ display: 'none' }}>
           <div className="col-sm-offset-2 col-sm-8">
             <div className="row">
@@ -92,7 +92,6 @@ export function AboutUsComponent(): React.JSX.Element {
           </div>
         </div>
 
-        {/* Payment Image Section */}
         <div className="row m-t-30">
           <div className="col-sm-8 col-sm-offset-2">
             <Image 
