@@ -26,6 +26,7 @@ export const PAGE_STYLESHEETS = {
     "/assets/css/ZTO/theme.css",
     "/assets/css/ZTO/inline_style.css",
     "/assets/css/ZTO/Romanian.css",
+    "/assets/css/ZTO/components/activityresult.css",
   ],
   "/activity/details": [
     "/assets/css/ZTO/bootstrap.css",

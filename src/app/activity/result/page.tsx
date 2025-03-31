@@ -2,13 +2,16 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import {ActivityListItem} from "@components/activity/result/activityListItem";
 import { apiPaths } from "@/config/apiPaths";
 // import {  } from "next/router";
 import { ActivityWaiting } from "@components/activity/activityWaiting";
+import { ActivityPageTitle } from "@components/activity/result/activityPageTitle";
 import {
   ActivityApiSearchResponse,
   SightSeeing,
 } from "@/types/ApiModels/Activity/ActivityApiResponse";
+import { ActivityResultFilter } from "@components/activity/result/activityResultFilter";
 import { ActivityFilter } from "@components/activity/activityFilter";
 import { Activity } from "@/types/Activity/activity";
 import { ActivityNoResultForm } from "@/app/components/activity/ActivityNoResultForm";
@@ -104,8 +107,126 @@ const MOCK_RESPONSE: ActivityApiSearchResponse = {
           },
           LoyaltyPoints: "0",
         },
+         {
+          SightId: 1,
+          Code: "1",
+          Name: "Day Trip To Turda Salt Mine, Rimetea Village & Col",
+          DisplayName: "",
+          CityCode: "CLU27619",
+          CityName: "Cluj-Napoca",
+          Desc: "",
+          Duration: "0 Days 8 Hour",
+          DurationHours: "",
+          Image:
+            "http://tcsnego.ztour-travel.ro/AdminSightSeeing/Images/Gallary/ZTO/SightImage/caption_03_20_25_892.jpg",
+          Type: "Sightseeing",
+          Category: "",
+          MinP: "75.00",
+          Token: "",
+          Provider: "683",
+          CID: "NEGO",
+          TrackingId: "0324202517570733",
+          Tours: {
+            Tour: [
+              {
+                IsAPI: false,
+                Id: "1",
+                Code: "1",
+                Name: "Day Trip To Turda Salt Mine, Rimetea Village & Col",
+                DisplayName:
+                  "Day Trip To Turda Salt Mine, Rimetea Village & Col",
+                TypeCode: "Escorted",
+                Duration: "0 Days 8 Hour",
+                DurationHours: "0 Days 8 Hour",
+                Avl: "Y",
+                ROE: "1",
+                SuppPrice: "75.0000",
+                SuppCurrency: "EUR",
+                CompNet: "75.00",
+                CompGross: "75.00",
+                EPDNet: "75.00",
+                EPDGross: "75.00",
+                AGNet: "75.00",
+                AGGross: "75.00",
+                SANet: "75.00",
+                SAGross: "75.00",
+                GrossPrice: "75.00",
+                ProcessToken: "e68d6020-4d15-4192-8152-d02d81906f2c",
+                DateList: {
+                  Date: [
+                    {
+                      Text: "04/20/2025",
+                    },
+                  ],
+                },
+                CID: "NEGO",
+                LoyaltyPoints: "0",
+              },
+            ],
+          },
+          LoyaltyPoints: "0",
+        },
         {
           SightId: 1,
+          Code: "1",
+          Name: "Day Trip To Turda Salt Mine, Rimetea Village & Col",
+          DisplayName: "",
+          CityCode: "CLU27619",
+          CityName: "Cluj-Napoca",
+          Desc: "",
+          Duration: "0 Days 8 Hour",
+          DurationHours: "",
+          Image:
+            "http://tcsnego.ztour-travel.ro/AdminSightSeeing/Images/Gallary/ZTO/SightImage/caption_03_20_25_892.jpg",
+          Type: "Sightseeing",
+          Category: "",
+          MinP: "75.00",
+          Token: "",
+          Provider: "683",
+          CID: "NEGO",
+          TrackingId: "0324202517570733",
+          Tours: {
+            Tour: [
+              {
+                IsAPI: false,
+                Id: "1",
+                Code: "1",
+                Name: "Day Trip To Turda Salt Mine, Rimetea Village & Col",
+                DisplayName:
+                  "Day Trip To Turda Salt Mine, Rimetea Village & Col",
+                TypeCode: "Escorted",
+                Duration: "0 Days 8 Hour",
+                DurationHours: "0 Days 8 Hour",
+                Avl: "Y",
+                ROE: "1",
+                SuppPrice: "75.0000",
+                SuppCurrency: "EUR",
+                CompNet: "75.00",
+                CompGross: "75.00",
+                EPDNet: "75.00",
+                EPDGross: "75.00",
+                AGNet: "75.00",
+                AGGross: "75.00",
+                SANet: "75.00",
+                SAGross: "75.00",
+                GrossPrice: "75.00",
+                ProcessToken: "e68d6020-4d15-4192-8152-d02d81906f2c",
+                DateList: {
+                  Date: [
+                    {
+                      Text: "04/20/2025",
+                    },
+                  ],
+                },
+                CID: "NEGO",
+                LoyaltyPoints: "0",
+              },
+            ],
+          },
+          LoyaltyPoints: "0",
+        },
+        {
+          SightId: 2,
           Code: "1",
           Name: "Day Trip To Turda Salt Mine, Rimetea Village & Col",
           DisplayName: "",
@@ -273,7 +394,6 @@ export default function ActivityResultPage() {
       <section id="content" style={{ minHeight: "353px" }}>
         <div className="container">
           <div id="main-1">
-         
             <div
               className="search-box-wrapper"
               id="modifyNR"
@@ -298,308 +418,14 @@ export default function ActivityResultPage() {
                 />
               </div>
             </div>
-
-            <div className="row">
-            
-              <div
-                className="col-sm-4 col-md-3 hidden-sm"
-                style={{
-                  display:
-                    activityResponse?.SearchResponse?.SightSeeings?.SightSeeing
-                      ?.length === 0
-                      ? "none"
-                      : "block",
-                }}
-              >
-                <div className="toggle-container filters-container hidden-xs">
-                  <ActivityFilter
-                    activities={activityResponse}
-                    onFilterChange={(filters) => {
-                   
-                    }}
-                    initialFilters={{
-                      city,
-                      country,
-                      searchDate,
-                      guest,
-                      otherParam,
-                      lang,
-                    }}
-                  />
-                </div>
-              </div>
-              {(activityResponse?.SearchResponse?.SightSeeings?.SightSeeing
-                ?.length ?? 0) > 0 && (
-                  <>
-                    <div className="col-sm-12 col-md-9">
-                      <div className="sort-by-section clearfix search-details fixresulttop">
-                        <ul className="search-criteria sort-bar clearfix block-sm">
-                          <li>
-                            <label className="search-city">
-                              {activityResponse?.SearchResponse?.Master?.CityName}
-                            </label>
-                            <div>
-                              <span className="customDir">
-                                <i
-                                  className="soap-icon-calendar"
-                                  style={{
-                                    fontSize: "18px",
-                                    verticalAlign: "baseline",
-                                  }}
-                                ></i>
-                                <span style={{ verticalAlign: "inherit" }}>
-                                  <span
-                                    style={{
-                                      verticalAlign: "inherit",
-                                      fontWeight: "600",
-                                    }}
-                                  >
-                                    &nbsp;
-
-                                    {
-                                      activityResponse?.SearchResponse?.Master?.FromDate &&
-                                      new Date(activityResponse.SearchResponse.Master.FromDate).toLocaleDateString("en-US", {
-                                        weekday: "short",
-                                        day: "2-digit",
-                                        month: "short",
-                                        year: "numeric",
-                                      })
-                                    }
-                                    &nbsp;
-                                  </span>
-                                </span>
-                                &nbsp;
-                                <i
-                                  className="soap-icon-right"
-                                  style={{ verticalAlign: "baseline" }}
-                                ></i>
-                                &nbsp;
-                                <i
-                                  className="soap-icon-calendar"
-                                  style={{
-                                    fontSize: "18px",
-                                    verticalAlign: "baseline",
-                                  }}
-                                ></i>
-                                &nbsp;
-                                <span style={{ verticalAlign: "inherit" }}>
-                                  <span
-                                    style={{
-                                      verticalAlign: "inherit",
-                                      fontWeight: "600",
-                                    }}
-                                  >
-                                    {
-                                      activityResponse?.SearchResponse?.Master?.ToDate &&
-                                      new Date(activityResponse.SearchResponse.Master.ToDate).toLocaleDateString("en-US", {
-                                        weekday: "short",
-                                        day: "2-digit",
-                                        month: "short",
-                                        year: "numeric",
-                                      })
-                                    }
-                                  </span>
-                                </span>
-                              </span>
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <div className="sort-by-section clearfix activity-sort">
-                        <div className="row">
-                          <div className="col-sm-10 hidden-sm hidden-xs border-rdashed min-height-50">
-                            <div className="hidden-xs">
-                              <h4 className="sort-by-title block-sm">
-                                {t("Sort results by")}
-                              </h4>
-                              <ul className="sort-bar clearfix block-sm">
-                                <li id="minPp" className="sort-by-price">
-                                  <a
-                                    href="#"
-                                    className="sort-by-container"
-                                    onClick={() => handleSort("price")}
-                                  >
-                                    <span>
-                                      {t("Price")}
-                                      <i
-                                        className={`fas fa-long-arrow-alt-${sortType === "price" && sortReverse
-                                          ? "down"
-                                          : "up"
-                                          }`}
-                                        style={{
-                                          visibility:
-                                            sortType === "price"
-                                              ? "visible"
-                                              : "hidden",
-                                        }}
-                                      ></i>
-                                    </span>
-                                  </a>
-                                </li>
-                                <li className="clearer visible-sms"></li>
-                                <li id="durationn" className="sort-by-rating">
-                                  <a
-                                    href="#"
-                                    className="sort-by-container"
-                                    onClick={() => handleSort("duration")}
-                                  >
-                                    <span>
-                                      {t("Duration")}
-                                      <i
-                                        className={`fas fa-long-arrow-alt-${sortType === "duration" && sortReverse
-                                          ? "down"
-                                          : "up"
-                                          }`}
-                                        style={{
-                                          visibility:
-                                            sortType === "duration"
-                                              ? "visible"
-                                              : "hidden",
-                                        }}
-                                      ></i>
-                                    </span>
-                                  </a>
-                                </li>
-                              </ul>
-                            </div>
-                          </div>
-                          <div className="col-md-2">
-                            <h5 className="sort-by-title-total block-sm-total margin-top-0">
-                              {
-                                activityResponse?.SearchResponse.SightSeeings
-                                  .Total
-                              }{" "}
-                              {(activityResponse?.SearchResponse?.SightSeeings
-                                ?.Total ?? 0) > 1
-                                ? t("activities.label.activities")
-                                : t("activities.label.activity")}
-                            </h5>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div
-                        className="listing-style3 activity"
-                        style={{ marginTop: "10px" }}
-                        id="dvResult"
-                      >
-                        {activityResponse?.SearchResponse.SightSeeings.SightSeeing.map(
-                          (activity : SightSeeing) => (
-                            <article
-                              key={activity.SightId}
-                              className="resultBox box"
-                            >
-                              <div className="row new-design-flex clearfix">
-                                <figure className="col-xs-4 col-sm-3 col-md-3">
-                                  <a title="" className="hover-effect">
-                                    <img
-                                      className="img-responsive"
-                                      src={
-                                        activity.Image ||
-                                        "/Images/ZTO/not_avil.jpg"
-                                      }
-                                      alt={activity.Name}
-                                      onError={(e) =>
-                                      (e.currentTarget.src =
-                                        "/Images/TI/not_avil.jpg")
-                                      }
-                                    />
-                                  </a>
-                                </figure>
-                                <div className="col-xs-8 col-sm-7 col-md-7 select_hotel">
-                                  <div className="activity-name-details">
-                                    <h3>
-                                      {activity.Name} <br />
-                                      <small className="ng-scope">
-                                        <span className="capitalize ng-binding">
-                                          {t("Duration")}: {activity.Duration}
-                                        </span>
-                                      </small>
-                                    </h3>
-                                    <p className="hidden-xs">
-                                      {activity.Desc}...
-                                    </p>
-                                  </div>
-                                  <div className="amenities hidden-xs infor-circle">
-                                    <a href="#" className="border-round" style={{ marginRight: '2px' }}>
-                                      <i className="far fa-money-bill-alt"></i>
-                                    </a>
-                                    <a href="#" className="border-round" style={{ marginRight: '2px' }}>
-                                      <i className="fas fa-info"></i>
-                                    </a>
-                                    <a href="#" className="border-round" style={{ marginRight: '2px' }}>
-                                      <i className="far fa-image"></i>
-                                    </a>
-                                  </div>
-                                </div>
-                                <div className="col-md-2 col-sm-2 hidden-xs">
-                                  <div className="total-activity-price_result">
-                                    <div className="total-activity-price price-wrapper-new">
-                                      <span className="price">
-                                        <small>
-                                          {
-                                            activityResponse.SearchResponse
-                                              .SightSeeings.Currency
-                                          }
-                                        </small>{" "}
-                                        {activity.MinP}
-                                      </span>
-                                    </div>
-                                    <div className="activity-select">
-                                      <button
-                                        className="full-width button btn-small icon-check"
-                                        onClick={() => {
-                                          const activityDetails = {
-                                              id: activity.SightId.toString(),
-                                              name: activity.Name,
-                                              city: activity.CityName,
-                                              duration: activity.Duration,
-                                              price: activity.MinP,
-                                              currency: activityResponse?.SearchResponse?.SightSeeings?.Currency,
-                                              image: activity.Image,
-                                              fromDate: activityResponse?.SearchResponse?.Master?.FromDate || "",
-                                          };
-                                          
-                                        
-                                          router.push(
-                                              `/activity/details?${new URLSearchParams(
-                                                  activityDetails
-                                              ).toString()}`
-                                          );
-                                        }}
-                                      >
-                                        {t("Select")}
-                                      </button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="visible-xs earnpoint-price-res visible-xs">
-                                <div className="col-xs-12">
-                                  <div className="row">
-                                    <div className="col-xs-6">{t("Price")}</div>
-                                    <div className="price-responsive text-right col-xs-6">
-                                      <small>
-                                        {
-                                          activityResponse.SearchResponse
-                                            .SightSeeings.Currency
-                                        }
-                                      </small>{" "}
-                                      {activity.MinP}
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </article>
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </>
-                )}
-
-              {/*No search Results Section */}
-              {activityResponse?.SearchResponse?.SightSeeings?.SightSeeing
+            <div className="row" style={{
+                display:
+                  activityResponse?.SearchResponse?.SightSeeings?.SightSeeing
+                    ?.length === 0
+                    ? "block"
+                    : "none",
+              }}>
+            {activityResponse?.SearchResponse?.SightSeeings?.SightSeeing
                 ?.length === 0 && (
                   <>
                     <div className="col-md-12">
@@ -641,6 +467,87 @@ export default function ActivityResultPage() {
                     </div>
                   </>
                 )}
+                </div>
+            <div className="row" style={{
+                display:
+                  activityResponse?.SearchResponse?.SightSeeings?.SightSeeing
+                    ?.length === 0
+                    ? "none"
+                    : "block",
+              }}>
+              <ActivityPageTitle activityResponse={activityResponse} />
+              <ActivityResultFilter
+                activities={activityResponse}
+                onFilterChange={(filters) => {
+
+                }}
+                initialFilters={{
+                  city,
+                  country,
+                  searchDate,
+                  guest,
+                  otherParam,
+                  lang,
+                }}
+              />
+              
+              {(activityResponse?.SearchResponse?.SightSeeings?.SightSeeing?.length ?? 0) > 0 && (
+                <>
+                  <div className="container__HTBo">
+                    <div className="row__9U33" style={{ alignItems: "normal", justifyContent: "flex-start", flexDirection: "row", flexWrap: "wrap" }}>
+                      <div className="col__BXMO" style={{ width: "100%", flex: "0 0 100%", maxWidth: "100%", marginLeft: "0%", right: "auto", left: "auto" }}>
+                        <div className="productListContainer__SfTG">
+                          <div className="productListProductsAndSortByContainer__kSLc fullGrid__W3ET">
+                            <div className="productGridHeaderContainer__RY8b">
+                              <div className="productListResultsCounterSection__ms8h">
+                                <h2 className="productListCountLabel__OduT" data-automation="ttd-product-list-header-count" data-total-count={activityResponse?.SearchResponse?.SightSeeings?.SightSeeing?.length || 0}>
+                                  {activityResponse?.SearchResponse?.SightSeeings?.SightSeeing?.length || 0} results
+                                </h2>
+                            
+                              </div>
+                              <div className="productListDisclaimerAndSortBy__aUG9">
+                                <div className="productListSortBy__DESF" data-automation="ttd-product-list-header-sort-by-dropdown-wrapper">
+                                  <div className="sortByOptionSelect__NTir css-0">
+                                    <span aria-live="polite" aria-atomic="false" aria-relevant="additions text" className="css-7pg0cj-a11yText"></span>
+                                    <div className="control__nika css-0" data-automation="ttd-product-list-header-sort-by">
+                                      <div className="valueContainer__eF5m css-0">
+                                        <div className="singleValue__uWCY css-0">Sort by: <b>{sortType === "price" ? "Price" : "Featured"}</b></div>
+                                        <input id="react-select-3-input" readOnly tabIndex={0} aria-autocomplete="list" className="css-62g3xt-dummyInput" value="" />
+                                      </div>
+                                      <div className="css-0">
+                                        <div className="dropdownIndicator__gk9R css-0" aria-hidden="true" onClick={() => handleSort(sortType === "price" ? "featured" : "price")}>
+                                          <svg width="16" height="16" viewBox="0 0 16 16" className="icon__UJ21">
+                                            <path d="M11.72 5.34a.75.75 0 111.06 1.06l-4.25 4.26c-.3.29-.77.29-1.06 0L3.22 6.4a.75.75 0 011.06-1.06L8 9.06l3.72-3.72z"></path>
+                                          </svg>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <input name="sortBy" type="hidden" value={sortType.toUpperCase()} />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="gridLayout__BQQv" data-automation="ttd-product-list">
+                              {activityResponse?.SearchResponse?.SightSeeings?.SightSeeing.map((activity, index) => (
+                                <ActivityListItem key={`${activity.SightId}-${index}`} activity={activity} />
+                              ))}
+                            </div>
+
+                            {(activityResponse?.SearchResponse?.SightSeeings?.SightSeeing ?? []).length > 10 && (
+                              <div className="productListPagination__q9yR">
+                                <div data-automation="ttd-product-list-pagination" className="paginationContainer__zrpT">
+                                  <a aria-label="Page 1 of 1" aria-pressed="true" href="#" className="paginationItem__gtXG selected__edVo">1</a>
+                                </div>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
+
             </div>
           </div>
         </div>
